@@ -68,9 +68,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @return string
 	 */
-	public function list()
-	{
-		return $this->hasOne('list');
-	}
+	// public function list()
+	// {
+	// 	return $this->hasOne('list');
+	// }
 
 }

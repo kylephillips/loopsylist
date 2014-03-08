@@ -19,12 +19,14 @@
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js?ver=3.8'></script>
 </head>
 
-<body class="">
+<body>
 	
 	<div id="page-wrap">
-	@yield('content')
+	
+		@yield('content')
 
-	@yield('footer_content')
+		@yield('footer_content')
+	
 	</div><!-- #page-wrap -->
 
 	{{HTML::script('assets/js/scripts.js')}}
