@@ -1,0 +1,108 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+
+// Reset the box-sizing
+
+*,
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+
+// Body reset
+
+html {
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height:100%;
+}
+
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: #000;
+  height:100%;
+  overflow-x: hidden;
+  width:100%;
+}
+
+// To correct overflow issue in iOS on body element
+#site-wrap {
+  overflow-x: hidden;
+  height:100%;
+  width:100%;
+  &.off {
+    overflow:visible;
+  }
+}
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+// Links
+
+a {
+  // color: $green;
+  text-decoration: none;
+  @include transition(color 200ms ease);
+
+  &:hover,
+  &:focus {
+    // color: $white;
+    text-decoration: none;
+	@include transition(color 200ms ease);
+  }
+
+  &:focus {
+    // .tab-focus();
+  }
+}
+
+
+// Images
+
+img {
+  vertical-align: middle;
+  max-width:100%;
+  height:auto;
+}
+
+
+// Containers
+.container {
+	max-width:1350px;
+	margin:0 auto;
+	@include box-sizing(border-box);
+	padding:0 20px;
+	@include clearfix();
+	&.small {
+		max-width:600px;
+	}
+  &.pad-top {
+    padding-top: 10px;
+  }
+}
+
+
+// Selection Colors
+::selection {
+  // background: $green;
+  color: #ffffff;
+  /* Safari */
+
+}
+::-moz-selection {
+  // background: $green;
+  color: #ffffff;
+}
