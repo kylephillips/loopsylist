@@ -5,7 +5,19 @@ class Doll extends Eloquent {
 	protected $table = 'dolls';
 	
 	protected $fillable = array(
-		'title', 'slug', 'image', 'sewn_from', 'pet', 'bio', 'link', 'release_date'
+		'title', 'slug', 'image', 'sewn_from', 'pet', 'bio', 'link', 'release_month', 'release_year', 'sewn_on_month', 'sewn_on_day'
+	);
+
+	// Required fields for Validation
+	public static $required = array(
+		'title' => 'required',
+		'release_month' => 'required',
+		'release_year' => 'required|integer'
+	);
+
+	// Validation messages
+	public static $validation_messages = array(
+		'title.required' => "Please include a name"
 	);
 
 	public function lists()
@@ -17,7 +29,7 @@ class Doll extends Eloquent {
 
 	public function dolltypes()
 	{
-		return $this->belongsToMany('DollType');
+		return $this->belongsToMany('DollType', 'dolls_dolltypes');
 	}
 
 }

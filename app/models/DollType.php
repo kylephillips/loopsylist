@@ -10,7 +10,7 @@ class DollType extends Eloquent {
 
 	public function dolls()
 	{
-		return $this->belongsToMany('Doll');
+		return $this->belongsToMany('Doll', 'dolls_dolltypes');
 	}
 
 }

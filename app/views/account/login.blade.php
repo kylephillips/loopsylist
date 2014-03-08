@@ -28,7 +28,7 @@
 		{{Form::label('password', 'Password')}}
 		{{Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password'))}}
 	</div>
-	{{Form::submit('Log In', array('class'=>'btn btn-default'))}}
+	{{Form::submit('Log In', array('class'=>'btn btn-primary'))}}
 	{{Form::close()}}
 	@endif
 
