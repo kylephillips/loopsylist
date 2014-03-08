@@ -45,10 +45,19 @@ class DollController extends \BaseController {
 				->withErrors($validation);
 		}
 
+		// Add the Image
+		$file = Input::file('image');
+		$destination = public_path() . '/uploads/toys/';
+		$filename = time() . '-' . $file->getClientOriginalName();
+		$uploadSuccess = Input::file('image')->move($destination, $filename);
+
+		// TODO: image resizing based on view templates
+
 		// Save the new toy
 		$toy = Doll::create(array(
 			'title' => Input::get('title'),
 			'slug' => Str::slug(Input::get('title')),
+			'image' => $filename,
 			'sewn_from' => Input::get('sewn_from'),
 			'pet' => Input::get('pet'),
 			'bio' => Input::get('bio'),

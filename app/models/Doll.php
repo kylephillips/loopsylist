@@ -12,7 +12,8 @@ class Doll extends Eloquent {
 	public static $required = array(
 		'title' => 'required',
 		'release_month' => 'required',
-		'release_year' => 'required|integer'
+		'release_year' => 'required|integer',
+		'image' => 'image'
 	);
 
 	// Validation messages

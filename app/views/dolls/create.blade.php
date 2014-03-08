@@ -46,7 +46,7 @@
 	</div>
 	<div class="form-group">
 		{{Form::label('release_year', 'Year of Release')}}
-		{{Form::selectRange('release_year', '2010', date('Y'), '', array('class'=>'form-control'))}}
+		{{Form::selectRange('release_year', '2009', date('Y'), '', array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('sewn_on_month', 'Month Sewn')}}

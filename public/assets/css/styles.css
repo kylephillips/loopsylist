@@ -371,6 +371,10 @@ table {
 .pull-right {
   float: right; }
 
+.hpr {
+  position: absolute;
+  left: -9999px; }
+
 *,
 *:before,
 *:after {
@@ -444,8 +448,4 @@ img {
     padding-top: 10px; }
 
 ::selection {
-  color: #ffffff;
   /* Safari */ }
-
-::-moz-selection {
-  color: #ffffff; }

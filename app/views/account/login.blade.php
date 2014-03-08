@@ -29,6 +29,7 @@
 		{{Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password'))}}
 	</div>
 	{{Form::submit('Log In', array('class'=>'btn btn-primary'))}}
+	<a href="{{URL::route('user.create')}}">Don't have a login?</a>
 	{{Form::close()}}
 	@endif
 

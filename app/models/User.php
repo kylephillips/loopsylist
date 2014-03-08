@@ -23,6 +23,25 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'email', 'password', 'username', 'firstname', 'lastname', 'zip_code', 'bio', 'group_id'
 	);
 
+	// Validation rules
+	public static $required = array(
+		'email' => 'required|email|unique:users,email',
+		'username' => 'required|unique:users,username',
+		'password' => 'required|min:6',
+		'age' => 'accepted'
+	);
+	// Validation messages
+	public static $validation_messages = array(
+		'email.required' => 'Please provide your email',
+		'email.email' => 'Please provide a valid email',
+		'email.unique' => 'Looks like your email is already taken',
+		'username.required'=> 'Please provide a user name',
+		'username.unique' => 'Sorry, that user name has been taken. Try another one.',
+		'password.required' => 'Please provide a password',
+		'password.min' => 'Your password needs to be at least 6 characters',
+		'age.accepted' => 'Please acknowledge that you are over 16 years of age.'
+	);
+
 	/**
 	 * Get the unique identifier for the user.
 	 *

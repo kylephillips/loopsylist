@@ -6,7 +6,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-	<title>@yield('title','Tenth Rep')</title>
+	<title>@yield('title','Loopsy List')</title>
 	
 	<link rel="shortcut icon" href="assets/favicon.ico">
 	

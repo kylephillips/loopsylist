@@ -84,7 +84,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('account.create');
 	}
 
 	/**
@@ -94,7 +94,35 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validation = Validator::make(Input::all(), User::$required, User::$validation_messages);
+		if ( $validation->fails() ){
+			return Redirect::route('user.create')
+				->withInput()
+				->withErrors($validation);
+		}
+
+		$honeypot = Input::get('hp');
+		if ( $honeypot == '' ){
+
+			// Save the new user and log them in
+			$user = User::create(array(
+				'email' => Input::get('email'),
+				'username' => Input::get('username'),
+				'password' => Hash::make(Input::get('password')),
+				'last_login' => date('Y-m-d G:i:s')
+			));
+			$user = User::where('username', Input::get('username'))->first();
+			Auth::login($user);
+
+			// TODO: redirect to list setup with name and zip fields
+			return Redirect::route('user.create')
+				->withSuccess('Your account has been setup successfully!');
+
+		} else {
+			// it's a bot
+			return Redirect::route('user.create')
+				->withErrors('It appears you are a bot.');
+		}
 	}
 
 	/**
