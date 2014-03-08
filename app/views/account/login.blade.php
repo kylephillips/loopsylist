@@ -1,24 +1,38 @@
 @extends('partials.master')
 @section('content')
 
-@if(Session::has('message'))
-<div class="alert alert-error">{{Session::get('message')}}</div>
-@endif
+<div class="container">
+	<h1>Login</h1>
 
+	@if(Session::has('message'))
+	<div class="alert alert-danger">{{Session::get('message')}}</div>
+	@endif
 
-{{Form::open()}}
-<ul>
-	<li>
+	@if(Session::has('success'))
+	<div class="alert alert-success">{{Session::get('success')}}</div>
+	@endif
+
+	@if(Auth::check())
+	<p>
+		You are logged in as {{Auth::user()->username}}<br />
+		<a href="{{URL::route('logout')}}">Logout</a>
+	</p>
+	
+	@else
+	{{Form::open()}}
+	<div class="form-group">
 		{{Form::label('username', 'User Name')}}
-		{{Form::text('username')}}
-	</li>
-	<li>
+		{{Form::text('username', '', array('class'=>'form-control', 'placeholder'=>'User Name'))}}
+	</div>
+	<div class="form-group">
 		{{Form::label('password', 'Password')}}
-		{{Form::password('password')}}
-	</li>
-</ul>
-{{Form::submit('Log In')}}
-{{Form::close()}}
+		{{Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password'))}}
+	</div>
+	{{Form::submit('Log In', array('class'=>'btn btn-default'))}}
+	{{Form::close()}}
+	@endif
+
+</div><!-- .container -->
 
 @stop
 

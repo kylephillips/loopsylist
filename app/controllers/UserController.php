@@ -47,11 +47,23 @@ class UserController extends \BaseController {
 
 			// temp: change to account view
 			return Redirect::route('login_form')
-				->withMessage('You have successfully logged in.');
+				->withSuccess('You have successfully logged in.');
 		} else {
 			return Redirect::route('login_form')
 				->withMessage($error_message);
 		}
+	}
+
+
+	/**
+	* Log the user out
+	* @return View
+	*/
+	public function getLogout()
+	{
+		Auth::logout();
+		return Redirect::route('login_form')
+			->withSuccess('You have been logged out.');
 	}
 
 
