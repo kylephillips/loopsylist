@@ -114,6 +114,11 @@ class UserController extends \BaseController {
 			$user = User::where('username', Input::get('username'))->first();
 			Auth::login($user);
 
+			// Create their default list
+			$list = new Toylist;
+			$list->user_id = $user->id;
+			$list->save();
+
 			// TODO: redirect to list setup with name and zip fields
 			return Redirect::route('user.create')
 				->withSuccess('Your account has been setup successfully!');

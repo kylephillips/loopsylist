@@ -1,6 +1,6 @@
 <?php
 
-class List extends Eloquent {
+class Toylist extends Eloquent {
 
 	protected $table = 'lists';
 	

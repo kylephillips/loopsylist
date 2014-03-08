@@ -1,0 +1,2 @@
+// Show/Hide Password
+$(document).on("keyup","#password",function(){var e=$("#password").val();$("#password_shown").val(e)});$(document).on("keyup","#password_shown",function(){var e=$("#password_shown").val();$("#password").val(e)});$("#toggle-password").on("click",function(){var e=$(this).find("input"),t=$(this).find("span");if($(e).is(":checked")){$(t).text("Hide Password");$("#password").hide();$("#password_shown").show()}else{$(t).text("Show Password");$("#password").show();$("#password_shown").hide()}});

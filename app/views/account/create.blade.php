@@ -36,6 +36,13 @@
 	<div class="form-group">
 		{{Form::label('password', 'Password')}}
 		{{Form::password('password', array('class'=>'form-control'))}}
+		
+		<!-- Toggle Password Visibility -->
+		<input type="text" id="password_shown" class="form-control" style="display:none;">
+		<div id="toggle-password"><label class="checkbox">
+			<input type="checkbox" > <span>Show Password</span></label>
+		</div>
+
 	</div>
 	<div class="form-group">
 		<label class="checkbox">{{Form::checkbox('age')}} I am at least 16 years of age or have the consent of a parent/gaurdian.</label>
@@ -47,3 +54,11 @@
 	{{Form::close()}}
 </div>
 @stop
+
+@section('footer_content')
+<script>
+
+</script>
+@stop
+
+
