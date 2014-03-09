@@ -1,0 +1,37 @@
+//
+// Top Nav Area
+// --------------------------------------------------
+
+.top-nav {
+	padding-top: 30px;
+	ul {
+		@include unstyled();
+		@include clearfix();
+		li {
+			float: right;
+			margin-left: 30px;
+			a {
+				color: $yellow;
+				font-weight: bold;
+				&.login-btn {
+					position: relative;
+					top: -5px;
+					display: block;
+					border: 1px solid rgba(0,0,0,0.3);
+					padding: 4px 20px;
+					border-radius: 2px;
+					color: $white;
+					@include transition(all 200ms ease);
+					&:hover {
+						background-color: $purple;
+						color: $white;
+						@include transition(all 200ms ease);
+					}
+				}
+			}
+			&:last-child {
+				margin: 0;
+			}
+		} // li
+	} // ul
+} // .top-nav

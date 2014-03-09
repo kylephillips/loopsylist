@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" href="assets/favicon.ico">
 	
 	{{HTML::style('/assets/css/styles.css')}}
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
 	
 	<!-- Typekit -->
 	<script type="text/javascript" src="//use.typekit.net/vmv4gsq.js"></script>
@@ -31,6 +31,8 @@
 		@yield('footer_content')
 	
 	</div><!-- #page-wrap -->
+
+	@include('partials.footer')
 
 	{{HTML::script('assets/js/scripts.js')}}
 

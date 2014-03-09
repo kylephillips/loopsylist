@@ -1,0 +1,244 @@
+//
+// Homepage
+// --------------------------------------------------
+
+// Hero Area
+.hero {
+	@include gradient($red, $purple);
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+
+	h1 {
+		width: 100%;
+		margin: 0;
+		padding: 40px 0px 0px 0px;
+		line-height: .6;
+		letter-spacing: 1px;
+		@include bello();
+		color: $yellow;
+		em {
+			color: $white;
+			font-style: normal;
+		}
+	}
+
+	// shadow
+	img {
+		position: relative;
+		margin-bottom: 10px;
+	}
+
+	p {
+		margin: 0;
+		color: $white;
+		font-size: 26px;
+		font-weight: bold;
+		strong {
+			color: $yellow;
+		}
+	}
+
+	.details {
+		font-size: 16px;
+		position: relative;
+		top: -30px;
+		margin-bottom: 50px;
+		a {
+			color: $yellow;
+			text-decoration: underline;
+			&:hover {
+				color: $pink;
+			}
+		}
+	}
+} // .hero
+
+// Find a List Form on Homepage
+.find-home {
+	text-align: center;
+	padding: 50px 0;
+	h3 {
+		@include bello();
+		color: $magenta;
+		font-size: 60px;
+		line-height: 55px;
+		margin: 0 0 15px 0;
+		em {
+			font-style: normal;
+			color: $purple;
+		}
+	}
+
+	form {
+		display: inline-block;
+		background-color: $pink-lighter;
+		width: 75%;
+		min-width: 650px;
+		border-radius: 6px;
+		padding: 8px;
+		@include clearfix();
+		.switch {
+			float: left;
+			width: 40%;
+		}
+		input[type='text']{
+			float: right;
+			width: 58%;
+			height: 55px;
+		}
+	}
+} // .find-home
+
+
+// Testimonials
+.testimonials {
+	margin-bottom: 30px;
+	ul {
+		@include clearfix();
+		@include unstyled();
+		border-top: 2px dashed $pink-light;
+		padding-top: 40px;
+		li {
+			float: left;
+			width: 29%; //300/1039
+			margin-left: 6.5%;
+			text-align: center;
+			&:first-child {
+				margin-left: 0;
+			}
+			p {
+				position: relative;
+				color: $purple;
+				padding: 40px 0;
+				em {
+					color: $magenta;
+					display: block;
+				}
+				&:before {
+					content: url('../images/quote-open.png');
+					position: absolute;
+					top: 0;
+					left: 42%;
+				}
+				&:after {
+					content: url('../images/quote-close.png');
+					position: absolute;
+					bottom: -10px;
+					left: 42%;
+				}
+			}
+			img {
+				width: 133px;
+				border-radius: 80px;
+				border: 4px solid $pink-light;
+			}
+		} // li
+	} // ul
+} // .testimonials
+
+
+// Call to action with photo montage BG
+.cta {
+	background: url('../images/home-montage.jpg'), repeat;
+	text-align: center;
+	padding: 80px 0;
+	h3 {
+		@include bello();
+		color: $white;
+		font-size: 68px;
+		line-height: 55px;
+		margin: 0 0 10px 0;
+		em {
+			font-style: normal;
+			color: $pink-light;
+		}
+	}
+	p {
+		color: $yellow;
+		font-size: 20px;
+		margin: 0 0 40px 0;
+	}
+} // .cta
+
+
+//
+// Media Queries
+// --------------------------------------------------
+
+@media (min-width: 768px) {
+
+	// Load large bg image for larger screens
+	.hero {
+		background: url('../images/home-header-bg.jpg'), $purple;
+		background-position: center top;
+		background-repeat: no-repeat;
+	}
+
+}
+
+@media (max-width: 767px) {
+	.hero {
+		h1 {
+			padding-top: 20px;
+			font-size: 60px !important;
+			margin-bottom: 10px;
+		}
+		img {
+			display: none;
+		}
+		p {
+			font-size: 18px;
+			line-height: 26px;
+		}
+		.details {
+			margin-bottom: 0px;
+		}
+	} // .hero
+
+	.find-home {
+		padding: 20px 0;
+		h3 {
+			font-size: 40px;
+			line-height: 45px;
+		}
+
+		form {
+			display: block;
+			width: 100%;
+			min-width: 0px;
+			.switch {
+				float: none;
+				width: 100%;
+				margin-bottom: 10px;
+				span.right {
+					left: 51.5%;
+				}
+			}
+			input[type='text']{
+				float: none;
+				width: 100%;
+			}
+		}
+	} // .find-home
+
+
+	.testimonials ul li {
+		float: none;
+		width: 100%; //300/1039
+		margin-left: 0%;
+		p {
+			padding: 0px;
+			margin-bottom: 20px;
+			em {
+				color: $magenta;
+				display: block;
+			} 
+			&:before, &:after { content: '';}
+		}
+	} 
+
+} // .media query
+
+
+
+

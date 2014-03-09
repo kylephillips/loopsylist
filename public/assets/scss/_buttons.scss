@@ -1,0 +1,58 @@
+//
+// Buttons
+// --------------------------------------------------
+
+.start-button {
+	display: inline-block;
+	text-align: center;
+	hr {
+		background: transparent;
+		border: 0;
+		border-top: 2px dashed #d90d84;
+	}
+	a {
+		display: inline-block;
+		background-color: $yellow;
+		color: $purple;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-weight: bold;
+		padding: 0px 50px;
+		height: 50px;
+		line-height: 50px;
+		border-radius: 30px;
+		border-bottom: 3px solid darken($yellow, 10%);
+		@include transition(all 200ms ease);
+		&:hover {
+			background-color: $pink;
+			color: $white;
+			border-color: darken($pink, 10%);
+			@include transition(all 200ms ease);
+		}
+	}
+	&.has-border {
+		width: 60%;
+		padding: 50px 0 0 0;
+		a {
+			position: relative;
+			top: -35px;
+		}
+	}
+} // .start-button
+
+@media (max-width: 767px) {
+	.start-button {
+		display: block;
+		hr {
+			display: none;
+		}
+		a {
+			display: block;
+			width: 100%;
+			padding: 0;
+		}
+		&.has-border {
+			width: 100%;
+		}
+	}
+}

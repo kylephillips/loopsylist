@@ -1,9 +1,9 @@
 <?php
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+/**
+* Pages
+*/
+Route::get('/', array('as'=>'home', 'uses'=>'PageController@getIndex'));
 
 
 /**

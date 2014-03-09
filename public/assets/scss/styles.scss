@@ -5,6 +5,15 @@
 
 // Base css
 @import "_typography.scss";
-@import "_forms.scss";
-
 @import "_scaffolding.scss";
+@import "_forms.scss";
+@import "_switch.scss";
+@import "_buttons.scss";
+@import "_design-elements.scss";
+
+// Partials
+@import "_top-nav.scss";
+@import "_footer.scss";
+
+// Page Specific Styles
+@import "_home.scss";

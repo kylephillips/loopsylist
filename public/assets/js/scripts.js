@@ -1,4 +1,14 @@
-// Show/Hide Password
+/* 
+* Base Scripts
+*/
+$(document).ready(function(){
+	// Home Headline
+	$('.hero h1').inflateText();
+});
+
+/* 
+* Show/Hide Password Functionality
+*/
 $(document).on('keyup', '#password', function(){
 	var pass = $('#password').val();
 	$('#password_shown').val(pass);

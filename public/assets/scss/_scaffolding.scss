@@ -28,17 +28,13 @@ body {
   height:100%;
   overflow-x: hidden;
   width:100%;
+  background-color: $purple;
 }
 
-// To correct overflow issue in iOS on body element
-#site-wrap {
-  overflow-x: hidden;
-  height:100%;
-  width:100%;
-  &.off {
-    overflow:visible;
-  }
+#page-wrap {
+  background-color: $white;
 }
+
 
 // Reset fonts for relevant elements
 input,
@@ -53,25 +49,20 @@ textarea {
 // Links
 
 a {
-  // color: $green;
+  color: $magenta;
   text-decoration: none;
   @include transition(color 200ms ease);
 
   &:hover,
   &:focus {
-    // color: $white;
-    text-decoration: none;
+  color: darken($magenta, 20%);
+  text-decoration: none;
 	@include transition(color 200ms ease);
-  }
-
-  &:focus {
-    // .tab-focus();
   }
 }
 
 
 // Images
-
 img {
   vertical-align: middle;
   max-width:100%;
@@ -81,7 +72,7 @@ img {
 
 // Containers
 .container {
-	max-width:1350px;
+	max-width:1050px;
 	margin:0 auto;
 	@include box-sizing(border-box);
 	padding:0 20px;
@@ -97,12 +88,10 @@ img {
 
 // Selection Colors
 ::selection {
-  // background: $green;
-  // color: #ffffff;
-  /* Safari */
-
+  background: $magenta;
+  color: #ffffff;
 }
 ::-moz-selection {
-  // background: $green;
-  // color: #ffffff;
+  background: $magenta;
+  color: #ffffff;
 }

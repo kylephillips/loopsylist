@@ -1,0 +1,45 @@
+//
+// Radio Switch
+// --------------------------------------------------
+
+.switch {
+	background-color: $magenta;
+	position: relative;
+	z-index: 1;
+	border-radius: 4px;
+	height: 55px;
+	ul {
+		@include unstyled();
+		@include clearfix();
+		li {
+			float: left;
+			width: 50%;
+			line-height: 53px;
+			a {
+				position: relative;
+				z-index: 3;
+				display: block;
+				color: lighten($magenta, 20%);
+				&.active {
+					color: $purple;
+				}
+			}
+		}
+	} // ul
+	span {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		border-radius: 2px;
+		z-index: 1;
+		width: 47%;
+		height: 45px;
+		background-color: $white;
+		display: block;
+		@include transition(all 200ms ease);
+		&.right {
+			left: 50.5%;
+			@include transition(all 200ms ease);
+		}
+	}
+} // .switch

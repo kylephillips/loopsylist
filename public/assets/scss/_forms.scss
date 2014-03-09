@@ -7,3 +7,29 @@
 	position: absolute;
 	left: -9999px;
 }
+
+label {
+	display: block;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password']{
+	background-color: $white;
+	border: 1px solid $pink-light;
+	font-size: 18px;
+	color: $purple;
+	padding: 0px 10px;
+	height: 45px;
+	@include transition(all 200ms ease);
+	border-radius: 2px;
+	&:focus {
+		@include transition(all 200ms ease);
+		outline: none;
+		@include box-shadow(0px 0px 5px 0px $magenta);
+	}
+	&::-webkit-input-placeholder { color: $purple; }
+	&:-moz-placeholder { color: $purple; }
+	&::-moz-placeholder { color: $purple; }
+	&:-ms-input-placeholder { color: $purple; }
+}
