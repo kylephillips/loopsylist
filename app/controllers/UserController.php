@@ -39,12 +39,6 @@ class UserController extends \BaseController {
 				'username'=>Input::get('username'), 
 				'password'=>Input::get('password')
 			)) ){
-
-			// User is logged in, update last login
-			$user = Auth::user();
-			$user->last_login = date('Y-m-d G:i:s');
-			$user->save();
-
 			// temp: change to account view
 			return Redirect::route('login_form')
 				->withSuccess('You have successfully logged in.');
@@ -108,8 +102,7 @@ class UserController extends \BaseController {
 			$user = User::create(array(
 				'email' => Input::get('email'),
 				'username' => Input::get('username'),
-				'password' => Hash::make(Input::get('password')),
-				'last_login' => date('Y-m-d G:i:s')
+				'password' => Hash::make(Input::get('password'))
 			));
 			$user = User::where('username', Input::get('username'))->first();
 			Auth::login($user);
@@ -172,6 +165,45 @@ class UserController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+
+	/**
+	* User Signup ajax validation
+	*
+	* @param string $field
+	* @param string $value
+	*/
+	public function validateSignup()
+	{
+		if ( Request::ajax() ){
+			
+			$field = Input::get('field');
+			$value = Input::get('value');
+
+			// Set correct rules depending on which field is being validated
+			switch ($field){
+				case 'email':
+					$data = array( 'email' => Input::get('value'));
+					$rules = array( 'email' => 'required|email|unique:users,email' );
+				break;
+				case 'username':
+					$data = array( 'username' => Input::get('value'));
+					$rules = array( 'username' => 'required|min:3|unique:users,username' );
+				break;
+				case 'password':
+					$data = array( 'password' => Input::get('value'));
+					$rules = array( 'password' => 'required|min:6' );
+				break;
+			}
+
+			$validation = Validator::make($data, $rules);
+			if ( $validation->fails() ){
+				return Response::json(array('status'=>'error'));
+			} else {
+				return Response::json(array('status'=>'success'));
+			}
+		}
 	}
 
 }

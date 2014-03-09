@@ -25,20 +25,20 @@
 	@endif
 
 	{{Form::open(array('url'=>URL::route('user.store'),'method'=>'POST'))}}
-	<div class="form-group">
+	<div class="form-group has-feedback">
 		{{Form::label('email', 'Your Email')}}
-		{{Form::email('email', '', array('class'=>'form-control', 'placeholder'=>'Don\'t worry -  we won\'t spam you'))}}
+		{{Form::email('email', '', array('class'=>'form-control validate', 'placeholder'=>'Don\'t worry -  we won\'t spam you'))}}
 	</div>
-	<div class="form-group">
+	<div class="form-group has-feedback">
 		{{Form::label('username', 'User Name')}}
-		{{Form::text('username', '', array('class'=>'form-control', 'placeholder'=>'You\'ll use this to login'))}}
+		{{Form::text('username', '', array('class'=>'form-control validate', 'placeholder'=>'You\'ll use this to login'))}}
 	</div>
-	<div class="form-group">
+	<div class="form-group has-feedback">
 		{{Form::label('password', 'Password')}}
-		{{Form::password('password', array('class'=>'form-control'))}}
+		{{Form::password('password', array('class'=>'form-control validate'))}}
 		
 		<!-- Toggle Password Visibility -->
-		<input type="text" id="password_shown" class="form-control" style="display:none;">
+		<input type="text" id="password_shown" class="form-control validate" placeholder="password" style="display:none;">
 		<div id="toggle-password"><label class="checkbox">
 			<input type="checkbox" > <span>Show Password</span></label>
 		</div>
@@ -55,10 +55,21 @@
 </div>
 @stop
 
+
 @section('footer_content')
 <script>
-
+$('.validate').on('keyup', function(){
+	var value = $(this).val();
+	var field = $(this).attr('id');
+	var url = "{{URL::route('validate_signup')}}";
+	validateField(field, value, url);
+});
+$('.validate').on('blur', function(){
+	var value = $(this).val();
+	var field = $(this).attr('id');
+	var url = "{{URL::route('validate_signup')}}";
+	validateField(field, value, url);
+});
 </script>
 @stop
-
 
