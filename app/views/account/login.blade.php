@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-	<h1>Login</h1>
+	<h1>Welcome back!</h1>
 
 	@if(Session::has('message'))
 	<div class="alert alert-danger">{{Session::get('message')}}</div>

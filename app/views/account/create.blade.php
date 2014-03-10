@@ -29,6 +29,10 @@
 		{{Form::label('email', 'Your Email')}}
 		{{Form::email('email', '', array('class'=>'form-control validate', 'placeholder'=>'We Don\'t spam.'))}}
 	</div>
+	<div class="form-group">
+		{{Form::label('zip', 'Your Zip Code (optional)')}}
+		{{Form::text('zip', '', array('class'=>'form-control', 'placeholder'=>'So friends and family can find you.'))}}
+	</div>
 	<div class="form-group has-feedback">
 		{{Form::label('username', 'User Name')}}
 		{{Form::text('username', '', array('class'=>'form-control validate', 'placeholder'=>'You\'ll use this to login'))}}

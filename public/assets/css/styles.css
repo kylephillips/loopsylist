@@ -620,7 +620,8 @@ input[type='password'] {
       clear: both; }
     .top-nav ul li {
       float: right;
-      margin-left: 30px; }
+      margin-left: 30px;
+      position: relative; }
       .top-nav ul li a {
         color: #ffcb08;
         font-weight: bold; }
@@ -645,6 +646,32 @@ input[type='password'] {
             transition: all 200ms ease; }
       .top-nav ul li:last-child {
         margin: 0; }
+      .top-nav ul li ul {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 30px;
+        width: 150px;
+        background-color: white;
+        border-radius: 3px;
+        -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.3);
+        box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.3); }
+        .top-nav ul li ul li {
+          float: none;
+          text-align: left;
+          margin: 0; }
+          .top-nav ul li ul li a {
+            display: block;
+            color: #8e2275;
+            border-top: 1px solid #fad5e5;
+            padding: 8px; }
+            .top-nav ul li ul li a:hover {
+              color: #ef5ba1; }
+          .top-nav ul li ul li:first-child a {
+            border: 0; }
+      .top-nav ul li:hover ul {
+        display: block; }
 
 footer {
   color: white;

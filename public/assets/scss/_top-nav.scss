@@ -10,6 +10,7 @@
 		li {
 			float: right;
 			margin-left: 30px;
+			position: relative;
 			a {
 				color: $yellow;
 				font-weight: bold;
@@ -31,6 +32,36 @@
 			}
 			&:last-child {
 				margin: 0;
+			}
+			ul {
+				display: none;
+				position: absolute;
+				right: 0;
+				top: 30px;
+				width: 150px;
+				background-color: $white;
+				border-radius: 3px;
+				@include box-shadow(1px 1px 3px 0px rgba(0,0,0,.3));
+				li {
+					float: none;
+					text-align: left;
+					margin: 0;
+					a {
+						display: block;
+						color: $purple;
+						border-top: 1px solid $pink-light;
+						padding: 8px;
+						&:hover {
+							color: $magenta;
+						}
+					}
+					&:first-child a {
+						border: 0;
+					}
+				}
+			} // ul 2
+			&:hover ul {
+				display: block;
 			}
 		} // li
 	} // ul
