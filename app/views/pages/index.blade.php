@@ -2,7 +2,7 @@
 @section('title', 'Loopsy List - Keep Track of your Lalaloopsy Collection')
 @section('content')
 
-<section class="hero">
+<section class="hero" data-stellar-background-ratio="0.5">
 	@include('partials.top')
 	<div class="container">
 		<h1><em>Loopsy</em> List</h1>
@@ -72,8 +72,10 @@
 @section('footer_content')
 
 {{HTML::script('/assets/js/inflateText.js')}}
+{{HTML::script('/assets/js/jquery.stellar.js')}}
 
 <script>
+$(window).stellar();
 $('.switch a').on('click', function(e){
 	e.preventDefault();
 	
