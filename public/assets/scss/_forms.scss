@@ -35,6 +35,20 @@ input[type='password']{
 	&:-ms-input-placeholder { color: $purple; }
 }
 
+input[type='submit']{
+	background-color: $purple;
+	color: $white;
+	font-size: 18px;
+	border: 0;
+	border-radius: 3px;
+	padding: 12px 30px;
+	border-bottom: 3px solid darken($purple, 10%);
+	@include transition(all 200ms ease);
+	&:hover {
+		background-color: $red;
+	}
+}
+
 
 // Validation
 .has-feedback {

@@ -5,18 +5,7 @@
 <section class="hero" data-stellar-background-ratio="0.5">
 	@include('partials.top')
 	<div class="container">
-		<h1>
-			<span class="l">L</span>
-			<span class="r">o</span>
-			<span class="p">o</span>
-			<span class="r">p</span>
-			<span class="l">s</span>
-			<span class="p">y </span>
-			<span class="l f">L</span>
-			<span class="r">i</span>
-			<span class="p">s</span>
-			<span class="r">t</span>
-		</h1>
+		<h1>Loopsy <em>List</em></h1>
 		<img src="{{URL::asset('assets/images')}}/headline-shadow.png" alt="Headline shadow" />
 		<p>A free and easy way to <strong>track and share</strong> your Lalaloopsy collection.</p>
 		<div class="start-button has-border">

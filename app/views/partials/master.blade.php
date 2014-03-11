@@ -24,6 +24,11 @@
 
 <body>
 	
+	<div id="modal-cont" class="modal">
+		<div class="modal-body"></div>
+		<div class="modal-close"><a href="#">Close</a></div>
+	</div>
+
 	<div id="page-wrap">
 	
 		@yield('content')

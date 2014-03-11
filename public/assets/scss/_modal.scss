@@ -1,0 +1,101 @@
+//
+// Modal
+// --------------------------------------------------
+.modal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.85);
+	z-index: 999;
+	opacity: 0;
+	visibility: hidden;
+	@include transition(all 200ms ease);
+	&.open {
+		@include transition(all 200ms ease);
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.modal-body {
+	position: relative;
+	width: 50%;
+	background-color: $white;
+	min-height: 200px;
+	margin: 20px auto;
+	padding: 10px;
+	border-radius: 4px;
+	@include box-shadow(2px 2px 8px 0px rgba(0,0,0,.7));
+	#login-form-cont {
+		border-radius: 2px;
+		background-color: $pink-lighter;
+		h1 {
+			background-color: $magenta;
+			text-align: center;
+			color: $white;
+			font-size: 18px;
+			padding: 8px 0;
+			margin: 0;
+			border-radius: 2px 2px 0px 0px;
+		}
+		#login-form {
+			padding: 15px;
+			text-align: center;
+		}
+		.alert {
+			text-align: left;
+		}
+		label {
+			text-align: left;
+			color: $purple;
+		}
+		input[type='text'],
+		input[type='password']{
+			width: 100%;
+			margin-bottom: 15px;
+		}
+		#toggle-password {
+			display: none;
+		}
+		a {
+			color: darken($pink, 10%);
+		}
+		.login-options {
+			@include unstyled();
+			@include clearfix();
+			padding-top: 10px;
+			li {
+				display: inline;
+				margin-left: 20px;
+				&:first-child {
+					margin: 0;
+				}
+			}
+		}
+	} // #login-form
+} // .modal-body
+
+
+// Close modal button
+.modal-close {
+	position: relative;
+	text-align: center;
+	a {
+		background-color: $magenta;
+		color: $white;
+		padding: 8px 20px;
+		border-radius: 2px;
+		@include transition(all 200ms ease);
+		&:hover {
+			background-color: $yellow;
+			color: $purple;
+		}
+	}
+}
+
+
+@media (max-width: 767px){
+	.modal-body {
+		width: 90%;
+	}
+}

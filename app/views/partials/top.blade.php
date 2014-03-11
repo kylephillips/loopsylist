@@ -9,7 +9,7 @@
 			</ul>
 		</li>
 		@else
-		<li><a href="{{URL::route('login_form')}}" class="login-btn">Login</a></li>
+		<li><a href="{{URL::route('login_form')}}" class="login-btn login-trigger">Login</a></li>
 		@endif
 		<li><a href="#">Find a List</a></li>
 	</ul>

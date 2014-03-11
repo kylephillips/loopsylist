@@ -16,7 +16,7 @@ class UserController extends \BaseController {
 	/**
 	 * Process the Login Form
 	 *
-	 * @return View
+	 * @return View or Response depending on request type
 	 */
 	public function postLogin()
 	{
@@ -25,13 +25,17 @@ class UserController extends \BaseController {
 			'username' => 'required|exists:users,username',
 			'password' => 'required'
 		);
-		$error_message = "Oopsie! Looks like the login you entered are incorrect.";
+		$error_message = "Oopsie! Looks like the login you entered is incorrect.";
 		
 		$validation = Validator::make(Input::all(), $required);
 		if ( $validation->fails() ){
-			return Redirect::route('login_form')
-				->withInput()
-				->withMessage($error_message);
+			if ( Request::ajax() ){
+				return Response::json(array('status'=>'error', 'message'=>$error_message));
+			} else {
+				return Redirect::route('login_form')
+					->withInput()
+					->withMessage($error_message);
+			}
 		}
 
 		// Authentication
@@ -39,9 +43,13 @@ class UserController extends \BaseController {
 				'username'=>Input::get('username'), 
 				'password'=>Input::get('password')
 			)) ){
-			// temp: change to account view
-			return Redirect::route('login_form')
-				->withSuccess('You have successfully logged in.');
+			if ( Request::ajax() ){
+				// temp: change to redirect to account view
+				return Response::json(array('status'=>'success'));
+			} else {
+				return Redirect::route('login_form')
+					->withSuccess('You have successfully logged in.');
+			}
 		} else {
 			return Redirect::route('login_form')
 				->withMessage($error_message);
@@ -56,8 +64,8 @@ class UserController extends \BaseController {
 	public function getLogout()
 	{
 		Auth::logout();
-		return Redirect::route('login_form')
-			->withSuccess('You have been logged out.');
+		return Redirect::back()
+			->with('topmessage','You have been logged out.');
 	}
 
 

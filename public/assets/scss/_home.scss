@@ -20,24 +20,6 @@
 			color: $white;
 			font-style: normal;
 		}
-		span {
-			display: inline-block;
-			margin-left: -18px;
-		}
-		span.l {
-			@include transform(rotate(5deg));
-			color: $white;
-		}
-		span.r {
-			@include transform(rotate(-5deg));
-		}
-		span.p {
-			@include transform(rotate(5deg));
-			color: $pink;
-		}
-		span.f {
-			margin-left: 20px;
-		}
 	}
 
 	// shadow

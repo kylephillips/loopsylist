@@ -502,6 +502,21 @@ input[type='password'] {
   input[type='password']:-ms-input-placeholder {
     color: #8e2275; }
 
+input[type='submit'] {
+  background-color: #8e2275;
+  color: white;
+  font-size: 18px;
+  border: 0;
+  border-radius: 3px;
+  padding: 12px 30px;
+  border-bottom: 3px solid #651853;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease; }
+  input[type='submit']:hover {
+    background-color: #bf1e4f; }
+
 .has-feedback input {
   position: relative; }
 
@@ -615,6 +630,112 @@ input[type='password'] {
   width: 100%;
   height: 12px;
   background: url("../images/border-pattern.png"), repeat-x; }
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease; }
+  .modal.open {
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    opacity: 1;
+    visibility: visible; }
+
+.modal-body {
+  position: relative;
+  width: 50%;
+  background-color: white;
+  min-height: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.7); }
+  .modal-body #login-form-cont {
+    border-radius: 2px;
+    background-color: #fff4f9; }
+    .modal-body #login-form-cont h1 {
+      background-color: #ef5ba1;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      padding: 8px 0;
+      margin: 0;
+      border-radius: 2px 2px 0px 0px; }
+    .modal-body #login-form-cont #login-form {
+      padding: 15px;
+      text-align: center; }
+    .modal-body #login-form-cont .alert {
+      text-align: left; }
+    .modal-body #login-form-cont label {
+      text-align: left;
+      color: #8e2275; }
+    .modal-body #login-form-cont input[type='text'],
+    .modal-body #login-form-cont input[type='password'] {
+      width: 100%;
+      margin-bottom: 15px; }
+    .modal-body #login-form-cont #toggle-password {
+      display: none; }
+    .modal-body #login-form-cont a {
+      color: #ef6ca5; }
+    .modal-body #login-form-cont .login-options {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      padding-top: 10px; }
+      .modal-body #login-form-cont .login-options:before, .modal-body #login-form-cont .login-options:after {
+        content: " ";
+        /* 1 */
+        display: table;
+        /* 2 */ }
+      .modal-body #login-form-cont .login-options:after {
+        clear: both; }
+      .modal-body #login-form-cont .login-options li {
+        display: inline;
+        margin-left: 20px; }
+        .modal-body #login-form-cont .login-options li:first-child {
+          margin: 0; }
+
+.modal-close {
+  position: relative;
+  text-align: center; }
+  .modal-close a {
+    background-color: #ef5ba1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 2px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease; }
+    .modal-close a:hover {
+      background-color: #ffcb08;
+      color: #8e2275; }
+
+@media (max-width: 767px) {
+  .modal-body {
+    width: 90%; } }
+.alert {
+  padding: 6px;
+  border-radius: 2px;
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 8px; }
+
+.alert-danger {
+  background-color: #bf1e4f;
+  color: white; }
 
 .top-nav {
   padding-top: 30px; }
@@ -755,31 +876,6 @@ footer {
     .hero h1 em {
       color: white;
       font-style: normal; }
-    .hero h1 span {
-      display: inline-block;
-      margin-left: -18px; }
-    .hero h1 span.l {
-      -webkit-transform: rotate(5deg);
-      -moz-transform: rotate(5deg);
-      -ms-transform: rotate(5deg);
-      -o-transform: rotate(5deg);
-      transform: rotate(5deg);
-      color: white; }
-    .hero h1 span.r {
-      -webkit-transform: rotate(-5deg);
-      -moz-transform: rotate(-5deg);
-      -ms-transform: rotate(-5deg);
-      -o-transform: rotate(-5deg);
-      transform: rotate(-5deg); }
-    .hero h1 span.p {
-      -webkit-transform: rotate(5deg);
-      -moz-transform: rotate(5deg);
-      -ms-transform: rotate(5deg);
-      -o-transform: rotate(5deg);
-      transform: rotate(5deg);
-      color: #f49ac1; }
-    .hero h1 span.f {
-      margin-left: 20px; }
   .hero img {
     position: relative;
     margin-bottom: 10px; }

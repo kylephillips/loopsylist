@@ -3,6 +3,49 @@
 */
 
 
+/*
+* Login Modal
+*/
+$('.login-trigger').on('click', function(e){
+	e.preventDefault();
+	var url = $(this).attr('href') + ' ' + '#login-form-cont';
+	$('#modal-cont').addClass('open');
+	$('#modal-cont .modal-body').load(url, function(){
+		$('#username').focus();
+	});
+});
+
+// Hide Modal when clicked outside
+$('.modal-body, .login-trigger').click(function(e){e.stopPropagation();});
+$(document).click(function(e){
+	if ( e.target.className !== '.modal-body'){
+		$('.modal').removeClass('open');
+	}
+});
+
+
+/*
+* Ajax login
+*/
+$(document).on('submit', '#login-form', function(e){
+	e.preventDefault();
+	var url = $(this).attr('action');
+	var data = $(this).serialize();
+	$.ajax({
+		type : 'POST',
+		url : url,
+		data : data,
+		success : function(data){
+			if ( data.status == 'error' ){
+				$('#login-error').text(data.message);
+				$('#login-error').show();
+			} else {
+				location.reload();
+			}
+		}
+	});
+});
+
 /* 
 * Show/Hide Password Functionality
 */
