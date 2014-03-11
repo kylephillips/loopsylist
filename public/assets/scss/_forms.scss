@@ -12,6 +12,7 @@ label {
 	display: block;
 }
 
+
 input[type='text'],
 input[type='email'],
 input[type='password']{
@@ -32,4 +33,24 @@ input[type='password']{
 	&:-moz-placeholder { color: $purple; }
 	&::-moz-placeholder { color: $purple; }
 	&:-ms-input-placeholder { color: $purple; }
+}
+
+
+// Validation
+.has-feedback {
+	input {
+		position: relative;
+	}
+}
+.has-error {
+	input {
+		border-color: $error;
+		border-width: 2px;
+	}
+}
+.has-success {
+	input {
+		border-color: $success;
+		border-width: 2px;
+	}
 }

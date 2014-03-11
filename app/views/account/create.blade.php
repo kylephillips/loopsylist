@@ -24,7 +24,7 @@
 	</div>
 	@endif
 
-	{{Form::open(array('url'=>URL::route('user.store'),'method'=>'POST'))}}
+	{{Form::open(array('url'=>URL::route('user.store'),'method'=>'POST', 'id'=>'signup'))}}
 	<div class="form-group has-feedback">
 		{{Form::label('email', 'Your Email')}}
 		{{Form::email('email', '', array('class'=>'form-control validate', 'placeholder'=>'We Don\'t spam.'))}}
@@ -54,6 +54,8 @@
 	<div class="hpr" tabindex="32000">
 		{{Form::text('hp')}}
 	</div>
+	{{Form::hidden('latitude', '', array('id'=>'latitude'))}}
+	{{Form::hidden('longitude', '', array('id'=>'longitude'))}}
 	{{Form::submit('Sign Up', array('class'=>'btn btn-primary'))}}
 	{{Form::close()}}
 </div>
@@ -61,6 +63,7 @@
 
 
 @section('footer_content')
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
 $('.validate').on('keyup', function(){
 	var value = $(this).val();

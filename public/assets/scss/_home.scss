@@ -11,7 +11,7 @@
 	h1 {
 		width: 100%;
 		margin: 0;
-		padding: 40px 0px 0px 0px;
+		padding: 30px 0px 0px 0px;
 		line-height: .6;
 		letter-spacing: 1px;
 		@include bello();
@@ -19,6 +19,24 @@
 		em {
 			color: $white;
 			font-style: normal;
+		}
+		span {
+			display: inline-block;
+			margin-left: -18px;
+		}
+		span.l {
+			@include transform(rotate(5deg));
+			color: $white;
+		}
+		span.r {
+			@include transform(rotate(-5deg));
+		}
+		span.p {
+			@include transform(rotate(5deg));
+			color: $pink;
+		}
+		span.f {
+			margin-left: 20px;
 		}
 	}
 
@@ -150,7 +168,7 @@
 		margin: 0 0 10px 0;
 		em {
 			font-style: normal;
-			color: $pink-light;
+			color: $pink;
 		}
 	}
 	p {

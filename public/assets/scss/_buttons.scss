@@ -24,9 +24,9 @@
 		border-bottom: 3px solid darken($yellow, 10%);
 		@include transition(all 200ms ease);
 		&:hover {
-			background-color: $pink;
+			background-color: $magenta;
 			color: $white;
-			border-color: darken($pink, 10%);
+			border-color: darken($magenta, 10%);
 			@include transition(all 200ms ease);
 		}
 	}

@@ -1,10 +1,7 @@
 /* 
 * Base Scripts
 */
-$(document).ready(function(){
-	// Home Headline
-	$('.hero h1').inflateText();
-});
+
 
 /* 
 * Show/Hide Password Functionality
@@ -95,4 +92,39 @@ function displaySuccess(field)
 	removeFeedback(field);
 	$(parent).addClass('has-success');
 	$(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+}
+
+/*
+* Geocode zip codes on user signup
+*/
+$('#signup').on('submit', function(e){
+	var zip = $('#zip').val();
+	if ( zip.length > 0 ){
+		e.preventDefault();
+		geocodeZip(zip);
+	}
+});
+
+function geocodeZip(zip){
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({
+		'address' : zip
+	}, function(results, status){
+		if ( status == google.maps.GeocoderStatus.OK ){
+				
+			var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+				
+			$('#latitude').val(latitude);
+			$('#longitude').val(longitude);
+			
+			$('#signup').unbind('submit');
+			$('#signup').submit();
+
+		} else {
+			$('.page-loading').hide();
+			$('#addresserror').show();
+			$('#addressform button').removeAttr('disabled');
+		}
+	});
 }

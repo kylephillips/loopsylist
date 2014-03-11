@@ -102,7 +102,10 @@ class UserController extends \BaseController {
 			$user = User::create(array(
 				'email' => Input::get('email'),
 				'username' => Input::get('username'),
-				'password' => Hash::make(Input::get('password'))
+				'password' => Hash::make(Input::get('password')),
+				'zip_code' => Input::get('zip'),
+				'latitude' => Input::get('latitude'),
+				'longitude' => Input::get('longitude')
 			));
 			$user = User::where('username', Input::get('username'))->first();
 			Auth::login($user);
