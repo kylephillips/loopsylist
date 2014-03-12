@@ -5,9 +5,9 @@
 <section class="hero" data-stellar-background-ratio="0.5">
 	@include('partials.top')
 	<div class="container">
-		<h1>Loopsy <em>List</em></h1>
+		<h1>Track <i>&amp;</i> Share</h1>
+		<h3>Your Lalaloopsy Collection!</h3>
 		<img src="{{URL::asset('assets/images')}}/headline-shadow.png" alt="Headline shadow" />
-		<p>A free and easy way to <strong>track and share</strong> your Lalaloopsy collection.</p>
 		<div class="start-button has-border">
 			<hr />
 			<a href="{{URL::route('user.create')}}">Start Your List</a>

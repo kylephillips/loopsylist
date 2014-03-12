@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div id="login-form-cont">
-		<h1>Login to edit your list</h1>
+		<h1>Login to Loopsy List</h1>
 
 		@if(Session::has('message'))
 		<div class="alert alert-danger">{{Session::get('message')}}</div>

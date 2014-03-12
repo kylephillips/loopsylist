@@ -3,32 +3,39 @@
 // --------------------------------------------------
 
 .top-nav {
-	padding-top: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	@include clearfix();
+	background-color: $purple-dark;
+	border-bottom: 3px solid $magenta;
+
+	&.front-page {
+		background: transparent;
+		padding-bottom: 0;
+		border: 0;
+	}
+
+	.logo {
+		float: left;
+		font-weight: bold;
+		font-size: 22px;
+		margin-right: 40px;
+		color: $white;
+		em {
+			font-style: normal;
+			color: $pink;
+		}
+	}
+
 	ul {
 		@include unstyled();
 		@include clearfix();
 		li {
-			float: right;
+			float: left;
 			margin-left: 30px;
 			position: relative;
 			a {
 				color: $yellow;
-				font-weight: bold;
-				&.login-btn {
-					position: relative;
-					top: -5px;
-					display: block;
-					border: 1px solid rgba(0,0,0,0.3);
-					padding: 4px 20px;
-					border-radius: 2px;
-					color: $white;
-					@include transition(all 200ms ease);
-					&:hover {
-						background-color: $purple;
-						color: $white;
-						@include transition(all 200ms ease);
-					}
-				}
 			}
 			&:last-child {
 				margin: 0;
@@ -66,3 +73,39 @@
 		} // li
 	} // ul
 } // .top-nav
+
+
+.login-btn {
+	position: relative;
+	top: -5px;
+	display: block;
+	border: 1px solid rgba(0,0,0,0.3);
+	padding: 4px 20px;
+	border-radius: 2px;
+	color: $white;
+	margin-left: 30px;
+	@include transition(all 200ms ease);
+	&:hover {
+		background-color: $purple;
+		color: $white;
+		@include transition(all 200ms ease);
+	}	
+}
+.nav-toggle {
+	display: none;
+	float: right;
+}
+
+
+@media (max-width: 767px){
+	.top-nav ul {
+		display: none;
+	}
+	.nav-toggle {
+		display: inline-block;
+	}
+}
+@media (min-width: 768px){
+	
+}
+

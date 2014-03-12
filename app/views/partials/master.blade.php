@@ -8,10 +8,9 @@
 
 	<title>@yield('title','Loopsy List')</title>
 	
-	<link rel="shortcut icon" href="assets/favicon.ico">
+	<link rel="shortcut icon" href="{{URL::asset('favicon.ico')}}">
 	
 	{{HTML::style('/assets/css/styles.css')}}
-	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
 	
 	<!-- Typekit -->
 	<script type="text/javascript" src="//use.typekit.net/vmv4gsq.js"></script>
@@ -29,15 +28,22 @@
 		<div class="modal-close"><a href="#">Close</a></div>
 	</div>
 
-	<div id="page-wrap">
-	
-		@yield('content')
+	<div id="mobile-nav">
+	</div>
 
-		@yield('footer_content')
-	
+	<div id="page-wrap">
+		<div class="content">
+			@if(!isset($front_page))
+			@include('partials.top')
+			@endif
+
+			@yield('content')
+
+			@yield('footer_content')
+		</div>
+		@include('partials.footer')
 	</div><!-- #page-wrap -->
 
-	@include('partials.footer')
 
 	{{HTML::script('assets/js/scripts.js')}}
 

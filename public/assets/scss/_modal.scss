@@ -28,11 +28,12 @@
 	@include box-shadow(2px 2px 8px 0px rgba(0,0,0,.7));
 	#login-form-cont {
 		border-radius: 2px;
-		background-color: $pink-lighter;
+		background-color: rgba(0,0,0,.06);
 		h1 {
-			background-color: $magenta;
+			background-color: rgba(0,0,0,.1);
 			text-align: center;
-			color: $white;
+			color: $black;
+			font-weight: normal;
 			font-size: 18px;
 			padding: 8px 0;
 			margin: 0;
@@ -53,12 +54,17 @@
 		input[type='password']{
 			width: 100%;
 			margin-bottom: 15px;
+			font-size: 16px;
+			border-color: rgba(0,0,0,.1);
 		}
 		#toggle-password {
 			display: none;
 		}
 		a {
 			color: darken($pink, 10%);
+			&:hover {
+				color: $purple;
+			}
 		}
 		.login-options {
 			@include unstyled();

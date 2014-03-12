@@ -1,0 +1,42 @@
+//
+// Mobile Nav
+// --------------------------------------------------
+
+// Base wrapper styles
+#mobile-nav {
+	position: fixed;
+	width: 70%;
+	height: 100%;
+	background-color: $purple-dark;
+	top: 0;
+	right: -70%;
+	@include transition(right 200ms ease);
+}
+#page-wrap {
+	right: 0;
+	width: 100%;
+	position: relative;
+	@include transition(right 200ms ease);
+}
+
+body.open {
+	#mobile-nav {
+		@include transition(right 200ms ease);
+		right: 0;
+	}
+	#page-wrap {
+		right: 70%;
+		@include transition(right 200ms ease);
+	}
+}
+
+@media (min-width: 768px){
+	body.open {
+		#mobile-nav {
+			right: -70%;
+		}
+		#page-wrap {
+			right: 0;
+		}
+	}
+}

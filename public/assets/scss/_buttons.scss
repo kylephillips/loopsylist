@@ -8,7 +8,7 @@
 	hr {
 		background: transparent;
 		border: 0;
-		border-top: 2px dashed #d90d84;
+		border-top: 2px dashed darken($purple, 8%);
 	}
 	a {
 		display: inline-block;
@@ -40,16 +40,15 @@
 	}
 } // .start-button
 
+
 @media (max-width: 767px) {
 	.start-button {
-		display: block;
-		hr {
-			display: none;
-		}
+		hr { display: none;	}
 		a {
-			display: block;
-			width: 100%;
-			padding: 0;
+			height: 40px;
+			line-height: 40px;
+			width: auto;
+			padding: 0 30px;
 		}
 		&.has-border {
 			width: 100%;

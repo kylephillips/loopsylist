@@ -396,7 +396,7 @@ body {
   width: 100%;
   background-color: #8e2275; }
 
-#page-wrap {
+.content {
   background-color: white; }
 
 input,
@@ -477,14 +477,7 @@ input[type='password'] {
   input[type='text']:focus,
   input[type='email']:focus,
   input[type='password']:focus {
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
-    -o-transition: all 200ms ease;
-    transition: all 200ms ease;
-    outline: none;
-    -webkit-box-shadow: 0px 0px 5px 0px #ef5ba1;
-    -moz-box-shadow: 0px 0px 5px 0px #ef5ba1;
-    box-shadow: 0px 0px 5px 0px #ef5ba1; }
+    outline: none; }
   input[type='text']::-webkit-input-placeholder,
   input[type='email']::-webkit-input-placeholder,
   input[type='password']::-webkit-input-placeholder {
@@ -583,7 +576,7 @@ input[type='submit'] {
   .start-button hr {
     background: transparent;
     border: 0;
-    border-top: 2px dashed #d90d84; }
+    border-top: 2px dashed #6d1a5a; }
   .start-button a {
     display: inline-block;
     background-color: #ffcb08;
@@ -616,16 +609,15 @@ input[type='submit'] {
       top: -35px; }
 
 @media (max-width: 767px) {
-  .start-button {
-    display: block; }
-    .start-button hr {
-      display: none; }
-    .start-button a {
-      display: block;
-      width: 100%;
-      padding: 0; }
-    .start-button.has-border {
-      width: 100%; } }
+  .start-button hr {
+    display: none; }
+  .start-button a {
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    padding: 0 30px; }
+  .start-button.has-border {
+    width: 100%; } }
 .pattern-border {
   width: 100%;
   height: 12px;
@@ -664,11 +656,12 @@ input[type='submit'] {
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.7); }
   .modal-body #login-form-cont {
     border-radius: 2px;
-    background-color: #fff4f9; }
+    background-color: rgba(0, 0, 0, 0.06); }
     .modal-body #login-form-cont h1 {
-      background-color: #ef5ba1;
+      background-color: rgba(0, 0, 0, 0.1);
       text-align: center;
-      color: white;
+      color: #414141;
+      font-weight: normal;
       font-size: 18px;
       padding: 8px 0;
       margin: 0;
@@ -684,11 +677,15 @@ input[type='submit'] {
     .modal-body #login-form-cont input[type='text'],
     .modal-body #login-form-cont input[type='password'] {
       width: 100%;
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-color: rgba(0, 0, 0, 0.1); }
     .modal-body #login-form-cont #toggle-password {
       display: none; }
     .modal-body #login-form-cont a {
       color: #ef6ca5; }
+      .modal-body #login-form-cont a:hover {
+        color: #8e2275; }
     .modal-body #login-form-cont .login-options {
       list-style-type: none;
       margin: 0;
@@ -738,7 +735,30 @@ input[type='submit'] {
   color: white; }
 
 .top-nav {
-  padding-top: 30px; }
+  padding-top: 20px;
+  padding-bottom: 15px;
+  background-color: #560143;
+  border-bottom: 3px solid #ef5ba1; }
+  .top-nav:before, .top-nav:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .top-nav:after {
+    clear: both; }
+  .top-nav.front-page {
+    background: transparent;
+    padding-bottom: 0;
+    border: 0; }
+  .top-nav .logo {
+    float: left;
+    font-weight: bold;
+    font-size: 22px;
+    margin-right: 40px;
+    color: white; }
+    .top-nav .logo em {
+      font-style: normal;
+      color: #f49ac1; }
   .top-nav ul {
     list-style-type: none;
     margin: 0;
@@ -751,31 +771,11 @@ input[type='submit'] {
     .top-nav ul:after {
       clear: both; }
     .top-nav ul li {
-      float: right;
+      float: left;
       margin-left: 30px;
       position: relative; }
       .top-nav ul li a {
-        color: #ffcb08;
-        font-weight: bold; }
-        .top-nav ul li a.login-btn {
-          position: relative;
-          top: -5px;
-          display: block;
-          border: 1px solid rgba(0, 0, 0, 0.3);
-          padding: 4px 20px;
-          border-radius: 2px;
-          color: white;
-          -webkit-transition: all 200ms ease;
-          -moz-transition: all 200ms ease;
-          -o-transition: all 200ms ease;
-          transition: all 200ms ease; }
-          .top-nav ul li a.login-btn:hover {
-            background-color: #8e2275;
-            color: white;
-            -webkit-transition: all 200ms ease;
-            -moz-transition: all 200ms ease;
-            -o-transition: all 200ms ease;
-            transition: all 200ms ease; }
+        color: #ffcb08; }
       .top-nav ul li:last-child {
         margin: 0; }
       .top-nav ul li ul {
@@ -805,6 +805,37 @@ input[type='submit'] {
       .top-nav ul li:hover ul {
         display: block; }
 
+.login-btn {
+  position: relative;
+  top: -5px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 4px 20px;
+  border-radius: 2px;
+  color: white;
+  margin-left: 30px;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease; }
+  .login-btn:hover {
+    background-color: #8e2275;
+    color: white;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease; }
+
+.nav-toggle {
+  display: none;
+  float: right; }
+
+@media (max-width: 767px) {
+  .top-nav ul {
+    display: none; }
+
+  .nav-toggle {
+    display: inline-block; } }
 footer {
   color: white;
   padding: 30px 0; }
@@ -846,6 +877,45 @@ footer {
       width: 200px; }
     footer span {
       top: -15px; } }
+#mobile-nav {
+  position: fixed;
+  width: 70%;
+  height: 100%;
+  background-color: #560143;
+  top: 0;
+  right: -70%;
+  -webkit-transition: right 200ms ease;
+  -moz-transition: right 200ms ease;
+  -o-transition: right 200ms ease;
+  transition: right 200ms ease; }
+
+#page-wrap {
+  right: 0;
+  width: 100%;
+  position: relative;
+  -webkit-transition: right 200ms ease;
+  -moz-transition: right 200ms ease;
+  -o-transition: right 200ms ease;
+  transition: right 200ms ease; }
+
+body.open #mobile-nav {
+  -webkit-transition: right 200ms ease;
+  -moz-transition: right 200ms ease;
+  -o-transition: right 200ms ease;
+  transition: right 200ms ease;
+  right: 0; }
+body.open #page-wrap {
+  right: 70%;
+  -webkit-transition: right 200ms ease;
+  -moz-transition: right 200ms ease;
+  -o-transition: right 200ms ease;
+  transition: right 200ms ease; }
+
+@media (min-width: 768px) {
+  body.open #mobile-nav {
+    right: -70%; }
+  body.open #page-wrap {
+    right: 0; } }
 .hero {
   background-color: #8e2275;
   /* Fallback Color */
@@ -861,41 +931,54 @@ footer {
   /* Opera 11.10+ */
   background-image: linear-gradient(top, #bf1e4f, #8e2275);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#bf1e4f', EndColorStr='#8e2275');
-  -webkit-font-smoothing: antialiased;
   text-align: center; }
   .hero h1 {
+    -webkit-font-smoothing: antialiased;
     width: 100%;
     margin: 0;
-    padding: 30px 0px 0px 0px;
+    padding: 60px 0px 0px 0px;
     line-height: .6;
     letter-spacing: 1px;
     font-family: "bello-caps", sans-serif;
     font-style: normal;
     font-weight: 400;
-    color: #ffcb08; }
+    color: white; }
     .hero h1 em {
-      color: white;
+      color: #ffcb08;
       font-style: normal; }
-  .hero img {
+    .hero h1 i {
+      color: #501342;
+      font-style: normal;
+      position: relative;
+      top: -10px; }
+  .hero h3 {
     position: relative;
-    margin-bottom: 10px; }
+    z-index: 2;
+    text-transform: uppercase;
+    color: #ffcb08;
+    letter-spacing: 5px;
+    font-size: 34px;
+    line-height: 36px;
+    margin: 25px 0 0 0; }
   .hero p {
     margin: 0;
     color: white;
-    font-size: 26px;
-    font-weight: bold; }
+    font-size: 23px; }
     .hero p strong {
+      font-weight: normal;
       color: #ffcb08; }
   .hero .details {
     font-size: 16px;
     position: relative;
-    top: -30px;
-    margin-bottom: 50px; }
+    top: -20px;
+    margin-bottom: 30px; }
     .hero .details a {
       color: #ffcb08;
       text-decoration: underline; }
       .hero .details a:hover {
         color: #f49ac1; }
+  .hero .start-button {
+    padding-top: 26px; }
 
 .find-home {
   text-align: center;
@@ -1006,7 +1089,15 @@ footer {
   .hero h1 {
     padding-top: 20px;
     font-size: 60px !important;
-    margin-bottom: 10px; }
+    margin-bottom: 0px; }
+    .hero h1 i {
+      top: 0; }
+  .hero h3 {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 18px;
+    line-height: 20px;
+    margin: 10px 0 30px 0; }
   .hero img {
     display: none; }
   .hero p {

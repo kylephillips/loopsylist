@@ -2,6 +2,13 @@
 * Base Scripts
 */
 
+/*
+* Toggle Mobile Nav
+*/
+$('.nav-toggle').on('click', function(e){
+	e.preventDefault();
+	$('body').toggleClass('open');
+});
 
 /*
 * Login Modal

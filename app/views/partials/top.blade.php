@@ -1,5 +1,12 @@
-<div class="container top-nav">
-	<ul>
+@if(isset($front_page))
+<section class="top-nav front-page">
+@else
+<section class="top-nav">
+@endif
+<div class="container">
+	<a href="{{URL::route('home')}}" class="logo">Loopsy <em>List</em></a>
+	<ul class="pull-right">
+		<li><a href="#">Find a List</a></li>
 		@if(Auth::check())
 		<li>
 			<a href="#" class="login-btn">{{Auth::user()->username}}</a>
@@ -9,8 +16,10 @@
 			</ul>
 		</li>
 		@else
+		<li><a href="{{URL::route('user.create')}}">Sign up</a></li>
 		<li><a href="{{URL::route('login_form')}}" class="login-btn login-trigger">Login</a></li>
 		@endif
-		<li><a href="#">Find a List</a></li>
 	</ul>
+	<a href="#" class="login-btn nav-toggle">Menu</a>
 </div>
+</section>
