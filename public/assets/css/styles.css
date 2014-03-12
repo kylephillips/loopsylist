@@ -751,14 +751,42 @@ input[type='submit'] {
     padding-bottom: 0;
     border: 0; }
   .top-nav .logo {
-    float: left;
-    font-weight: bold;
-    font-size: 22px;
-    margin-right: 40px;
-    color: white; }
-    .top-nav .logo em {
-      font-style: normal;
-      color: #f49ac1; }
+    float: left; }
+    .top-nav .logo a {
+      display: block;
+      height: 40px;
+      font-weight: bold;
+      font-size: 22px;
+      margin: -5px 40px 0 0;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 20px;
+      border-radius: 20px;
+      -webkit-transition: all 200ms ease;
+      -moz-transition: all 200ms ease;
+      -o-transition: all 200ms ease;
+      transition: all 200ms ease; }
+      .top-nav .logo a em {
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+        font-style: normal;
+        color: #f49ac1; }
+      .top-nav .logo a:hover {
+        background-color: white;
+        color: #8e2275;
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease; }
+        .top-nav .logo a:hover em {
+          -webkit-transition: all 200ms ease;
+          -moz-transition: all 200ms ease;
+          -o-transition: all 200ms ease;
+          transition: all 200ms ease;
+          color: #ef5ba1; }
   .top-nav ul {
     list-style-type: none;
     margin: 0;
@@ -809,10 +837,11 @@ input[type='submit'] {
   position: relative;
   top: -5px;
   display: block;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 4px 20px;
   border-radius: 2px;
-  color: white;
+  color: white !important;
   margin-left: 30px;
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;

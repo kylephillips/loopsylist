@@ -17,15 +17,34 @@
 
 	.logo {
 		float: left;
-		font-weight: bold;
-		font-size: 22px;
-		margin-right: 40px;
-		color: $white;
-		em {
-			font-style: normal;
-			color: $pink;
-		}
-	}
+		a {
+			display: block;
+			height: 40px;
+			font-weight: bold;
+			font-size: 22px;
+			margin:-5px 40px 0 0;
+			color: $white;
+			background-color: rgba(255,255,255,.08);
+			border: 1px solid rgba(255,255,255,.1);
+			padding: 6px 20px;
+			border-radius: 20px;
+			@include transition(all 200ms ease);
+			em {
+				@include transition(all 200ms ease);
+				font-style: normal;
+				color: $pink;
+			}
+			&:hover {
+				background-color: $white;
+				color: $purple;
+				@include transition(all 200ms ease);
+				em {
+					@include transition(all 200ms ease);
+					color: $magenta;
+				}
+			}
+		} // a
+	} // .logo
 
 	ul {
 		@include unstyled();
@@ -79,10 +98,11 @@
 	position: relative;
 	top: -5px;
 	display: block;
-	border: 1px solid rgba(0,0,0,0.3);
+	background-color: rgba(0,0,0,.08);
+	border: 1px solid rgba(0,0,0,0.2);
 	padding: 4px 20px;
 	border-radius: 2px;
-	color: $white;
+	color: $white !important;
 	margin-left: 30px;
 	@include transition(all 200ms ease);
 	&:hover {

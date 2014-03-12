@@ -4,7 +4,7 @@
 <section class="top-nav">
 @endif
 <div class="container">
-	<a href="{{URL::route('home')}}" class="logo">Loopsy <em>List</em></a>
+	<div class="logo"><a href="{{URL::route('home')}}">Loopsy <em>List</em></a></div>
 	<ul class="pull-right">
 		<li><a href="#">Find a List</a></li>
 		@if(Auth::check())
