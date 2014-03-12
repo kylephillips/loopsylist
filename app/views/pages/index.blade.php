@@ -7,7 +7,6 @@
 	<div class="container">
 		<h1>Track <i>&amp;</i> Share</h1>
 		<h3>Your Lalaloopsy Collection!</h3>
-		<img src="{{URL::asset('assets/images')}}/headline-shadow.png" alt="Headline shadow" />
 		<div class="start-button has-border">
 			<hr />
 			<a href="{{URL::route('user.create')}}">Start Your List</a>
