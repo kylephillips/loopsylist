@@ -2,56 +2,59 @@
 // Footer
 // --------------------------------------------------
 footer {
-	color: $white;
+	text-align: center;
 	@include clearfix();
-	padding: 30px 0;
+	padding: 60px 0;
+
+	hr {
+		background: transparent;
+		border: 0;
+		border-top: 1px solid $pink-dark;
+	}
+
+	.icon {
+		width: 100%;
+		margin: -40px auto 30px auto;
+		height: 60px;
+		text-align: center;
+		a {
+			border: 1px solid darken($pink-dark, 4%);
+			display: inline-block;
+			width: 60px;
+			height: 60px;
+			line-height: 55px;
+			border-radius: 40px;
+			background-color: $pink-dark;
+			@include transition(all 200ms ease);
+			img {
+				width: 30px;
+			}
+			&:hover {
+				background-color: $magenta;
+				@include transition(all 200ms ease);
+			}
+		}
+	}
 
 	.copyright {
-		float: left;
-		width: 45%;
-		em {
-			font-style: normal;
-			color: $yellow;
-			display: block;
-		}
+		clear: both;
 		p {
+			font-size: 15px;
+			color: $pink;
 			line-height: 20px;
 		}
 	}
 
-	img {
-		float: right;
-		width: 200px
-	}
-
-	span {
-		display: block;
-		width: 100%;
-		border-top: 1px dashed $magenta;
-		position: relative;
-		top: -25px;
+	&.home {
+		background-color: $purple;
+		hr {
+			border-color: darken($purple, 5%);
+		}
+		.icon a {
+			background-color: darken($purple, 5%);
+			border-color: darken($purple, 8%);
+		}
 	}
 
 } // footer
 
-@media (max-width: 767px) {
-	footer {
-		text-align: center;
-		padding: 20px 0;
-
-		.copyright {
-			float: none;
-			width: 100%;
-		}
-
-		img {
-			float: none;
-			width: 200px
-		}
-
-		span {
-			top: -15px;
-		}
-
-	} // footer
-}

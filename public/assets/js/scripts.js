@@ -65,15 +65,12 @@ $(document).on('keyup', '#password_shown', function(){
 	$('#password').val(pass);
 });
 $('#toggle-password').on('click', function(){
-	var check = $(this).find('input');
-	var text = $(this).find('span');
-
-	if ( $(check).is(':checked') ){
-		$(text).text('Hide Password');
+	if ( $('#password').is(':visible') ){
+		$(this).text('Hide');
 		$('#password').hide();
 		$('#password_shown').show();
 	} else {
-		$(text).text('Show Password');
+		$(this).text('Show');
 		$('#password').show();
 		$('#password_shown').hide();
 	}

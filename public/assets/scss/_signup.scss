@@ -1,0 +1,41 @@
+//
+// Signup Page(s)
+// --------------------------------------------------
+
+.signup-hero {
+	text-align: center;
+	background: url('../images/home-montage.jpg'), repeat;
+	color: $white;
+	padding: 60px 0;
+	margin-bottom: 40px;
+	h1 {
+		@include bello();
+		font-size: 86px;
+		line-height: 70px;
+		margin: 0 0 8px 0;
+		em {
+			font-style: normal;
+			color: $yellow;
+		}
+	}
+	p {
+		font-size: 22px;
+		margin: 0;
+	}
+} // .signup-hero
+
+@media (max-width: 767px){
+
+	.signup-hero {
+		padding: 30px 0;
+		margin-bottom: 20px;
+		h1 {
+			font-size: 50px;
+			line-height: 40px;
+		}
+		p {
+			font-size: 18px;
+		}
+	} 
+
+}

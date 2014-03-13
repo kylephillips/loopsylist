@@ -111,7 +111,6 @@ class UserController extends \BaseController {
 				'email' => Input::get('email'),
 				'username' => Input::get('username'),
 				'password' => Hash::make(Input::get('password')),
-				'zip_code' => Input::get('zip'),
 				'latitude' => Input::get('latitude'),
 				'longitude' => Input::get('longitude')
 			));
