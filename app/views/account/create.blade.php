@@ -4,13 +4,27 @@
 <section class="signup-hero">
 	<div class="container">
 		<h1><em>Start</em> Your Loopsie List</h1>
-		<p>The best way to keep track of your Lalaloopsy collection.</p>
-</div>
+		<p>The best free way to keep track of your Lalaloopsy collection.</p>
+	</div>
 </section>
 
+@if ( Auth::check() )
+<?php $user = Auth::user()->username; ?>
+<div class="container small">
+	<div class="alert alert-info center">
+		<strong>Awesome!</strong> You have an account setup! <a href="{{URL::route('user.show', array('user'=>$user))}}">View your details and list here.</a>
+	</div>
+</div>
+@else
 <div class="container">
 
 	<div class="small-form">
+
+		<ul class="signup-steps">
+			<li class="active"><strong>Step 1:</strong>Create Your Account</li>
+			<li><strong>Step 2:</strong>Setup Your List</li>
+			<li><strong>Step 3:</strong>Share Your List</li>
+		</ul>
 		
 		@if(Session::has('errors'))
 		<div class="alert alert-danger">
@@ -66,6 +80,7 @@
 		{{Form::close()}}
 	</div><!-- .small-form -->
 </div>
+@endif
 @stop
 
 

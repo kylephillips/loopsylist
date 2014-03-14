@@ -12,7 +12,7 @@
 			<a href="{{URL::route('user.create')}}">Start Your List</a>
 		</div>
 		<p class="details">
-			<a href="{{URL::route('login_form')}}">Login</a> or <a href="#">Find a list</a>
+			<a href="{{URL::route('login_form')}}" class="login-trigger">Login</a> or <a href="{{URL::route('find_list')}}">Find a list</a>
 		</p>
 	</div><!-- .container -->
 </section><!-- .hero -->
@@ -31,7 +31,7 @@
 				<span class="left"></span>
 			</div>
 			{{Form::text('name', '', array('id'=>'name', 'placeholder'=>'Who\'d you like to find?'))}}
-			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Where\'d you like to search?', 'style'=>'display:none;'))}}
+			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Search within 50 miles of... (address or zip)', 'style'=>'display:none;'))}}
 			{{Form::hidden('type', 'name', array('id'=>'type'))}}
 		{{Form::close()}}
 	</div>
@@ -75,34 +75,9 @@
 
 <script>
 $(window).stellar();
-
 $(document).ready(function(){
 	// Home Headline
 	$('.hero h1').inflateText();
-});
-
-$('.switch a').on('click', function(e){
-	e.preventDefault();
-	
-	var selected = $(this).attr('href');
-	var span = $(this).parents('.switch').find('span');
-
-	$('.switch a').removeClass('active');
-	$(this).addClass('active');
-	
-	if ( selected == "#name" ){
-		$(span).removeClass('right');
-		$('#location').val('');
-		$('#location').hide();
-		$('#name').show();
-		$('#type').val('name');
-	} else {
-		$(span).addClass('right');
-		$('#name').val('');
-		$('#name').hide();
-		$('#location').show();
-		$('#type').val('location');
-	}
 });
 </script>
 @stop

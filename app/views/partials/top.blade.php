@@ -6,11 +6,13 @@
 <div class="container">
 	<div class="logo"><a href="{{URL::route('home')}}">Loopsy <em>List</em></a></div>
 	<ul class="pull-right">
-		<li><a href="#">Find a List</a></li>
+		<li><a href="{{URL::route('find_list')}}">Find a List</a></li>
 		@if(Auth::check())
+		<?php $user = Auth::user()->username; ?>
 		<li>
 			<a href="#" class="login-btn">{{Auth::user()->username}}</a>
 			<ul>
+				<li><a href="{{URL::route('user.show', array('user'=>$user))}}">My Account</a></li>
 				<li><a href="#">My List</a></li>
 				<li><a href="{{URL::route('logout')}}">Logout</a></li>
 			</ul>

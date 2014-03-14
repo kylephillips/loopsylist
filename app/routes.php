@@ -4,6 +4,7 @@
 * Pages
 */
 Route::get('/', array('as'=>'home', 'uses'=>'PageController@getIndex'));
+Route::get('find-list', array('as'=>'find_list', 'uses'=>'PageController@getSearch'));
 
 
 /**

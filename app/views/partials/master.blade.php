@@ -38,10 +38,9 @@
 			@endif
 
 			@yield('content')
-
-			@yield('footer_content')
 		</div>
 		@include('partials.footer')
+		@yield('footer_content')
 	</div><!-- #page-wrap -->
 
 

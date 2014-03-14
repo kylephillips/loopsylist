@@ -7,4 +7,13 @@ class PageController extends BaseController {
 			->with('front_page', 'front_page');
 	}
 
+	/**
+	* Display the find a list form
+	* @return View
+	*/
+	public function getSearch()
+	{
+		return View::make('pages.find-list');
+	}
+
 }

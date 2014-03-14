@@ -30,6 +30,31 @@ $(document).click(function(e){
 	}
 });
 
+// Form Switch
+$('.switch a').on('click', function(e){
+	e.preventDefault();
+	
+	var selected = $(this).attr('href');
+	var span = $(this).parents('.switch').find('span');
+
+	$('.switch a').removeClass('active');
+	$(this).addClass('active');
+	
+	if ( selected == "#name" ){
+		$(span).removeClass('right');
+		$('#location').val('');
+		$('#location').hide();
+		$('#name').show();
+		$('#type').val('name');
+	} else {
+		$(span).addClass('right');
+		$('#name').val('');
+		$('#name').hide();
+		$('#location').show();
+		$('#type').val('location');
+	}
+});
+
 
 /*
 * Ajax login
@@ -64,7 +89,8 @@ $(document).on('keyup', '#password_shown', function(){
 	var pass = $('#password_shown').val();
 	$('#password').val(pass);
 });
-$('#toggle-password').on('click', function(){
+$('#toggle-password').on('click', function(e){
+	e.preventDefault();
 	if ( $('#password').is(':visible') ){
 		$(this).text('Hide');
 		$('#password').hide();

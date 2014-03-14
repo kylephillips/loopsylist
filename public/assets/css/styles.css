@@ -445,6 +445,9 @@ img {
   .container.pad-top {
     padding-top: 10px; }
 
+.center {
+  text-align: center; }
+
 ::selection {
   background: #ef5ba1;
   color: #ffffff; }
@@ -813,10 +816,16 @@ input[type='submit'] {
     width: 90%; } }
 .alert {
   padding: 6px;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 15px;
   line-height: 20px;
   margin-bottom: 8px; }
+
+.alert-info {
+  background-color: #d0f0fd;
+  border: 1px solid #b8e8fc; }
+  .alert-info a {
+    color: #8e2275; }
 
 .alert-danger {
   background-color: #bf1e4f;
@@ -1295,6 +1304,39 @@ body.open #page-wrap {
   .signup-hero p {
     font-size: 22px;
     margin: 0; }
+
+.signup-steps {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 30px; }
+  .signup-steps:before, .signup-steps:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .signup-steps:after {
+    clear: both; }
+  .signup-steps li {
+    float: left;
+    width: 33.33%;
+    line-height: 18px;
+    font-size: 15px;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #fff4f9;
+    border: 1px solid #f6e3eb;
+    color: #f49ac1; }
+    .signup-steps li strong {
+      display: block; }
+    .signup-steps li:last-child {
+      border-left: 0;
+      border-radius: 0px 3px 3px 0px; }
+    .signup-steps li:first-child {
+      border-right: 0;
+      border-radius: 3px 0px 0px 3px; }
+    .signup-steps li.active {
+      color: #8e2275; }
 
 @media (max-width: 767px) {
   .signup-hero {

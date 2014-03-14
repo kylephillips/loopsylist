@@ -14,10 +14,10 @@
 		@endif
 
 		@if(Auth::check())
-		<p>
+		<div class="alert alert-info">
 			You are logged in as {{Auth::user()->username}}<br />
 			<a href="{{URL::route('logout')}}">Logout</a>
-		</p>
+		</div>
 		
 		@else
 		{{Form::open(array('url'=>URL::route('login'), 'id'=>'login-form'))}}

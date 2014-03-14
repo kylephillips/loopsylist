@@ -24,6 +24,40 @@
 	}
 } // .signup-hero
 
+// 3 steps
+.signup-steps {
+	@include unstyled();
+	@include clearfix();
+	margin-bottom: 30px;
+	li {
+		float: left;
+		width: 33.33%;
+		line-height: 18px;
+		font-size: 15px;
+		padding: 10px 0;
+		text-align: center;
+		background-color: $pink-lighter;
+		border: 1px solid $pink-dark;
+		color: $pink;
+		strong {
+			display: block;
+		}
+		&:last-child {
+			border-left: 0;
+			border-radius: 0px 3px 3px 0px;
+		}
+		&:first-child {
+			border-right: 0;
+			border-radius: 3px 0px 0px 3px;
+		}
+		&.active {
+			//background-color: $purple;
+			color: $purple;
+			//border-color: $purple
+		}
+	}
+} // .signup-steps
+
 @media (max-width: 767px){
 
 	.signup-hero {
