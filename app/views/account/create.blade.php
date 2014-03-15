@@ -16,15 +16,9 @@
 	</div>
 </div>
 @else
+
 <div class="container">
-
 	<div class="small-form">
-
-		<ul class="signup-steps">
-			<li class="active"><strong>Step 1:</strong>Create Your Account</li>
-			<li><strong>Step 2:</strong>Setup Your List</li>
-			<li><strong>Step 3:</strong>Share Your List</li>
-		</ul>
 		
 		@if(Session::has('errors'))
 		<div class="alert alert-danger">
@@ -79,13 +73,12 @@
 		</div>
 		{{Form::close()}}
 	</div><!-- .small-form -->
-</div>
+</div><!-- .container -->
 @endif
 @stop
 
 
 @section('footer_content')
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
 $('.validate').on('keyup', function(){
 	var value = $(this).val();

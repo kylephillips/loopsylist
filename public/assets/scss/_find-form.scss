@@ -1,0 +1,41 @@
+//
+// Find a list form
+// --------------------------------------------------
+
+// Form
+.find-form {
+	text-align: center;
+	&.home {
+		padding: 50px 0;
+	}
+	h3 {
+		@include bello();
+		color: $magenta;
+		font-size: 60px;
+		line-height: 55px;
+		margin: 0 0 15px 0;
+		em {
+			font-style: normal;
+			color: $purple;
+		}
+	}
+
+	form {
+		display: inline-block;
+		background-color: $pink-lighter;
+		width: 75%;
+		min-width: 650px;
+		border-radius: 6px;
+		padding: 8px;
+		@include clearfix();
+		.switch {
+			float: left;
+			width: 40%;
+		}
+		input[type='text']{
+			float: right;
+			width: 58%;
+			height: 55px;
+		}
+	}
+} // .find-home

@@ -20,7 +20,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password');
 
 	protected $fillable = array(
-		'email', 'password', 'username', 'firstname', 'lastname', 'zip_code', 'bio', 'group_id', 'latitude', 'longitude'
+		'email', 'password', 'username', 'name', 'zip_code', 'bio', 'group_id', 'latitude', 'longitude'
 	);
 
 	// Validation rules

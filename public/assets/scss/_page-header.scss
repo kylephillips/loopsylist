@@ -1,0 +1,19 @@
+//
+// Page Header
+// --------------------------------------------------
+
+.page-header {
+	background-color: $pink-lighter;
+	margin-bottom: 30px;
+	text-align: center;
+	color: $purple;
+	border-bottom: 1px solid $pink-dark;
+	h1 {
+		font-size: 24px;
+		-webkit-font-smoothing: antialiased;
+		em {
+			font-style: normal;
+			color: $magenta;
+		}
+	}
+} // .page-header

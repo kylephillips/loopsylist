@@ -170,7 +170,7 @@ function displaySuccess(field)
 /*
 * Geocode zip codes on user signup
 */
-$('#signup').on('submit', function(e){
+$('#addressUpdate').on('submit', function(e){
 	var zip = $('#zip').val();
 	if ( zip.length > 0 ){
 		e.preventDefault();
@@ -191,8 +191,8 @@ function geocodeZip(zip){
 			$('#latitude').val(latitude);
 			$('#longitude').val(longitude);
 			
-			$('#signup').unbind('submit');
-			$('#signup').submit();
+			$('#addressUpdate').unbind('submit');
+			$('#addressUpdate').submit();
 
 		} else {
 			$('.page-loading').hide();

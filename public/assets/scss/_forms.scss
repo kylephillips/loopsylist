@@ -115,6 +115,14 @@ input[type='submit']{
 	}
 } // .small-form
 
+.form-group.textarea {
+	label {
+		float: none;
+		width: 100%;
+		margin-bottom: 8px;
+	}
+}
+
 
 // Validation
 .has-feedback {

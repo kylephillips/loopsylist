@@ -133,6 +133,64 @@ class UserController extends \BaseController {
 		}
 	}
 
+	/** 
+	* Step Two of the signup process (other details)
+	*
+	* @return View
+	*/
+	public function createTwo()
+	{
+		if ( Auth::check() ) {
+			return View::make('account.create-two');
+		} else {
+			return Redirect::route('user.create');
+		}
+	}
+
+
+	/** 
+	* Store user details (signup step 2)
+	*
+	* @return View
+	*/
+	public function createTwopost()
+	{
+		if ( Auth::check() ){
+
+			// Validation requirements
+			// No fields technically required, but we need to check formatting
+			$required = array(
+				'name' => 'min:3',
+				'zip' => 'min:5|numeric'
+			);
+			$message = array(
+				'zip.min' => 'Your zip code should be a 5-digit number'
+			);
+			$validation = Validator::make(Input::all(), $required, $message);
+			if ( $validation->fails() ){
+				return Redirect::route('create_step_two_post')
+					->withInput()
+					->withErrors($validation);
+			}
+
+			// Save User Details
+			$user = Auth::user();
+			if ( Input::get('name') ) $user->name = Input::get('name');
+			if ( Input::get('zip') ) $user->zip_code = Input::get('zip');
+			if ( Input::get('latitude') ) $user->latitude = Input::get('latitude');
+			if ( Input::get('longitude') ) $user->longitude = Input::get('longitude');
+			if ( Input::get('bio') ) $user->bio = Input::get('bio');
+			$user->save();
+
+			// Save List Visibility Preference
+			$list = Toylist::where('user_id', $user->id)->firstOrFail();
+			$list->visibility = ( Input::get('visibility') ) ? 'public' : 'private';
+			$list->save();
+		} else {
+			return Redirect::route('user.create');
+		}
+	}
+
 	/**
 	 * Display the specified resource.
 	 *

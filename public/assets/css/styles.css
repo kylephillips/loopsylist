@@ -374,6 +374,13 @@ table {
 h1, h2, h3, h4, h5, h6 {
   font-family: "proxima-nova-soft", sans-serif; }
 
+p {
+  margin: 0 0 20px 0; }
+
+h3 {
+  margin: 0;
+  color: #8e2275; }
+
 *,
 *:before,
 *:after {
@@ -580,6 +587,11 @@ input[type='submit'] {
     .small-form .form-group input[type='tel'] {
       float: right;
       width: 75%; }
+
+.form-group.textarea label {
+  float: none;
+  width: 100%;
+  margin-bottom: 8px; }
 
 .has-feedback input {
   position: relative; }
@@ -1057,6 +1069,56 @@ body.open #page-wrap {
     right: -70%; }
   body.open #page-wrap {
     right: 0; } }
+.page-header {
+  background-color: #fff4f9;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #8e2275;
+  border-bottom: 1px solid #f6e3eb; }
+  .page-header h1 {
+    font-size: 24px;
+    -webkit-font-smoothing: antialiased; }
+    .page-header h1 em {
+      font-style: normal;
+      color: #ef5ba1; }
+
+.find-form {
+  text-align: center; }
+  .find-form.home {
+    padding: 50px 0; }
+  .find-form h3 {
+    font-family: "bello-caps", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #ef5ba1;
+    font-size: 60px;
+    line-height: 55px;
+    margin: 0 0 15px 0; }
+    .find-form h3 em {
+      font-style: normal;
+      color: #8e2275; }
+  .find-form form {
+    display: inline-block;
+    background-color: #fff4f9;
+    width: 75%;
+    min-width: 650px;
+    border-radius: 6px;
+    padding: 8px; }
+    .find-form form:before, .find-form form:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */ }
+    .find-form form:after {
+      clear: both; }
+    .find-form form .switch {
+      float: left;
+      width: 40%; }
+    .find-form form input[type='text'] {
+      float: right;
+      width: 58%;
+      height: 55px; }
+
 .hero {
   background-color: #8e2275;
   /* Fallback Color */
@@ -1127,42 +1189,6 @@ body.open #page-wrap {
   .hero .start-button {
     padding-top: 26px; }
 
-.find-home {
-  text-align: center;
-  padding: 50px 0; }
-  .find-home h3 {
-    font-family: "bello-caps", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    color: #ef5ba1;
-    font-size: 60px;
-    line-height: 55px;
-    margin: 0 0 15px 0; }
-    .find-home h3 em {
-      font-style: normal;
-      color: #8e2275; }
-  .find-home form {
-    display: inline-block;
-    background-color: #fff4f9;
-    width: 75%;
-    min-width: 650px;
-    border-radius: 6px;
-    padding: 8px; }
-    .find-home form:before, .find-home form:after {
-      content: " ";
-      /* 1 */
-      display: table;
-      /* 2 */ }
-    .find-home form:after {
-      clear: both; }
-    .find-home form .switch {
-      float: left;
-      width: 40%; }
-    .find-home form input[type='text'] {
-      float: right;
-      width: 58%;
-      height: 55px; }
-
 .testimonials {
   margin-bottom: 30px; }
   .testimonials ul {
@@ -1205,7 +1231,8 @@ body.open #page-wrap {
       .testimonials ul li img {
         width: 133px;
         border-radius: 80px;
-        border: 4px solid #fad5e5; }
+        border: 4px solid #fad5e5;
+        margin-bottom: 20px; }
 
 .cta {
   background: url("../images/home-montage.jpg"), repeat;

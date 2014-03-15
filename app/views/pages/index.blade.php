@@ -19,7 +19,7 @@
 
 <div class="pattern-border"></div>
 
-<section class="find-home">
+<section class="find-form home">
 	<div class="container">
 		<h3><em>Find</em> a List</h3>
 		{{Form::open()}}
@@ -35,7 +35,7 @@
 			{{Form::hidden('type', 'name', array('id'=>'type'))}}
 		{{Form::close()}}
 	</div>
-</section><!-- .find-home -->
+</section><!-- .find-form -->
 
 <section class="testimonials">
 	<div class="container">
