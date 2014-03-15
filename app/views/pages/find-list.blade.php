@@ -25,6 +25,9 @@
 </section><!-- .find-form -->
 
 <section class="find-results">
+	<div class="container">
+		<h3>Search Results</h3>
+	</div>
 </section>
 
 @stop

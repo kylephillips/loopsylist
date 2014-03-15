@@ -179,6 +179,8 @@ class UserController extends \BaseController {
 			if ( Input::get('zip') ) $user->zip_code = Input::get('zip');
 			if ( Input::get('latitude') ) $user->latitude = Input::get('latitude');
 			if ( Input::get('longitude') ) $user->longitude = Input::get('longitude');
+			if ( Input::get('city') ) $user->city = Input::get('city');
+			if ( Input::get('state') ) $user->state = Input::get('state');
 			if ( Input::get('bio') ) $user->bio = Input::get('bio');
 			$user->save();
 

@@ -184,13 +184,30 @@ function geocodeZip(zip){
 		'address' : zip
 	}, function(results, status){
 		if ( status == google.maps.GeocoderStatus.OK ){
-				
+
+			// Get the city and state from the returned results
+			for (var component in results[0]['address_components']) {
+	            for (var i in results[0]['address_components'][component]['types']) {
+	                if (results[0]['address_components'][component]['types'][i] == "locality") {
+	                    city = results[0]['address_components'][component]['short_name'];
+	                }
+	                if (results[0]['address_components'][component]['types'][i] == "administrative_area_level_1") {
+	                    state = results[0]['address_components'][component]['long_name'];
+	                }
+	            }
+        	}
+			
+			// Get the lat and lng from the returned results	
 			var latitude = results[0].geometry.location.lat();
 			var longitude = results[0].geometry.location.lng();
 				
+			// Populate the form fields
 			$('#latitude').val(latitude);
 			$('#longitude').val(longitude);
+			$('#city').val(city);
+			$('#state').val(state);
 			
+			// Submit the form
 			$('#addressUpdate').unbind('submit');
 			$('#addressUpdate').submit();
 

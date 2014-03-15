@@ -64,6 +64,8 @@
 		<div class="submit">
 			{{Form::hidden('latitude', '', array('id'=>'latitude'))}}
 			{{Form::hidden('longitude', '', array('id'=>'longitude'))}}
+			{{Form::hidden('city', '', array('id'=>'city'))}}
+			{{Form::hidden('state', '', array('id'=>'state'))}}
 			{{Form::submit('Save', array('class'=>'btn btn-primary'))}}
 			<p><a href="#">or Skip and complete later</a></p>
 		</div>
