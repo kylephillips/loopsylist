@@ -108,9 +108,13 @@ input[type='submit']{
 		input[type='text'],
 		input[type='email'],
 		input[type='password'],
-		input[type='tel']{
+		input[type='tel'],
+		select {
 			float: right;
 			width: 75%;
+		}
+		select {
+			margin-top: 8px;
 		}
 	}
 } // .small-form
@@ -131,16 +135,31 @@ input[type='submit']{
 	}
 }
 .has-error {
+	color: $error;
 	input {
 		border-color: $error;
 		border-width: 2px;
 	}
 }
 .has-success {
+	color: $success;
 	input {
 		border-color: $success;
 		border-width: 2px;
 	}
+}
+.icon-feedback {
+	position: absolute;
+	z-index: 3;
+	right: 8px;
+	top: 23px;
+	font-size: 18px !important;
+}
+.form-group.first .icon-feedback {
+	top: 13px;
+}
+.form-group.has-password .icon-feedback {
+	right: 70px;
 }
 
 
@@ -167,11 +186,22 @@ input[type='submit']{
 			input[type='text'],
 			input[type='email'],
 			input[type='password'],
-			input[type='tel']{
+			input[type='tel'],
+			select {
 				float: none;
 				width: 100%;
 			}
+			select {
+				margin: 0;
+			}
 		}
 	} // .small-form
+
+	.icon-feedback {
+		top: 47px;
+	}
+	.form-group.first .icon-feedback {
+		top: 37px;
+	}
 
 } // media query

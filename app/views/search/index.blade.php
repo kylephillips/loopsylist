@@ -17,7 +17,7 @@
 				</ul>
 				<span class="left"></span>
 			</div>
-			{{Form::text('name', '', array('id'=>'name', 'placeholder'=>'Who\'d you like to find?'))}}
+			{{Form::text('name', '', array('id'=>'name', 'placeholder'=>'Who\'d you like to find?', 'autocomplete'=>'off'))}}
 			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Search within 50 miles of... ', 'style'=>'display:none;'))}}
 			{{Form::hidden('type', 'name', array('id'=>'type'))}}
 			{{Form::hidden('latitude', '', array('id'=>'latitude'))}}
@@ -40,4 +40,9 @@
 
 @section('footer_content')
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+$(document).ready(function(){
+	$('#name').focus();
+});
+</script>
 @stop

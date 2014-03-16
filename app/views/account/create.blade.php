@@ -50,12 +50,12 @@
 				{{Form::label('username', 'User Name')}}
 				{{Form::text('username', '', array('class'=>'form-control validate', 'placeholder'=>'You\'ll use this to login'))}}
 			</div>
-			<div class="form-group has-feedback">
+			<div class="form-group has-feedback has-password">
 				{{Form::label('password', 'Password')}}
 				{{Form::password('password', array('class'=>'form-control validate', 'placeholder'=>'At least 6 characters'))}}
 				
 				<!-- Toggle Password Visibility -->
-				<input type="text" id="password_shown" class="form-control validate" placeholder="At least 6 characters" style="display:none;">
+				<input type="text" id="password_shown" class="form-control validate" placeholder="At least 6 characters" autocomplete="off" style="display:none;">
 
 				<a href="#" id="toggle-password">Show</a>
 			</div>

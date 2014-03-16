@@ -130,7 +130,7 @@ function geocodeSearch()
 /*
 * Ajax login
 */
-$(document).on('submit', '#login-form', function(e){
+$(document).on('submit', '.modal #login-form', function(e){
 	e.preventDefault();
 	var url = $(this).attr('action');
 	var data = $(this).serialize();
@@ -211,7 +211,7 @@ function removeFeedback(field){
 	var parent = $(element).parent('div');
 	$(parent).removeClass('has-error');
 	$(parent).removeClass('has-success');
-	$(parent).find('.form-control-feedback').remove();
+	$(parent).find('.icon-feedback').remove();
 }
 
 /*
@@ -223,7 +223,7 @@ function displayError(field)
 	var parent = $(element).parent('div');
 	removeFeedback(field);
 	$(parent).addClass('has-error');
-	$(parent).append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+	$(parent).append('<i class="icon-remove icon-feedback"></i>');
 }
 
 /*
@@ -235,7 +235,7 @@ function displaySuccess(field)
 	var parent = $(element).parent('div');
 	removeFeedback(field);
 	$(parent).addClass('has-success');
-	$(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+	$(parent).append('<i class="icon-check icon-feedback"></i>');
 }
 
 /*

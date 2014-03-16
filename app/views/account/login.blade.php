@@ -1,16 +1,15 @@
 @extends('partials.master')
 @section('content')
+<section class="page-header">
+	<div class="container">
+		<h1>Login to <em>Loosy List</em></h1>
+	</div>
+</section>
 
-<div class="container">
+<div class="container login-page">
 	<div id="login-form-cont">
-		<h1>Login to Loopsy List</h1>
-
 		@if(Session::has('message'))
 		<div class="alert alert-danger">{{Session::get('message')}}</div>
-		@endif
-
-		@if(Session::has('success'))
-		<div class="alert alert-success">{{Session::get('success')}}</div>
 		@endif
 
 		@if(Auth::check())
@@ -29,12 +28,6 @@
 		<div class="form-group">
 			{{Form::label('password', 'Password')}}
 			{{Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password'))}}
-
-			<!-- Toggle Password Visibility -->
-			<input type="text" id="password_shown" class="form-control" placeholder="Password" style="display:none;">
-			<div id="toggle-password"><label class="checkbox">
-				<input type="checkbox" > <span>Show Password</span></label>
-			</div>
 		</div>
 		{{Form::submit('Log In', array('class'=>'btn btn-primary', 'id'=>'login-submit'))}}
 		<ul class="login-options">

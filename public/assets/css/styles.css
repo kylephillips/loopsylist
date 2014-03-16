@@ -584,9 +584,12 @@ input[type='submit'] {
     .small-form .form-group input[type='text'],
     .small-form .form-group input[type='email'],
     .small-form .form-group input[type='password'],
-    .small-form .form-group input[type='tel'] {
+    .small-form .form-group input[type='tel'],
+    .small-form .form-group select {
       float: right;
       width: 75%; }
+    .small-form .form-group select {
+      margin-top: 8px; }
 
 .form-group.textarea label {
   float: none;
@@ -596,13 +599,30 @@ input[type='submit'] {
 .has-feedback input {
   position: relative; }
 
-.has-error input {
-  border-color: #bf1e4f;
-  border-width: 2px; }
+.has-error {
+  color: #bf1e4f; }
+  .has-error input {
+    border-color: #bf1e4f;
+    border-width: 2px; }
 
-.has-success input {
-  border-color: #3daf05;
-  border-width: 2px; }
+.has-success {
+  color: #3daf05; }
+  .has-success input {
+    border-color: #3daf05;
+    border-width: 2px; }
+
+.icon-feedback {
+  position: absolute;
+  z-index: 3;
+  right: 8px;
+  top: 23px;
+  font-size: 18px !important; }
+
+.form-group.first .icon-feedback {
+  top: 13px; }
+
+.form-group.has-password .icon-feedback {
+  right: 70px; }
 
 @media (max-width: 767px) {
   #toggle-password {
@@ -621,9 +641,18 @@ input[type='submit'] {
     .small-form .form-group input[type='text'],
     .small-form .form-group input[type='email'],
     .small-form .form-group input[type='password'],
-    .small-form .form-group input[type='tel'] {
+    .small-form .form-group input[type='tel'],
+    .small-form .form-group select {
       float: none;
-      width: 100%; } }
+      width: 100%; }
+    .small-form .form-group select {
+      margin: 0; }
+
+  .icon-feedback {
+    top: 47px; }
+
+  .form-group.first .icon-feedback {
+    top: 37px; } }
 .switch {
   background-color: #ef5ba1;
   position: relative;
@@ -1490,6 +1519,28 @@ body.open #page-wrap {
         display: block; }
       .testimonials ul li p:before, .testimonials ul li p:after {
         content: ''; } }
+.login-page #login-form-cont {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center; }
+  .login-page #login-form-cont label {
+    text-align: left; }
+  .login-page #login-form-cont input[type='text'],
+  .login-page #login-form-cont input[type='password'] {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 20px; }
+  .login-page #login-form-cont ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 20px; }
+    .login-page #login-form-cont ul li {
+      display: inline-block;
+      margin-left: 20px; }
+      .login-page #login-form-cont ul li:first-child {
+        margin: 0; }
+
 .signup-hero {
   text-align: center;
   background: url("../images/home-montage.jpg"), repeat;

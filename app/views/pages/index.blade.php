@@ -31,7 +31,7 @@
 				<span class="left"></span>
 			</div>
 			{{Form::text('name', '', array('id'=>'name', 'placeholder'=>'Who\'d you like to find?'))}}
-			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Search within 50 miles of... (address or zip)', 'style'=>'display:none;'))}}
+			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Search within 50 miles of...', 'style'=>'display:none;'))}}
 			{{Form::hidden('type', 'name', array('id'=>'type'))}}
 			{{Form::hidden('latitude', '', array('id'=>'latitude'))}}
 			{{Form::hidden('longitude', '', array('id'=>'longitude'))}}

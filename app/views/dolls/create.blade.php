@@ -6,10 +6,13 @@
 @stop
 
 @section('content')
+<section class="page-header">
+	<div class="container">
+		<h1>Add a <em>Loosy</em></h1>
+	</div>
+</section>
 
 <div class="container">
-
-	<h1>Add a Loopsy</h1>
 
 	@if(Session::has('errors'))
 	<div class="alert alert-danger">
@@ -30,6 +33,8 @@
 		{{Session::get('success')}}
 	</div>
 	@endif
+
+	<div class="small-form">
 
 	{{Form::open(array('url'=>URL::route('loopsie.store'),'method'=>'POST','class'=>'dropzone', 'files'=>true))}}
 	<div class="form-group">
@@ -62,22 +67,26 @@
 	</div>
 	<div class="form-group">
 		{{Form::label('pet', 'Pet')}}
-		{{Form::text('pet', '', array('class'=>'form-control'))}}
+		{{Form::text('pet', '', array('class'=>'form-control', 'placeholder'=>'If applicable'))}}
 	</div>
 	<div class="form-group">
-		{{Form::label('bio', 'Biography')}}
-		{{Form::textarea('bio', '', array('id'=>'bio'))}}
+		{{Form::label('link', 'Purchase Link')}}
+		{{Form::text('link', '', array('class'=>'form-control', 'placeholder'=>'Amazon, Ebay, etc...'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('image', 'Image')}}
 		{{Form::file('image')}}
 	</div>
-	<div class="form-group">
-		{{Form::label('link', 'Purchase Link')}}
-		{{Form::text('link', '', array('class'=>'form-control'))}}
+	<div class="form-group textarea">
+		{{Form::label('bio', 'Biography')}}
+		{{Form::textarea('bio', '', array('id'=>'bio'))}}
 	</div>
-	{{Form::submit('Add Toy', array('class'=>'btn btn-primary'))}}
+	<div class="submit">
+		{{Form::submit('Add Toy', array('class'=>'btn btn-primary'))}}
+	</div>
 	{{Form::close()}}
+
+</div>
 @stop
 
 @section('footer_content')
