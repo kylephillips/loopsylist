@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'icons';
+    src: url('fonts/icons.eot');
+    src: url('fonts/icons.eot?#iefix') format('embedded-opentype'),
+         url('fonts/icons.woff') format('woff'),
+         url('fonts/icons.ttf') format('truetype'),
+         url('fonts/icons.svg#myfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+[class*="icon-"]{
+	font-family: "icons";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	font-size:28px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.icon-grid:before{
+	content: 'a';
+}
+.icon-angle-down:before{
+	content: 'b';
+}
+.icon-angle-up:before{
+	content: 'c';
+}
+.icon-angle-right:before{
+	content: 'd';
+}
+.icon-angle-left:before{
+	content: 'e';
+}
+.icon-menu:before{
+	content: 'f';
+}
+.icon-star:before{
+	content: 'g';
+}
+.icon-comment:before{
+	content: 'h';
+}
+.icon-add-user:before{
+	content: 'i';
+}
+.icon-user:before{
+	content: 'j';
+}
+.icon-gear:before{
+	content: 'k';
+}
+.icon-caret-up:before{
+	content: 'l';
+}
+.icon-caret-down:before{
+	content: 'm';
+}
+.icon-check:before{
+	content: 'n';
+}
+.icon-map-pin:before{
+	content: 'o';
+}
+.icon-lock:before{
+	content: 'p';
+}
+.icon-edit:before{
+	content: 'q';
+}
+.icon-twitter:before{
+	content: 'r';
+}
+.icon-facebook:before{
+	content: 's';
+}
+.icon-google-plus:before{
+	content: 't';
+}
+.icon-tumblr:before{
+	content: 'u';
+}
+.icon-cloud:before{
+	content: 'v';
+}
+.icon-envelope:before{
+	content: 'w';
+}
+.icon-sort-down:before{
+	content: 'x';
+}
+.icon-sort-up:before{
+	content: 'y';
+}
+.icon-sort:before{
+	content: 'z';
+}
+.icon-search:before{
+	content: 'A';
+}

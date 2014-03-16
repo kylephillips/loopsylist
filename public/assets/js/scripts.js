@@ -55,6 +55,77 @@ $('.switch a').on('click', function(e){
 	}
 });
 
+/*
+* Search Form / Results
+*/
+$('#searchform').on('submit', function(e){
+	e.preventDefault();
+	var type = $('#type').val();
+	$('.search-results').hide();
+	$('#loading').show();
+	if ( type == 'name' ){
+		searchLists();
+	} else {
+		geocodeSearch();
+	}
+});
+
+function searchLists()
+{
+	var url = $('#searchform').attr('action');
+	var data = $('#searchform').serialize();
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: data,
+		success: function(data){
+			displayResults(data);
+		}
+	});
+}
+
+function displayResults(data)
+{
+	$('#searchresults').empty();
+
+	if ( jQuery.isEmptyObject(data) ){
+		$('#searchresults').append('<li class="no-results">No Lists Found</li>');
+	}
+
+	var html = "";
+	$.each(data, function(i, item){
+		var li = '<li><a href="/user/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
+		html = html + li;
+	});
+	$('#searchresults').append(html);
+	$('#loading').hide();
+	$('.search-results').show();
+}
+
+function geocodeSearch()
+{
+	var location = $('#location').val();
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({
+		'address' : location
+	}, function(results, status){
+		if ( status == google.maps.GeocoderStatus.OK ){
+
+			// Get the lat and lng from the returned results	
+			var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+				
+			// Populate the form fields
+			$('#latitude').val(latitude);
+			$('#longitude').val(longitude);
+			
+			// Submit the form
+			searchLists();
+		}
+	});
+
+}
+
 
 /*
 * Ajax login

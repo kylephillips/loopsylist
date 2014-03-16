@@ -1,10 +1,12 @@
 <?php
 
+
 /**
 * Pages
 */
 Route::get('/', array('as'=>'home', 'uses'=>'PageController@getIndex'));
-Route::get('find-list', array('as'=>'find_list', 'uses'=>'PageController@getSearch'));
+Route::get('search', array('as'=>'find_list', 'uses'=>'SearchController@getIndex'));
+Route::post('search', array('as'=>'post_search', 'uses'=>'SearchController@postSearch'));
 
 
 /**
@@ -28,3 +30,4 @@ Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserContro
 * Toys (loopsies)
 */ 
 Route::resource('loopsie', 'DollController');
+

@@ -19,10 +19,10 @@
 
 <div class="pattern-border"></div>
 
-<section class="find-form home">
+<section class="search-form home">
 	<div class="container">
 		<h3><em>Find</em> a List</h3>
-		{{Form::open()}}
+		{{Form::open(array('url'=>URL::route('post_search'), 'id'=>'searchform'))}}
 			<div class="switch">
 				<ul>
 					<li><a href="#name" class="active">By Name</a></li>
@@ -33,9 +33,21 @@
 			{{Form::text('name', '', array('id'=>'name', 'placeholder'=>'Who\'d you like to find?'))}}
 			{{Form::text('location', '', array('id'=>'location', 'placeholder'=>'Search within 50 miles of... (address or zip)', 'style'=>'display:none;'))}}
 			{{Form::hidden('type', 'name', array('id'=>'type'))}}
+			{{Form::hidden('latitude', '', array('id'=>'latitude'))}}
+			{{Form::hidden('longitude', '', array('id'=>'longitude'))}}
+			<button type="submit"><i class="icon-search"></i></button>
 		{{Form::close()}}
 	</div>
 </section><!-- .find-form -->
+
+<div id="loading"></div>
+
+<section class="search-results home" style="display:none;">
+	<div class="container">
+		<h3>Lists Found</h3>
+		<ul id="searchresults"></ul>
+	</div>
+</section>
 
 <section class="testimonials">
 	<div class="container">
@@ -69,6 +81,7 @@
 @stop
 
 @section('footer_content')
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 {{HTML::script('/assets/js/inflateText.js')}}
 {{HTML::script('/assets/js/jquery.stellar.js')}}

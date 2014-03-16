@@ -111,8 +111,7 @@ class UserController extends \BaseController {
 				'email' => Input::get('email'),
 				'username' => Input::get('username'),
 				'password' => Hash::make(Input::get('password')),
-				'latitude' => Input::get('latitude'),
-				'longitude' => Input::get('longitude')
+				'slug' => Str::slug(Input::get('username'))
 			));
 			$user = User::where('username', Input::get('username'))->first();
 			Auth::login($user);
@@ -122,9 +121,7 @@ class UserController extends \BaseController {
 			$list->user_id = $user->id;
 			$list->save();
 
-			// TODO: redirect to list setup with name and zip fields
-			return Redirect::route('user.create')
-				->withSuccess('Your account has been setup successfully!');
+			return Redirect::route('create_step_two_post');
 
 		} else {
 			// it's a bot

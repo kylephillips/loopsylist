@@ -16,7 +16,10 @@
 	<div class="small-form">
 
 		<h3 class="center">Welcome to Loopsy List!</h3>
-		<p class="center">Include the details below to help friends find your list. If you'd like to complete this later, <a href="#">skip right to your list</a>.</p>
+		<p class="center">
+			Include the details below to help friends find your list.<br />
+			If you'd like to complete this later, <a href="#">skip right to your list</a>.
+		</p>
 		
 		@if(Session::has('errors'))
 		<div class="alert alert-danger">
