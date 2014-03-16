@@ -14,8 +14,28 @@ class DollController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+
+		// Get doll types for use in category select element
+		$all_types = DollType::get();
+		$types['all'] = 'All';
+		foreach ( $all_types as $single_type ){
+			$types[$single_type->id] = $single_type->title;
+		}
+
+		// List of Years Loopsies available for select menu
+		$years['all'] = 'All';
+		foreach ( range(2010, date('Y')) as $number ){
+			$years[$number] = $number;
+		}
+
+
+		$loopsies = Doll::get();
+		return View::make('dolls.index')
+			->with('loopsies', $loopsies)
+			->with('types', $types)
+			->with('years', $years);
 	}
+
 
 	/**
 	 * Show the form for creating a new toy.
@@ -35,6 +55,7 @@ class DollController extends \BaseController {
 			->with('types', $types);
 	}
 
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -52,11 +73,16 @@ class DollController extends \BaseController {
 
 		// Add the Image
 		$file = Input::file('image');
-		$destination = public_path() . '/uploads/toys/';
+		$destination = public_path() . '/uploads/toys';
 		$filename = time() . '-' . $file->getClientOriginalName();
 		$uploadSuccess = Input::file('image')->move($destination, $filename);
 
-		// TODO: image resizing based on view templates
+		// Crop the thumbnail Image and save it
+		$thumbnail_filename = public_path() . '/uploads/toys/_thumbs/225x265_' . $filename;
+		$original = $destination . '/' . $filename;
+		
+		$thumbnail = Image::make($original)->crop(225, 265)->save($thumbnail_filename, 80);
+
 
 		// Save the new toy
 		$toy = Doll::create(array(
@@ -89,9 +115,20 @@ class DollController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($slug)
 	{
-		//
+		$loopsy = Doll::where('slug', $slug)->first();
+		$pagetitle = 'Loopsy List - ' . $loopsy->title;
+		
+		// Save the formatted birthday for display
+		$birthday_month = date('F', $loopsy->sewn_on_month);
+		$birthday_day = date('jS', $loopsy->sewn_on_day);
+		$birthday = $birthday_month . ' ' . $birthday_day;
+
+		return View::make('dolls.show')
+			->with('pagetitle', $pagetitle)
+			->with('loopsy', $loopsy)
+			->with('birthday', $birthday);
 	}
 
 	/**

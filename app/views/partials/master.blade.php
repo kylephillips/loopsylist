@@ -29,6 +29,7 @@
 	</div>
 
 	<div id="mobile-nav">
+		@include('partials.mobile-nav')
 	</div>
 
 	<div id="page-wrap">

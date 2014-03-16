@@ -1,0 +1,139 @@
+//
+// Listing of all Loopsies
+// --------------------------------------------------
+
+.list-filters {
+	background-color: $pink-lighter;
+	@include unstyled();
+	@include clearfix();
+	border: 1px solid $pink-dark;
+	border-radius: 4px;
+	max-width: 500px;
+	margin: 0 auto 30px auto;
+	li {
+		float: left;
+		width: 50%;
+		padding: 8px;
+		border-left: 1px solid $pink-dark;
+		text-align: center;
+		@include clearfix();
+		&:first-child {
+			border: 0;
+		}
+		label {
+			display: inline-block;
+			margin-right: 8px;
+		}
+		select {
+			min-width: 150px;
+		}	
+	}
+	&.loggedin {
+		max-width: 100%;
+		li {
+			width: 33.33%;
+		}
+	}
+} // .list-filters
+
+
+.loopsy-gallery {
+	@include unstyled();
+	@include clearfix();
+	border-top: 1px dashed $pink-dark;
+	padding: 20px 0;
+	&.first {
+		border: 0;
+	}
+	li {
+		float: left;
+		width: 25%;
+		text-align: center;
+		img {
+			border: 1px solid $white;
+		}
+		div {
+			width: 70%;
+			padding: 8px;
+			margin: 0 auto 10px auto;
+			background-color: $pink-lighter;
+			border-radius: 4px;
+			position: relative;
+			&.have {
+				background-color: $magenta;
+			}
+			.check {
+				border: 0;
+				position: absolute;
+				width: 40px;
+				bottom: 9px;
+				right: 9px;
+			}
+		}
+		a {
+			color: $purple;
+		}
+	}
+} // .loopsy-gallery
+
+
+// Details list on single view
+.loopsy-details {
+	@include unstyled();
+	background-color: $pink-lighter;
+	border: 1px solid $pink-dark;
+	border-radius: 4px;
+	li {
+		padding: 8px;
+		border-top: 1px dashed darken($pink-dark, 5%);
+		line-height: 18px;
+		@include clearfix();
+		&:first-child {
+			border: 0;
+		}
+		strong {
+			float: left;
+			width: 35%;
+			color: $purple;
+		}
+		span {
+			float: right;
+			width: 60%;
+		}
+	}
+} // .loopsy-details
+
+
+@media (max-width:767px){
+
+	.list-filters {
+		li {
+			float: none;
+			width: 100%;
+			text-align: left;
+			border: 0;
+			border-top: 1px solid $pink-dark;
+			label {
+				float: left;
+				width: 30%;
+			}
+			select {
+				float: right;
+				width: 60%;
+			}
+		}
+		&.loggedin li {
+			width: 100%;
+		}
+	}
+
+	.loopsy-gallery {
+		border: 0;
+		padding: 0;
+		li {
+			width: 50%;
+			margin-bottom: 20px;
+		}
+	}
+
+} // media query

@@ -1,0 +1,29 @@
+//
+// Login Page Form
+// --------------------------------------------------
+
+.login-page #login-form-cont {
+	max-width: 400px;
+	margin: 0 auto;
+	text-align: center;
+	label {
+		text-align: left;
+	}
+	input[type='text'],
+	input[type='password']{
+		text-align: left;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	ul {
+		@include unstyled();
+		margin-top: 20px;
+		li {
+			display: inline-block;
+			margin-left: 20px;
+			&:first-child {
+				margin: 0;
+			}
+		}
+	}
+}

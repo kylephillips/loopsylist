@@ -1,0 +1,56 @@
+//
+// Status Switch
+// --------------------------------------------------
+
+.status-switch {
+	margin-bottom: 20px;
+	p {
+		text-align: center;
+		margin: 0 0 8px 0;
+		font-weight: bold;
+		color: $purple;
+	}
+	div {
+		position: relative;
+		background-color: $pink-lighter;
+		padding: 8px;
+		border-radius: 8px;
+		border: 1px solid $pink-dark;
+	}
+	span {
+		position: absolute;
+		width: 48%;
+		height: 40px;
+		background-color: $white;
+		top: 13px;
+		left: 13px;
+		z-index: 1;
+		@include transition(left 200ms ease);
+		&.right {
+			@include transition(left 200ms ease);
+			left: 48%;
+		}
+	}
+	ul {
+		@include unstyled();
+		@include clearfix();
+		background-color: $magenta;
+		border-radius: 3px;
+		li {
+			position: relative;
+			z-index: 2;
+			float: left;
+			width: 50%;
+			text-align: center;
+			a {
+				color: $pink-light;
+				display: block;
+				height: 50px;
+				line-height: 50px;
+				&.active {
+					color: $purple;
+				}
+			}
+		}
+	}
+}

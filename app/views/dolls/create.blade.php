@@ -8,7 +8,7 @@
 @section('content')
 <section class="page-header">
 	<div class="container">
-		<h1>Add a <em>Loosy</em></h1>
+		<h1>Add a <em>Loopsy</em></h1>
 	</div>
 </section>
 
@@ -29,7 +29,7 @@
 	@endif
 
 	@if(Session::has('success'))
-	<div class="alert alert-success">
+	<div class="alert alert-info">
 		{{Session::get('success')}}
 	</div>
 	@endif
@@ -51,7 +51,7 @@
 	</div>
 	<div class="form-group">
 		{{Form::label('release_year', 'Year of Release')}}
-		{{Form::selectRange('release_year', '2009', date('Y'), '', array('class'=>'form-control'))}}
+		{{Form::selectRange('release_year', '2010', date('Y'), '', array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('sewn_on_month', 'Month Sewn')}}
@@ -82,7 +82,7 @@
 		{{Form::textarea('bio', '', array('id'=>'bio'))}}
 	</div>
 	<div class="submit">
-		{{Form::submit('Add Toy', array('class'=>'btn btn-primary'))}}
+		{{Form::submit('Add Loopsy', array('class'=>'btn btn-primary'))}}
 	</div>
 	{{Form::close()}}
 

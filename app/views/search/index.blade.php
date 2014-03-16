@@ -3,7 +3,7 @@
 @section('content')
 <section class="page-header">
 	<div class="container">
-		<h1>Find a <em>Loosy List</em></h1>
+		<h1>Find a <em>Loopsy List</em></h1>
 	</div>
 </section>
 

@@ -14,7 +14,7 @@ class AddUserSlug extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->string('slug')->unique();
+			// $table->string('slug')->unique();
 		});
 	}
 
@@ -27,7 +27,7 @@ class AddUserSlug extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->dropColumn('slug');
+			// $table->dropColumn('slug');
 		});
 	}
 

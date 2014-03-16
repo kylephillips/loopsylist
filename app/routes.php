@@ -29,5 +29,5 @@ Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserContro
 /**
 * Toys (loopsies)
 */ 
-Route::resource('loopsie', 'DollController');
+Route::resource('loopsy', 'DollController');
 

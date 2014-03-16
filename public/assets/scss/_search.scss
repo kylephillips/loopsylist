@@ -121,3 +121,35 @@
 	height: 100px;
 }
 
+@media (max-width:767px){
+	.search-form {
+		padding: 20px 0;
+		h3 {
+			font-size: 40px;
+			line-height: 45px;
+		}
+
+		form {
+			display: block;
+			width: 100%;
+			min-width: 0px;
+			.switch {
+				float: none;
+				width: 100%;
+				margin-bottom: 10px;
+				span.right {
+					left: 51.5%;
+				}
+			}
+			input[type='text']{
+				float: none;
+				width: 100%;
+			}
+		}
+
+		button[type='submit']{
+			top: 74px;
+		}
+	} // .find-home
+}
+

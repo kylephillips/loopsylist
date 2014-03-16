@@ -11,6 +11,7 @@
 	top: 0;
 	right: -70%;
 	@include transition(right 200ms ease);
+	@include box-shadow(inset 2px 0px 4px 0px rgba(0,0,0,.3));
 }
 #page-wrap {
 	right: 0;
@@ -27,6 +28,36 @@ body.open {
 	#page-wrap {
 		right: 70%;
 		@include transition(right 200ms ease);
+	}
+}
+
+// Main mobile nav styles
+#mobile-nav .logo {
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 20px 0;
+	em {
+		color: $white;
+		font-style: normal;
+	}
+}
+#mobile-nav ul {
+	@include unstyled();
+	text-align: center;
+	li {
+		a {
+			color: $white;
+			display: block;
+			padding: 10px 0;
+			border-top: 1px solid rgba(0,0,0,.2);
+			&.login-btn {
+				margin: 20px 0 0 0;
+				display: inline-block;
+				padding: 8px 30px;
+			}
+		}
 	}
 }
 

@@ -2,6 +2,22 @@
 // Buttons
 // --------------------------------------------------
 
+.btn {
+	display: inline-block;
+	background-color: $purple;
+	padding: 5px 20px;
+	color: $white;
+	border-radius: 3px;
+	border-bottom: 3px solid $purple-dark;
+	@include transition(all 200ms ease);
+	&:hover {
+		@include transition(all 200ms ease);
+		background-color: $magenta;
+		border-color: darken($magenta, 5%);
+		color: $white;
+	}
+}
+
 .start-button {
 	display: inline-block;
 	text-align: center;

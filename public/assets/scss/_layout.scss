@@ -1,0 +1,26 @@
+//
+// Main Layout/Grid
+// --------------------------------------------------
+.page {
+	@include clearfix();
+
+	.main {
+		float: left;
+		width: 60%; //551/900
+	}
+
+	aside {
+		float: right;
+		width: 36%; //330/900
+	}
+
+} // .page
+
+@media (max-width:767px){
+	.page {
+		.main, aside {
+			float: none;
+			width: 100%;
+		}
+	}
+}

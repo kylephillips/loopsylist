@@ -80,6 +80,9 @@
 
 @section('footer_content')
 <script>
+$(document).ready(function(){
+	$('#email').focus();
+});
 $('.validate').on('keyup', function(){
 	var value = $(this).val();
 	var field = $(this).attr('id');
