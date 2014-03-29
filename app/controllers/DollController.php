@@ -152,6 +152,7 @@ class DollController extends \BaseController {
 			->with('doll', $doll);
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -170,6 +171,7 @@ class DollController extends \BaseController {
 
 		$doll = Doll::findOrFail($id);
 
+		// Recrop the image if new crop is present
 		if ( Input::get('cropimage') ){
 			$x = Input::get('x');
 			$y = Input::get('y');
@@ -181,6 +183,19 @@ class DollController extends \BaseController {
 			
 			$newcrop = Image::make($file)->crop($w, $h, $x, $y)->resize(225, 265)->save($resized);
 		}
+
+		// Update the remaining fields
+		if ( Input::get('title') ) $doll->title = Input::get('title');
+		if ( Input::get('title') ) $doll->slug = Str::slug(Input::get('title'));
+		if ( Input::get('sewn_from') ) $doll->sewn_from = Input::get('sewn_from');
+		if ( Input::get('pet') ) $doll->pet = Input::get('pet');
+		if ( Input::get('bio') ) $doll->bio = Input::get('bio');
+		if ( Input::get('link') ) $doll->link = Input::get('link');
+		$doll->release_month = Input::get('release_month');
+		$doll->release_year = Input::get('release_year');
+		$doll->sewn_on_month = Input::get('sewn_on_month');
+		$doll->sewn_on_day = Input::get('sewn_on_day');
+		$doll->save();
 
 		return Redirect::route('loopsy.edit', array('id'=>$id))
 			->with('success', 'Loopsy successfully updated');
