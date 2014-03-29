@@ -1,6 +1,7 @@
 @extends('partials.master')
 
 @section('head_content')
+{{HTML::style('assets/css/jquery.Jcrop.css')}}
 {{HTML::style('/assets/js/redactor/redactor.css')}}
 {{HTML::script('/assets/js/redactor/redactor.min.js')}}
 @stop
@@ -12,9 +13,9 @@
 	</div>
 </section>
 
-{{Form::model($doll, array('route'=>array('loopsy.update', $doll->id),'method'=>'POST','class'=>'dropzone', 'files'=>true))}}
-<div class="container">
+{{Form::model($doll, array('url'=>URL::route('loopsy.update', array('id'=>$doll->id)),'method'=>'PUT','files'=>true))}}
 
+<div class="container">
 	@if(Session::has('errors'))
 	<div class="alert alert-danger">
 		Please correct the following:
@@ -75,6 +76,10 @@
 	<div class="form-group">
 		{{Form::label('image', 'Image')}}
 		<img src="{{URL::asset('uploads/toys/_thumbs/225x265_')}}{{$doll->image}}" alt="{{$doll->title}}" />
+		<br /><a href="#" class="btn edit-image">Recrop</a>
+	</div>
+	<div id="cropimage" style="display:none;">
+		<img src="{{URL::asset('uploads/toys')}}/{{$doll->image}}" alt="{{$doll->title}}" id="crop" />
 	</div>
 	<div class="form-group textarea">
 		{{Form::label('bio', 'Biography')}}
@@ -85,14 +90,49 @@
 	</div>
 
 </div><!-- .container -->
+
+{{Form::hidden('cropimage', '', array('id'=>'jcrop'))}}
+{{Form::hidden('x', '', array('id'=>'x'))}}
+{{Form::hidden('y', '', array('id'=>'y'))}}
+{{Form::hidden('w', '', array('id'=>'w'))}}
+{{Form::hidden('h', '', array('id'=>'h'))}}
+
 {{Form::close()}}
 
 @stop
 
 @section('footer_content')
+
+{{HTML::script('assets/js/jquery.Jcrop.js')}}
+
 <script>
 $(document).ready(function(){
 	$('#bio').redactor();
+
+	$('#crop').Jcrop({
+		aspectRatio: 0.849056603774,
+		onSelect: updateCoords,
+		keySupport: false
+	});
+	function updateCoords(c){
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	};
+});
+// Image Cropping
+$('.edit-image').on('click', function(e){
+	e.preventDefault();
+	if ( $('#cropimage').is(':visible') ){
+		$(this).text('Recrop');
+		$('#jcrop').val('');
+		$('#cropimage').hide();
+	} else {
+		$(this).text('Cancel Crop')
+		$('#jcrop').val('1');
+		$('#cropimage').show();
+	}
 });
 </script>
 @stop

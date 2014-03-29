@@ -160,8 +160,32 @@ class DollController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$validation = Validator::make(Input::all(), Doll::$required, Doll::$validation_messages);
+		if ( $validation->fails() ){
+			$messages = $validation->messages();
+			return Redirect::route('loopsy.edit', array('id'=>$id))
+				->withInput()
+				->withErrors($validation);
+		}
+
+		$doll = Doll::findOrFail($id);
+
+		if ( Input::get('cropimage') ){
+			$x = Input::get('x');
+			$y = Input::get('y');
+			$w = Input::get('w');
+			$h = Input::get('h');
+				
+			$file = public_path() . '/uploads/toys/' . $doll->image; // Original Image Path
+			$resized = public_path() . '/uploads/toys/_thumbs/225x265_' . $doll->image; // Image to overwrite
+			
+			$newcrop = Image::make($file)->crop($w, $h, $x, $y)->resize(225, 265)->save($resized);
+		}
+
+		return Redirect::route('loopsy.edit', array('id'=>$id))
+			->with('success', 'Loopsy successfully updated');
 	}
+
 
 	/**
 	 * Remove the specified resource from storage.
