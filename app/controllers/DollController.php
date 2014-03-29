@@ -4,7 +4,7 @@ class DollController extends \BaseController {
 
 	public function __construct()
     {
-        $this->beforeFilter('admin', array('only' => 'create') );
+        $this->beforeFilter('admin', array('only' => array('create','edit')) );
     }
 
 	/**
@@ -139,7 +139,17 @@ class DollController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$doll = Doll::findOrFail($id);
+
+		// Get doll types for use in category select element
+		$all_types = DollType::get();
+		foreach ( $all_types as $single_type ){
+			$types[$single_type->id] = $single_type->title;
+		}
+
+		return View::make('dolls.edit')
+			->with('types', $types)
+			->with('doll', $doll);
 	}
 
 	/**

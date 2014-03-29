@@ -8,10 +8,11 @@
 @section('content')
 <section class="page-header">
 	<div class="container">
-		<h1>Add a <em>Loopsy</em></h1>
+		<h1>Edit <em>{{$doll->title}}</em></h1>
 	</div>
 </section>
 
+{{Form::model($doll, array('route'=>array('loopsy.update', $doll->id),'method'=>'POST','class'=>'dropzone', 'files'=>true))}}
 <div class="container">
 
 	@if(Session::has('errors'))
@@ -35,58 +36,57 @@
 	@endif
 
 	<div class="small-form">
-
-	{{Form::open(array('url'=>URL::route('loopsy.store'),'method'=>'POST','class'=>'dropzone', 'files'=>true))}}
 	<div class="form-group">
 		{{Form::label('type', 'Toy Type')}}
 		{{Form::select('type', $types, '', array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('title', 'Name/Title*')}}
-		{{Form::text('title', '', array('class'=>'form-control'))}}
+		{{Form::text('title', $doll->title, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('release_month', 'Month of Release')}}
-		{{Form::selectMonth('release_month', '', array('class'=>'form-control'))}}
+		{{Form::selectMonth('release_month', $doll->release_month, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('release_year', 'Year of Release')}}
-		{{Form::selectRange('release_year', '2010', date('Y'), '', array('class'=>'form-control'))}}
+		{{Form::selectRange('release_year', '2010', date('Y'), $doll->release_year, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('sewn_on_month', 'Month Sewn')}}
-		{{Form::selectMonth('sewn_on_month', '', array('class'=>'form-control'))}}
+		{{Form::selectMonth('sewn_on_month', $doll->sewn_on_month, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('sewn_on_day', 'Day Sewn')}}
-		{{Form::selectRange('sewn_on_day', '1', '31', '', array('class'=>'form-control'))}}
+		{{Form::selectRange('sewn_on_day', '1', '31', $doll->sewn_on_day, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('sewn_from', 'Sewn From')}}
-		{{Form::text('sewn_from', '', array('class'=>'form-control'))}}
+		{{Form::text('sewn_from', $doll->sewn_from, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('pet', 'Pet')}}
-		{{Form::text('pet', '', array('class'=>'form-control', 'placeholder'=>'If applicable'))}}
+		{{Form::text('pet', $doll->pet, array('class'=>'form-control', 'placeholder'=>'If applicable'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('link', 'Purchase Link')}}
-		{{Form::text('link', '', array('class'=>'form-control', 'placeholder'=>'Amazon, Ebay, etc...'))}}
+		{{Form::text('link', $doll->link, array('class'=>'form-control', 'placeholder'=>'Amazon, Ebay, etc...'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('image', 'Image')}}
-		{{Form::file('image')}}
+		<img src="{{URL::asset('uploads/toys/_thumbs/225x265_')}}{{$doll->image}}" alt="{{$doll->title}}" />
 	</div>
 	<div class="form-group textarea">
 		{{Form::label('bio', 'Biography')}}
-		{{Form::textarea('bio', '', array('id'=>'bio'))}}
+		{{Form::textarea('bio', $doll->bio, array('id'=>'bio'))}}
 	</div>
 	<div class="submit">
-		{{Form::submit('Add Loopsy', array('class'=>'btn btn-primary'))}}
+		{{Form::submit('Save Edits', array('class'=>'btn btn-primary'))}}
 	</div>
-	{{Form::close()}}
 
-</div>
+</div><!-- .container -->
+{{Form::close()}}
+
 @stop
 
 @section('footer_content')

@@ -5,6 +5,15 @@
 <section class="hero" data-stellar-background-ratio="0.5">
 	@include('partials.top')
 	<div class="container">
+		@if(Auth::check())
+		<?php $user = Auth::user()->username; ?>
+		<h1>Woohoo!</h1>
+		<h3>You're all in!</h3>
+		<div class="start-button has-border">
+			<hr />
+			<a href="{{URL::route('user.show', array('user'=>$user))}}">View/Edit Your List</a>
+		</div>
+		@else
 		<h1>Track <i>&amp;</i> Share</h1>
 		<h3>Your Lalaloopsy Collection!</h3>
 		<div class="start-button has-border">
@@ -14,6 +23,7 @@
 		<p class="details">
 			<a href="{{URL::route('login_form')}}" class="login-trigger">Login</a> or <a href="{{URL::route('find_list')}}">Find a list</a>
 		</p>
+		@endif
 	</div><!-- .container -->
 </section><!-- .hero -->
 
