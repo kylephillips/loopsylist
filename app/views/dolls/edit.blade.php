@@ -110,11 +110,17 @@
 $(document).ready(function(){
 	$('#bio').redactor();
 
+	var jcrop_api;
+
 	$('#crop').Jcrop({
-		aspectRatio: 0.849056603774,
-		onSelect: updateCoords,
-		keySupport: false
-	});
+			aspectRatio: 0.849056603774,
+			onSelect: updateCoords,
+			keySupport: false,
+			boxWidth: 500,
+			trueSize: [<?php echo $image_size[0]; ?>,<?php echo $image_size[1]; ?>]
+		}, function(){
+			jcrop_api = this;	
+		});
 	function updateCoords(c){
 		$('#x').val(c.x);
 		$('#y').val(c.y);

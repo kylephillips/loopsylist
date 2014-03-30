@@ -167,9 +167,13 @@ class DollController extends \BaseController {
 			$types[$single_type->id] = $single_type->title;
 		}
 
+		$image = public_path() . '/uploads/toys/' . $doll->image;
+		$image_size = getimagesize($image);
+
 		return View::make('dolls.edit')
 			->with('types', $types)
-			->with('doll', $doll);
+			->with('doll', $doll)
+			->with('image_size', $image_size);
 	}
 
 
