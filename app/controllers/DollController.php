@@ -28,12 +28,22 @@ class DollController extends \BaseController {
 			$years[$number] = $number;
 		}
 
+		// Dolls this user has
+		$dolls = array();
+		if ( Auth::check() ){
+			$list = ToyList::where('user_id', Auth::user()->id)->first()->pluck('id');
+			$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
+			foreach($have as $key=>$has){
+				$dolls[$key] = $has->doll_id;
+			}
+		}
 
 		$loopsies = Doll::get();
 		return View::make('dolls.index')
 			->with('loopsies', $loopsies)
 			->with('types', $types)
-			->with('years', $years);
+			->with('years', $years)
+			->with('dolls', $dolls);
 	}
 
 
@@ -66,7 +76,7 @@ class DollController extends \BaseController {
 		$validation = Validator::make(Input::all(), Doll::$required, Doll::$validation_messages);
 		if ( $validation->fails() ){
 			$messages = $validation->messages();
-			return Redirect::route('loopsie.create')
+			return Redirect::route('loopsy.create')
 				->withInput()
 				->withErrors($validation);
 		}
@@ -82,12 +92,13 @@ class DollController extends \BaseController {
 		$original = $destination . '/' . $filename;
 		
 		$thumbnail = Image::make($original)->crop(225, 265)->save($thumbnail_filename, 80);
+		$slug = Str::slug(Input::get('title'));
 
 
 		// Save the new toy
 		$toy = Doll::create(array(
 			'title' => Input::get('title'),
-			'slug' => Str::slug(Input::get('title')),
+			'slug' => $slug,
 			'image' => $filename,
 			'sewn_from' => Input::get('sewn_from'),
 			'pet' => Input::get('pet'),
@@ -101,10 +112,11 @@ class DollController extends \BaseController {
 
 		// Save the toy Type
 		$toy->dolltypes()->attach(Input::get('type'));
+		$newid = $toy->id;
 
 		$message = Input::get('title') . ' has been added!';
 
-		return Redirect::route('loopsie.create')
+		return Redirect::route('loopsy.update', array('id'=>$newid))
 			->withSuccess($message);
 
 	}
@@ -125,10 +137,18 @@ class DollController extends \BaseController {
 		$birthday_day = date('jS', $loopsy->sewn_on_day);
 		$birthday = $birthday_month . ' ' . $birthday_day;
 
+		// Does the user have this doll?
+		$status = 0;
+		if ( Auth::check() ){
+			$list = Auth::user()->toylist->id;
+			$status = DB::table('dolls_lists')->where('doll_id',$loopsy->id)->where('list_id', $list)->pluck('status');
+			if ( !isset($status) ) $status = 0;
+		}
 		return View::make('dolls.show')
 			->with('pagetitle', $pagetitle)
 			->with('loopsy', $loopsy)
-			->with('birthday', $birthday);
+			->with('birthday', $birthday)
+			->with('status', $status);
 	}
 
 	/**

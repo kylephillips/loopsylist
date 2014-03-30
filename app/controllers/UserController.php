@@ -121,6 +121,7 @@ class UserController extends \BaseController {
 			$list->user_id = $user->id;
 			$list->save();
 
+
 			return Redirect::route('create_step_two_post');
 
 		} else {

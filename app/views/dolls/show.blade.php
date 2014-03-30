@@ -29,10 +29,10 @@
 			<p>Do you have {{$loopsy->title}}?</p>
 			<div>
 				<ul>
-					<li><a href="no" class="active">Don't have</a></li>
-					<li><a href="yes">Have</a></li>
+					<li><a href="no" @if($status == 0)class="active"@endif data-id="{{$loopsy->id}}">Don't have</a></li>
+					<li><a href="yes" @if($status == 1)class="active"@endif data-id="{{$loopsy->id}}">Have</a></li>
 				</ul>
-				<span></span>
+				<span @if($status == 1)class="right"@endif></span>
 			</div>
 		</section>
 		@endif
@@ -64,19 +64,39 @@
 @stop
 
 @section('footer_content')
+@if (Auth::check())
 <script>
 $('.status-switch a').on('click', function(e){
-	var status = $(this).attr('href');
-	$('.status-switch a').removeClass('active');
-		$(this).addClass('active');
-	if ( status == 'no' ){
-		$('.status-switch span').removeClass('right');
-	} else {
-		$('.status-switch span').addClass('right');
+	if ( !$(this).hasClass('active') ){
+		var status = $(this).attr('href');
+		var id = $(this).data('id');
+
+		$('.status-switch a').removeClass('active');
+			$(this).addClass('active');
+		if ( status == 'no' ){
+			$('.status-switch span').removeClass('right');
+			savePosition('no', id);
+		} else {
+			$('.status-switch span').addClass('right');
+			savePosition('yes', id);
+		}
 	}
 	e.preventDefault();
 });
+
+function savePosition(position, id)
+{
+	$.ajax({
+		url : "{{URL::route('save_switch')}}",
+		type : 'GET',
+		data : {
+			status : position,
+			doll : id
+		}
+	});
+}
 </script>
+@endif
 @stop
 
 

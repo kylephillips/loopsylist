@@ -15,7 +15,7 @@ class Toylist extends Eloquent {
 
 	public function dolls()
 	{
-		return $this->belongsToMany('Doll')
+		return $this->belongsToMany('Doll', 'dolls_lists', 'list_id', 'doll_id')
 			->withPivot('order')
 			->withTimestamps();
 	}

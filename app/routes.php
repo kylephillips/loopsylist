@@ -23,6 +23,7 @@ Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserContro
 /**
 * Lists
 */
+Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@statusSwitch'));
 
 
 

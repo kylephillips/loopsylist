@@ -87,6 +87,7 @@
 	</div>
 	<div class="submit">
 		{{Form::submit('Save Edits', array('class'=>'btn btn-primary'))}}
+		<p><a href="{{URL::route('loopsy.show', array('id'=>$doll->slug))}}">View Loopsy</a></p>
 	</div>
 
 </div><!-- .container -->
