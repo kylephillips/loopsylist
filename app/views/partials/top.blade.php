@@ -1,3 +1,18 @@
+@if( (Auth::check()) && (Auth::user()->group->id == 2) )
+<section class="admin-bar">
+	<div class="container">
+		<nav>
+			<ul>
+				<li><a href="#">Admin Menu</a>
+					<ul>
+						<li><a href="{{URL::route('loopsy.create')}}">Add a Loopsy</a>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</section>
+@endif
 @if(isset($front_page))
 <section class="top-nav front-page">
 @else

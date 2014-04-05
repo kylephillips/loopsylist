@@ -1,0 +1,38 @@
+//
+// Admin Bar
+// --------------------------------------------------
+.admin-bar {
+	background-color: #000000;
+	@include clearfix();
+	nav {
+		float: left;
+		ul {
+			margin: 0;
+			padding: 8px 0;
+		}
+		li {
+			margin: 0;
+			position: relative;
+			z-index: 1000;
+			ul {
+				display: none;
+				position: absolute;
+				@include unstyled();
+				background-color: $white;
+				width: 200px;
+				left: 0;
+				li a {
+					display: block;
+					padding: 5px;
+					color: $purple;
+				}
+			}
+			&:hover ul {
+				display: block;
+			}
+		}
+		a {
+			color: $white;
+		}
+	}
+}

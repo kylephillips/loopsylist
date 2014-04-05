@@ -7,6 +7,7 @@ class DollController extends \BaseController {
         $this->beforeFilter('admin', array('only' => array('create','edit')) );
     }
 
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,12 +15,33 @@ class DollController extends \BaseController {
 	 */
 	public function index()
 	{
+		// Variables for use in select menu filters
+		$year = "";
+		if ( isset($_GET['year']) ){
+			$year = $_GET['year'];
+		}
+
+		$type = "";
+		if ( isset($_GET['type']) ){
+			$type = DB::table('dolltypes')->where('slug', $_GET['type'])->pluck('slug');
+		}
+
+		$status = "";
+		if ( isset($_GET['status']) ){
+			if ( $_GET['status'] == 'has' ){
+				$status = 'has';
+			} elseif ( $_GET['status'] == 'all' )  {
+				$status = 'all';
+			} else {
+				$status = 'hasnot';
+			}
+		}
 
 		// Get doll types for use in category select element
 		$all_types = DollType::get();
 		$types['all'] = 'All';
 		foreach ( $all_types as $single_type ){
-			$types[$single_type->id] = $single_type->title;
+			$types[$single_type->slug] = $single_type->title;
 		}
 
 		// List of Years Loopsies available for select menu
@@ -31,19 +53,55 @@ class DollController extends \BaseController {
 		// Dolls this user has
 		$dolls = array();
 		if ( Auth::check() ){
-			$list = ToyList::where('user_id', Auth::user()->id)->first()->pluck('id');
+			$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
 			$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
 			foreach($have as $key=>$has){
 				$dolls[$key] = $has->doll_id;
 			}
 		}
 
-		$loopsies = Doll::get();
+		// Get the list of Loopsies - filter as needed
+		$loopsies = Doll::where(function($query){
+
+			if ( (isset($_GET['year'])) && ($_GET['year'] !== 'all') ){
+				$query->where('release_year', $_GET['year']);
+			}
+
+			if ( (isset($_GET['type'])) && ($_GET['type'] !== 'all') ){
+				$query->whereHas('dolltypes', function($q){
+					$q->where('slug', $_GET['type']);
+				});
+			}
+
+			if ( isset($_GET['status']) && Auth::check() ){
+				$stat = $_GET['status'];
+				if ( $stat == 'has' || $stat = 'hasnot' ) :
+
+				$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
+				$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
+				$has_list = array();
+				foreach ($have as $key=>$has){
+					$has_list[] = $has->doll_id;
+				}
+
+				if ( $_GET['status'] == 'has' ){
+					$query->whereIn('id', $has_list);
+				} else {
+					$query->whereNotIn('id', $has_list);
+				}
+				endif;
+			}
+
+		})->get();
+		
 		return View::make('dolls.index')
 			->with('loopsies', $loopsies)
 			->with('types', $types)
 			->with('years', $years)
-			->with('dolls', $dolls);
+			->with('dolls', $dolls)
+			->with('year', $year)
+			->with('type', $type)
+			->with('status', $status);
 	}
 
 
@@ -84,7 +142,9 @@ class DollController extends \BaseController {
 		// Add the Image
 		$file = Input::file('image');
 		$destination = public_path() . '/uploads/toys';
-		$filename = time() . '-' . $file->getClientOriginalName();
+		$slug = Str::slug(Input::get('title'));
+
+		$filename = time() . '-' . $slug;
 		$uploadSuccess = Input::file('image')->move($destination, $filename);
 
 		// Crop the thumbnail Image and save it
@@ -92,7 +152,6 @@ class DollController extends \BaseController {
 		$original = $destination . '/' . $filename;
 		
 		$thumbnail = Image::make($original)->crop(225, 265)->save($thumbnail_filename, 80);
-		$slug = Str::slug(Input::get('title'));
 
 
 		// Save the new toy
@@ -111,12 +170,12 @@ class DollController extends \BaseController {
 		));
 
 		// Save the toy Type
-		$toy->dolltypes()->attach(Input::get('type'));
+		$toy->dolltypes()->sync(array(Input::get('type')));
 		$newid = $toy->id;
 
 		$message = Input::get('title') . ' has been added!';
 
-		return Redirect::route('loopsy.update', array('id'=>$newid))
+		return Redirect::route('loopsy.edit', array('id'=>$newid))
 			->withSuccess($message);
 
 	}
@@ -159,19 +218,27 @@ class DollController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$doll = Doll::findOrFail($id);
-
+		$doll = Doll::with('dolltypes')->findOrFail($id);
+		
 		// Get doll types for use in category select element
 		$all_types = DollType::get();
 		foreach ( $all_types as $single_type ){
 			$types[$single_type->id] = $single_type->title;
 		}
 
+		// Get this doll's type
+		foreach($doll->dolltypes as $type)
+		{
+			$type_id = $type->id;
+		}
+
+
 		$image = public_path() . '/uploads/toys/' . $doll->image;
 		$image_size = getimagesize($image);
 
 		return View::make('dolls.edit')
 			->with('types', $types)
+			->with('dolltype', $type_id)
 			->with('doll', $doll)
 			->with('image_size', $image_size);
 	}
@@ -221,6 +288,8 @@ class DollController extends \BaseController {
 		$doll->sewn_on_day = Input::get('sewn_on_day');
 		$doll->save();
 
+		$doll->dolltypes()->sync(array(Input::get('type')));
+
 		return Redirect::route('loopsy.edit', array('id'=>$id))
 			->with('success', 'Loopsy successfully updated');
 	}
@@ -236,5 +305,6 @@ class DollController extends \BaseController {
 	{
 		//
 	}
+
 
 }

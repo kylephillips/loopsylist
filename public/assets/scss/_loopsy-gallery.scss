@@ -52,6 +52,12 @@
 		img {
 			border: 1px solid $white;
 		}
+		&.has img {
+			opacity: .5;
+		}
+		&.has img.check {
+			opacity: 1;
+		}
 		div {
 			width: 70%;
 			padding: 8px;

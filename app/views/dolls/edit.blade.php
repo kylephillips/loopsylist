@@ -35,11 +35,10 @@
 		{{Session::get('success')}}
 	</div>
 	@endif
-
 	<div class="small-form">
 	<div class="form-group">
 		{{Form::label('type', 'Toy Type')}}
-		{{Form::select('type', $types, '', array('class'=>'form-control'))}}
+		{{Form::select('type', $types, $dolltype, array('class'=>'form-control'))}}
 	</div>
 	<div class="form-group">
 		{{Form::label('title', 'Name/Title*')}}
@@ -74,9 +73,9 @@
 		{{Form::text('link', $doll->link, array('class'=>'form-control', 'placeholder'=>'Amazon, Ebay, etc...'))}}
 	</div>
 	<div class="form-group">
-		{{Form::label('image', 'Image')}}
-		<img src="{{URL::asset('uploads/toys/_thumbs/225x265_')}}{{$doll->image}}" alt="{{$doll->title}}" />
-		<br /><a href="#" class="btn edit-image">Recrop</a>
+		{{Form::label('thumbnail', 'Thumbnail')}}
+		<img src="{{URL::asset('uploads/toys/_thumbs/225x265_')}}{{$doll->image}}" alt="{{$doll->title}}" class="thumbnail" />
+		<br /><a href="#" class="btn edit-image">Recrop Thumbnail</a>
 	</div>
 	<div id="cropimage" style="display:none;">
 		<img src="{{URL::asset('uploads/toys')}}/{{$doll->image}}" alt="{{$doll->title}}" id="crop" />

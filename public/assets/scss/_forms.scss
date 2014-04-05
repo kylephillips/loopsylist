@@ -66,6 +66,9 @@ input[type='submit']{
 .submit {
 	text-align: center;
 	padding-top: 20px;
+	p {
+		padding-top: 15px;
+	}
 }
 
 .small-form {
@@ -76,6 +79,10 @@ input[type='submit']{
 		border: 1px solid $pink-dark;
 		padding: 15px;
 		border-radius: 4px;
+	}
+	.thumbnail {
+		border: 4px solid $pink-lighter;
+		margin-bottom: 10px;
 	}
 	.form-group {
 		border-top: 1px dashed $pink-light;
@@ -112,6 +119,10 @@ input[type='submit']{
 		select {
 			float: right;
 			width: 75%;
+		}
+		.edit-image {
+			float: left;
+			margin-left: 25%;
 		}
 		select {
 			margin-top: 8px;

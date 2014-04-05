@@ -16,19 +16,19 @@
 	@endif
 		<li>
 			{{Form::label('year', 'Year')}}
-			{{Form::select('year', $years)}}
+			{{Form::select('year', $years, $year, array('class'=>'filter'))}}
 		</li>
 		<li>
 			{{Form::label('type', 'Type')}}
-			{{Form::select('type', $types)}}
+			{{Form::select('type', $types, $type, array('class'=>'filter'))}}
 		</li>
 		@if(Auth::check())
 		<li>
 			{{Form::label('status', 'Status')}}
-			<select>
-				<option>All</option>
-				<option value="has">Dolls I have</option>
-				<option value="hasnot">Dolls I don't have</option>
+			<select id="status" class="filter">
+				<option value="all" <?php if($status == 'all') echo 'selected'; ?>>All</option>
+				<option value="has" <?php if($status == 'has') echo 'selected'; ?>>Dolls I have</option>
+				<option value="hasnot" <?php if($status == 'hasnot') echo 'selected'; ?>>Dolls I don't have</option>
 			</select>
 		</li>
 		@endif
@@ -60,6 +60,9 @@
 				@endif
 				{{$loopsy->title}}
 			</a>
+			@if ( (Auth::check()) && (Auth::user()->group->id == 2) )
+			<p><a href="{{URL::route('loopsy.edit', array('id'=>$loopsy->id))}}">(Edit)</a></p>
+			@endif
 		</li>
 	<?php $c++; ?>
 	@endforeach
@@ -74,3 +77,30 @@
 </div><!-- .container -->
 
 @stop
+
+@section('footer_content')
+@if (Auth::check())
+<script>
+$('.filter').on('change', function(){
+	var year = $('#year').val();
+	var type = $('#type').val();
+	var status = $('#status').val();
+	var url = "{{URL::route('loopsy.index')}}";
+	var newurl = url + '?year=' + year + '&type=' + type + '&status=' + status;
+	window.location.replace(newurl);
+});
+</script>
+@else
+<script>
+$('.filter').on('change', function(){
+	var year = $('#year').val();
+	var type = $('#type').val();
+	var url = "{{URL::route('loopsy.index')}}";
+	var newurl = url + '?year=' + year + '&type=' + type;
+	window.location.replace(newurl);
+});
+</script>
+@endif
+@stop
+
+
