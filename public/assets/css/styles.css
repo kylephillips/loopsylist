@@ -1132,7 +1132,8 @@ input[type='submit'] {
     .top-nav ul li {
       float: left;
       margin-left: 30px;
-      position: relative; }
+      position: relative;
+      z-index: 1; }
       .top-nav ul li a {
         color: #ffcb08; }
         .top-nav ul li a:hover {

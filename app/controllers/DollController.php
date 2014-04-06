@@ -21,7 +21,7 @@ class DollController extends \BaseController {
 			$year = $_GET['year'];
 		}
 
-		$type = "";
+		$type = 'full-size';
 		if ( isset($_GET['type']) ){
 			$type = DB::table('dolltypes')->where('slug', $_GET['type'])->pluck('slug');
 		}
@@ -39,7 +39,6 @@ class DollController extends \BaseController {
 
 		// Get doll types for use in category select element
 		$all_types = DollType::get();
-		$types['all'] = 'All';
 		foreach ( $all_types as $single_type ){
 			$types[$single_type->slug] = $single_type->title;
 		}
@@ -61,17 +60,15 @@ class DollController extends \BaseController {
 		}
 
 		// Get the list of Loopsies - filter as needed
-		$loopsies = Doll::where(function($query){
+		$loopsies = Doll::where(function($query) use ($type) {
 
 			if ( (isset($_GET['year'])) && ($_GET['year'] !== 'all') ){
 				$query->where('release_year', $_GET['year']);
 			}
 
-			if ( (isset($_GET['type'])) && ($_GET['type'] !== 'all') ){
-				$query->whereHas('dolltypes', function($q){
-					$q->where('slug', $_GET['type']);
-				});
-			}
+			$query->whereHas('dolltypes', function($q) use ($type) {
+				$q->where('slug', $type);
+			});
 
 			if ( isset($_GET['status']) && Auth::check() ){
 				$stat = $_GET['status'];

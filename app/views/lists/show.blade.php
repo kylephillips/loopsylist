@@ -12,7 +12,7 @@
 	
 	<section class="type-switch">
 		{{Form::label('type', 'Type')}}
-		{{Form::select('type', $types, '', array('class'=>'filter'))}}
+		{{Form::select('type', $types, $displayedtype, array('class'=>'filter'))}}
 	</section>
 
 	<ul class="user-status-switch">
@@ -23,6 +23,7 @@
 
 	<section id="all" class="tab-content">
 		<div class="user-list-head">
+			@if($displayedtype == 'full-size')
 			<select id="year-select-all">
 			<?php 
 				for ($y = 2010; $y < date('Y'); $y++){
@@ -34,6 +35,7 @@
 				}
 			?>
 			</select>
+			@endif
 			<strong>Have this Loopsy?</strong>
 		</div>
 
@@ -103,6 +105,12 @@ $('.showphoto').on('click', function(e){
 		}
 	});
 	e.preventDefault();
+});
+
+$('#type').on('change', function(){
+	var type = $(this).val();
+	var url = "{{URL::route('list.show', array('user'=>Auth::user()->slug))}}?type=" + type;
+	window.location.replace(url);
 });
 
 $('#year-select-all').on('change', function(){

@@ -26,7 +26,11 @@ class ListController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		// Get the User ID
+		// Set the correct type
+		$type = "full-size";
+		if ( isset($_GET['type']) ) $type = $_GET['type'];
+
+		// Get the User ID & make sure this is their list
 		$user = User::with('toylist')->where('slug', $id)->firstOrFail();
 		if ( Auth::user()->id == $user->id ) {
 
@@ -47,15 +51,15 @@ class ListController extends \BaseController {
 			}
 
 			// FPO: only fullsize
-			$dolls = Doll::whereHas('dolltypes', function($q){
-					$q->where('slug', 'full-size');
-				})->orderBy('release_year', 'DESC')->get();
-
+			$dolls = Doll::whereHas('dolltypes', function($q) use ($type) {
+					$q->where('slug', $type);
+			})->orderBy('release_year', 'DESC')->get();
 
 			return View::make('lists.show')
 				->with('types', $types)
 				->with('dolls', $dolls)
-				->with('dolls_have', $dolls_have);
+				->with('dolls_have', $dolls_have)
+				->with('displayedtype', $type);
 		} else {
 			// Redirect them to their list
 			return Redirect::route('list.show', array('id'=>Auth::user()->slug));
@@ -97,7 +101,7 @@ class ListController extends \BaseController {
 	}
 
 	/**
-	* Single Update switch (on loopsy view)
+	* Single Update switch
 	*
 	* @return Response
 	*/
