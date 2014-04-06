@@ -28,6 +28,12 @@
 		<div class="modal-close"><a href="#">Close</a></div>
 	</div>
 
+	<!-- Loopsy Detail -->
+	<div id="dolldetail" class="modal" >
+		<div class="modal-body" id="photo"></div>
+		<div class="modal-close"><a href="#">Close</a></div>
+	</div>
+
 	<div id="mobile-nav">
 		@include('partials.mobile-nav')
 	</div>

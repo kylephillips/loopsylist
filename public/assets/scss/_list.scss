@@ -1,0 +1,161 @@
+//
+// List Page
+// --------------------------------------------------
+
+.type-switch {
+	background-color: $pink-lighter;
+	border: 1px solid $pink-dark;
+	border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 20px;
+	@include clearfix();
+	label {
+		float: left;
+		width: 25%;
+		color: $purple;
+		text-align: center;
+	}
+	select {
+		float: right;
+		width: 75%;
+	}
+} // .type-switch
+
+.user-status-switch {
+	@include unstyled();
+	@include clearfix();
+	margin-bottom: 20px;
+	li {
+		float: left;
+		width: 33.3333%;
+		a {
+			display: block;
+			text-align: center;
+			background-color: $pink-lighter;
+			border: 1px solid $pink-dark;
+			padding: 8px 0;
+			@include transition(all 200ms ease);
+			&:hover {
+				@include transition(all 200ms ease);
+				background-color: $pink-dark;
+			}
+			&.active {
+				background-color: $purple;
+				border-color: $purple;
+				color: $white;
+			}
+		}
+		&:first-child a {
+			border-right: 0;
+			border-radius: 4px 0 0 4px;
+		}
+		&:last-child a {
+			border-left: 0;
+			border-radius: 0 4px 4px 0;
+		}
+	}
+} // .status-switch
+
+.user-list-head {
+	background-color: $purple-dark;
+	color: $white;
+	border-radius: 4px 4px 0px 0px;
+	padding: 10px;
+	@include clearfix();
+	strong {
+		float: right;
+		width: 40%;
+		text-align: center;
+	}
+	label, select {
+		float: left;
+	}
+	label {
+		margin-right: 8px;
+	}
+}
+
+// All Loopsies
+.user-list-all {
+	@include unstyled();
+	li {
+		background-color: $pink-lighter;
+		padding: 8px;
+		@include clearfix();
+		&:nth-child(even){
+			background-color: darken($pink-lighter, 2%);
+		}
+		div {
+			float: left;
+			width: 60%;
+			padding-top: 8px;
+			font-weight: bold;
+			color: $purple-dark;
+			@include clearfix();
+			a {
+				display: block;
+				float: left;
+				margin:3px 10px 0 0;
+				i {
+					font-size: 18px;
+				}
+			}
+		}
+		section {
+			float: right;
+			width: 40%;
+			position: relative;
+			span {
+				background-color: $magenta-dark;
+				width: 48%;
+				height: 30px;
+				position: absolute;
+				z-index: 2;
+				top: 5px;
+				left: 5px;
+				border-radius: 1px;
+				@include transition(all 200ms ease);
+				&.right {
+					background-color: $white;
+					@include transition(all 200ms ease);
+					left: 50%;
+				}
+			}
+		} // section
+	} // li
+} // .list-all
+
+// List Switch
+.user-list-switch {
+	@include unstyled();
+	@include clearfix();
+	background-color: $magenta;
+	border-radius: 3px;
+	li {
+		padding: 0;
+		float: left;
+		width: 50%;
+		text-align: center;
+		background: transparent;
+		&:nth-child(even){
+			background: transparent;
+		}
+		a {
+			display: block;
+			color: $pink-light;
+			padding: 8px 0;
+			position: relative;
+			z-index: 3;
+			&.active {
+				color: $purple;
+				&.no {
+					color: $pink;
+				}
+			}
+		}
+	}
+}
+
+
+
+

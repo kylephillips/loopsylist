@@ -12,6 +12,11 @@
 	aside {
 		float: right;
 		width: 36%; //330/900
+		.btn {
+			width: 100%;
+			margin-bottom: 20px;
+			text-align: center;
+		}
 	}
 
 } // .page

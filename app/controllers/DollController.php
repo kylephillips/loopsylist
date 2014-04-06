@@ -75,20 +75,19 @@ class DollController extends \BaseController {
 
 			if ( isset($_GET['status']) && Auth::check() ){
 				$stat = $_GET['status'];
-				if ( $stat == 'has' || $stat = 'hasnot' ) :
+				if ( $stat == 'has' || $stat == 'hasnot' ) :
+					$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
+					$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
+					$has_list = array();
+					foreach ($have as $key=>$has){
+						$has_list[] = $has->doll_id;
+					}
 
-				$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
-				$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
-				$has_list = array();
-				foreach ($have as $key=>$has){
-					$has_list[] = $has->doll_id;
-				}
-
-				if ( $_GET['status'] == 'has' ){
-					$query->whereIn('id', $has_list);
-				} else {
-					$query->whereNotIn('id', $has_list);
-				}
+					if ( $_GET['status'] == 'has' ){
+						$query->whereIn('id', $has_list);
+					} else {
+						$query->whereNotIn('id', $has_list);
+					}
 				endif;
 			}
 
@@ -188,7 +187,7 @@ class DollController extends \BaseController {
 	 */
 	public function show($slug)
 	{
-		$loopsy = Doll::where('slug', $slug)->first();
+		$loopsy = Doll::with('dolltypes')->where('slug', $slug)->first();
 		$pagetitle = 'Loopsy List - ' . $loopsy->title;
 		
 		// Save the formatted birthday for display
@@ -304,6 +303,19 @@ class DollController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+
+	/**
+	* Get a doll's Image using provided ID
+	* @return JSON Response
+	*/
+	public function getImage()
+	{
+		$doll = DB::table('dolls')->where('id', Input::get('id'))->pluck('image');
+		return Response::json(array(
+			'image'=>$doll
+		));
 	}
 
 

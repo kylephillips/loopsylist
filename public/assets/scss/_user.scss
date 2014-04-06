@@ -1,0 +1,21 @@
+//
+// User Profile Styles
+// --------------------------------------------------
+.user-details {
+	display: none;
+	background-color: $white;
+	padding: 15px;
+	text-align: left;
+	margin-bottom: 20px;
+	@include clearfix();
+	.left {
+		float: left;
+		width: 48%;
+	}
+	#map {
+		//background-color: $pink;
+		float: right;
+		width: 48%;
+		height: 150px;
+	}
+} // .user-details

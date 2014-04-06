@@ -482,6 +482,10 @@ img {
 .page aside {
   float: right;
   width: 36%; }
+  .page aside .btn {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center; }
 
 @media (max-width: 767px) {
   .page .main, .page aside {
@@ -1362,6 +1366,11 @@ body.open #page-wrap {
     .page-header h1 em {
       font-style: normal;
       color: #ef5ba1; }
+    .page-header h1 .btn {
+      font-size: 14px;
+      padding: 3px 10px;
+      border: 0;
+      margin-top: 10px; }
 
 .search-form {
   text-align: center; }
@@ -1548,8 +1557,10 @@ body.open #page-wrap {
       z-index: 2;
       float: left;
       width: 50%;
-      text-align: center; }
+      text-align: center;
+      background: transparent; }
       .status-switch ul li a {
+        background: transparent;
         color: #fad5e5;
         display: block;
         height: 50px;
@@ -1949,3 +1960,200 @@ body.open #page-wrap {
     .loopsy-gallery li {
       width: 50%;
       margin-bottom: 20px; } }
+.user-details {
+  display: none;
+  background-color: white;
+  padding: 15px;
+  text-align: left;
+  margin-bottom: 20px; }
+  .user-details:before, .user-details:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .user-details:after {
+    clear: both; }
+  .user-details .left {
+    float: left;
+    width: 48%; }
+  .user-details #map {
+    float: right;
+    width: 48%;
+    height: 150px; }
+
+.type-switch {
+  background-color: #fff4f9;
+  border: 1px solid #f6e3eb;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px; }
+  .type-switch:before, .type-switch:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .type-switch:after {
+    clear: both; }
+  .type-switch label {
+    float: left;
+    width: 25%;
+    color: #8e2275;
+    text-align: center; }
+  .type-switch select {
+    float: right;
+    width: 75%; }
+
+.user-status-switch {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px; }
+  .user-status-switch:before, .user-status-switch:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .user-status-switch:after {
+    clear: both; }
+  .user-status-switch li {
+    float: left;
+    width: 33.3333%; }
+    .user-status-switch li a {
+      display: block;
+      text-align: center;
+      background-color: #fff4f9;
+      border: 1px solid #f6e3eb;
+      padding: 8px 0;
+      -webkit-transition: all 200ms ease;
+      -moz-transition: all 200ms ease;
+      -o-transition: all 200ms ease;
+      transition: all 200ms ease; }
+      .user-status-switch li a:hover {
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+        background-color: #f6e3eb; }
+      .user-status-switch li a.active {
+        background-color: #8e2275;
+        border-color: #8e2275;
+        color: white; }
+    .user-status-switch li:first-child a {
+      border-right: 0;
+      border-radius: 4px 0 0 4px; }
+    .user-status-switch li:last-child a {
+      border-left: 0;
+      border-radius: 0 4px 4px 0; }
+
+.user-list-head {
+  background-color: #560143;
+  color: white;
+  border-radius: 4px 4px 0px 0px;
+  padding: 10px; }
+  .user-list-head:before, .user-list-head:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .user-list-head:after {
+    clear: both; }
+  .user-list-head strong {
+    float: right;
+    width: 40%;
+    text-align: center; }
+  .user-list-head label, .user-list-head select {
+    float: left; }
+  .user-list-head label {
+    margin-right: 8px; }
+
+.user-list-all {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .user-list-all li {
+    background-color: #fff4f9;
+    padding: 8px; }
+    .user-list-all li:before, .user-list-all li:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */ }
+    .user-list-all li:after {
+      clear: both; }
+    .user-list-all li:nth-child(even) {
+      background-color: #ffeaf3; }
+    .user-list-all li div {
+      float: left;
+      width: 60%;
+      padding-top: 8px;
+      font-weight: bold;
+      color: #560143; }
+      .user-list-all li div:before, .user-list-all li div:after {
+        content: " ";
+        /* 1 */
+        display: table;
+        /* 2 */ }
+      .user-list-all li div:after {
+        clear: both; }
+      .user-list-all li div a {
+        display: block;
+        float: left;
+        margin: 3px 10px 0 0; }
+        .user-list-all li div a i {
+          font-size: 18px; }
+    .user-list-all li section {
+      float: right;
+      width: 40%;
+      position: relative; }
+      .user-list-all li section span {
+        background-color: #cf4c8a;
+        width: 48%;
+        height: 30px;
+        position: absolute;
+        z-index: 2;
+        top: 5px;
+        left: 5px;
+        border-radius: 1px;
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease; }
+        .user-list-all li section span.right {
+          background-color: white;
+          -webkit-transition: all 200ms ease;
+          -moz-transition: all 200ms ease;
+          -o-transition: all 200ms ease;
+          transition: all 200ms ease;
+          left: 50%; }
+
+.user-list-switch {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ef5ba1;
+  border-radius: 3px; }
+  .user-list-switch:before, .user-list-switch:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .user-list-switch:after {
+    clear: both; }
+  .user-list-switch li {
+    padding: 0;
+    float: left;
+    width: 50%;
+    text-align: center;
+    background: transparent; }
+    .user-list-switch li:nth-child(even) {
+      background: transparent; }
+    .user-list-switch li a {
+      display: block;
+      color: #fad5e5;
+      padding: 8px 0;
+      position: relative;
+      z-index: 3; }
+      .user-list-switch li a.active {
+        color: #8e2275; }
+        .user-list-switch li a.active.no {
+          color: #f49ac1; }

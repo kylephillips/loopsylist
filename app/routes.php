@@ -23,6 +23,7 @@ Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserContro
 /**
 * Lists
 */
+Route::resource('list', 'ListController');
 Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@statusSwitch'));
 
 
@@ -31,4 +32,5 @@ Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@sta
 * Toys (loopsies)
 */ 
 Route::resource('loopsy', 'DollController');
+Route::get('loopsy-image', array('as'=>'loopsy_image', 'uses'=>'DollController@getImage'));
 

@@ -24,12 +24,12 @@
 		<li><a href="{{URL::route('loopsy.index')}}">Loopsies</a></li>
 		<li><a href="{{URL::route('find_list')}}">Find a List</a></li>
 		@if(Auth::check())
-		<?php $user = Auth::user()->username; ?>
+		<?php $user = Auth::user()->slug; ?>
 		<li>
-			<a href="#" class="login-btn">{{Auth::user()->slug}}</a>
+			<a href="#" class="login-btn">{{Auth::user()->username}}</a>
 			<ul>
-				<li><a href="{{URL::route('user.show', array('user'=>$user))}}">My Account</a></li>
-				<li><a href="#">My List</a></li>
+				<li><a href="{{URL::route('user.show', array('user'=>$user))}}">My List</a></li>
+				<li><a href="{{URL::route('list.show', array('id'=>$user))}}">Edit List</a></li>
 				<li><a href="{{URL::route('logout')}}">Logout</a></li>
 			</ul>
 		</li>

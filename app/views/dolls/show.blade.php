@@ -38,8 +38,20 @@
 		@endif
 
 		<img src="{{URL::asset('uploads/toys')}}/{{$loopsy->image}}" alt="{{$loopsy->title}}" />
+		<?php
+		$searchterm = urlencode($loopsy->title) . "+lalaloopsy";
+		?>
+		
+		<a href="http://www.amazon.com/s/?field-keywords={{$searchterm}}" target="_blank" class="btn">Search On Amazon</a>
+
+		<a href="http://www.ebay.com/sch/{{$searchterm}}" target="_blank" class="btn">Search on Ebay</a>
 
 		<ul class="loopsy-details">
+			@foreach($loopsy->dolltypes as $type)
+			<li>
+				<strong>Type</strong>
+				<span>{{$type->title}}</span>
+			@endforeach
 			<li>
 				<strong>Birthday</strong>
 				<span>{{$birthday}}</span>
