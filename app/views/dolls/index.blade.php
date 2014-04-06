@@ -34,6 +34,9 @@
 		@endif
 	</ul>
 
+	@if(count($loopsies) == 0)
+	<div class="alert alert-info">No Results for the current selection.</div>
+	@endif
 
 	<?php $c = 0; ?>	
 	@foreach($loopsies as $loopsy)
