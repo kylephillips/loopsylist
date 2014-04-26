@@ -28,8 +28,9 @@
 		<li>
 			<a href="#" class="login-btn">{{Auth::user()->username}}</a>
 			<ul>
-				<li><a href="{{URL::route('user.show', array('user'=>$user))}}">My List</a></li>
-				<li><a href="{{URL::route('list.show', array('id'=>$user))}}">Edit List</a></li>
+				<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Account</a></li>
+				<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My List</a></li>
+				<li><a href="{{URL::route('list.edit', array('id'=>$user))}}">Edit List</a></li>
 				<li><a href="{{URL::route('logout')}}">Logout</a></li>
 			</ul>
 		</li>

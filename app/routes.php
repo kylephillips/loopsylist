@@ -25,6 +25,8 @@ Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserContro
 */
 Route::resource('list', 'ListController');
 Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@statusSwitch'));
+Route::get('user-dolls', array('as'=>'user_dolls', 'uses'=>'ListController@getUserDolls'));
+Route::get('list-order', array('as'=>'list_order', 'uses'=>'ListController@reorder'));
 
 
 

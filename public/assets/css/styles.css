@@ -405,7 +405,6 @@ body {
   line-height: 24px;
   color: #000;
   height: 100%;
-  overflow-x: hidden;
   width: 100%;
   background-color: white; }
 
@@ -891,6 +890,9 @@ input[type='submit'] {
         margin-left: 20px; }
         .modal-body #login-form-cont .login-options li:first-child {
           margin: 0; }
+
+#dolldetail .modal-body {
+  text-align: center; }
 
 .modal-close {
   position: relative;
@@ -2127,6 +2129,12 @@ body.open #page-wrap {
           transition: all 200ms ease;
           left: 50%; }
 
+.donthavelist li {
+  cursor: pointer;
+  position: relative; }
+  .donthavelist li div {
+    float: none; }
+
 .user-list-switch {
   list-style-type: none;
   margin: 0;
@@ -2155,6 +2163,12 @@ body.open #page-wrap {
       position: relative;
       z-index: 3; }
       .user-list-switch li a.active {
-        color: #8e2275; }
+        color: #f49ac1; }
         .user-list-switch li a.active.no {
           color: #f49ac1; }
+
+#list.loading {
+  height: 300px;
+  background: url("../images/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center; }

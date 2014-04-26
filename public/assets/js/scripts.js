@@ -24,10 +24,8 @@ $('.login-trigger').on('click', function(e){
 
 // Hide Modal when clicked outside
 $('.modal-body, .login-trigger, .showphoto').click(function(e){e.stopPropagation();});
-$(document).click(function(e){
-	if ( e.target.className !== '.modal-body'){
-		$('.modal').removeClass('open');
-	}
+$('.modal').not('.modal-body, .showphoto, .login-trigger').on('click', function(){
+	$('.modal').removeClass('open');
 });
 
 // Form Switch
@@ -55,15 +53,6 @@ $('.switch a').on('click', function(e){
 	}
 });
 
-// List Buttons
-$('.user-status-switch li a').on('click', function(e){
-	e.preventDefault();
-	$('.user-status-switch li a').removeClass("active");
-	$(this).addClass('active');
-	var active = $(this).attr('href');
-	$('.tab-content').hide();
-	$(active).show();
-});
 
 /*
 * Search Form / Results
@@ -104,7 +93,7 @@ function displayResults(data)
 
 	var html = "";
 	$.each(data, function(i, item){
-		var li = '<li><a href="http://localhost/~kyle/loopsylist/public/user/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
+		var li = '<li><a href="http://localhost/~kyle/loopsylist/public/list/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
 		html = html + li;
 	});
 	$('#searchresults').append(html);

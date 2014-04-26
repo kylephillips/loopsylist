@@ -17,7 +17,13 @@ class Toylist extends Eloquent {
 	{
 		return $this->belongsToMany('Doll', 'dolls_lists', 'list_id', 'doll_id')
 			->withPivot('order')
+			->withPivot('status')
 			->withTimestamps();
+	}
+
+	public function hasDolls()
+	{
+		return $this->dolls()->wherePivot('status', '1');
 	}
 
 }

@@ -14,7 +14,7 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 			<br /><a href="#" class="details-toggle btn">Show Details</a>
 			@endif
 			@if($userid == $user->id)
-			<a href="{{URL::route('list.show', array('user'=>$user->slug))}}" class="btn">Edit</a>
+			<a href="{{URL::route('list.edit', array('user'=>$user->slug))}}" class="btn">Edit</a>
 			@endif
 		</h1>
 		@if($user->toylist->visibility == 'public')

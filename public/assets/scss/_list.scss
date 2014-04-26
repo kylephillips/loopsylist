@@ -125,6 +125,16 @@
 	} // li
 } // .list-all
 
+.donthavelist {
+	li {
+		cursor:pointer;
+		position:relative;
+		div {
+			float: none;
+		}
+	}
+}
+
 // List Switch
 .user-list-switch {
 	@include unstyled();
@@ -147,13 +157,20 @@
 			position: relative;
 			z-index: 3;
 			&.active {
-				color: $purple;
+				color: $pink;
 				&.no {
 					color: $pink;
 				}
 			}
 		}
 	}
+}
+
+#list.loading {
+	height: 300px;
+	background: url('../images/loading.gif');
+	background-repeat:no-repeat;
+	background-position: center;
 }
 
 

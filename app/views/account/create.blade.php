@@ -12,7 +12,7 @@
 <?php $user = Auth::user()->username; ?>
 <div class="container small">
 	<div class="alert alert-info center">
-		<strong>Awesome!</strong> You have an account setup! <a href="{{URL::route('user.show', array('user'=>$user))}}">View your details and list here.</a>
+		<strong>Awesome!</strong> You have an account setup! <a href="{{URL::route('list.show', array('user'=>$user))}}">View your details and list here.</a>
 	</div>
 </div>
 @else

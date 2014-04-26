@@ -92,7 +92,9 @@
 @section('footer_content')
 <script>
 $(document).ready(function(){
-	$('#bio').redactor();
+	$('#bio').redactor({
+		toolbarFixedBox: true
+	});
 });
 </script>
 @stop

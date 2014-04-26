@@ -2,6 +2,11 @@
 
 class UserController extends \BaseController {
 
+	public function __construct()
+	{
+		$this->beforeFilter('auth', array('only' => array('edit')) );
+	}
+
 	/**
 	 * Display login form
 	 *
@@ -199,81 +204,6 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-
-		$type = "";
-		if ( isset($_GET['type']) ){
-			$type = DB::table('dolltypes')->where('slug', $_GET['type'])->pluck('slug');
-		}
-
-		$status = "";
-		if ( isset($_GET['status']) ){
-			if ( $_GET['status'] == 'has' ){
-				$status = 'has';
-			} elseif ( $_GET['status'] == 'all' )  {
-				$status = 'all';
-			} else {
-				$status = 'hasnot';
-			}
-		}
-
-		$user = User::with('toylist')->where('slug', $id)->firstOrFail();
-		$userid = $user->id;
-
-		// Get doll types for use in category select element
-		$all_types = DollType::get();
-		$types['all'] = 'All';
-		foreach ( $all_types as $single_type ){
-			$types[$single_type->slug] = $single_type->title;
-		}
-
-		// Dolls this user has
-		$have = DB::table('dolls_lists')
-			->where('list_id', $user->toylist->id)
-			->where('status', 1)
-			->select('doll_id')
-			->get();
-		foreach($have as $key=>$has){
-			$dolls[$key] = $has->doll_id;
-		}
-		
-
-		$loopsies = Doll::where(function($query) use ($userid) {
-
-			if ( (isset($_GET['type'])) && ($_GET['type'] !== 'all') ){
-				$query->whereHas('dolltypes', function($q){
-					$q->where('slug', $_GET['type']);
-				});
-			}
-
-			if ( isset($_GET['status']) ){
-				$stat = $_GET['status'];
-				if ( $stat == 'has' || $stat == 'hasnot' ) :
-					$list = ToyList::where('user_id', $userid)->pluck('id');
-					$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
-					$has_list = array();
-					foreach ($have as $key=>$has){
-						$has_list[] = $has->doll_id;
-					}
-
-					if ( $_GET['status'] == 'has' ){
-						$query->whereIn('id', $has_list);
-					} else {
-						$query->whereNotIn('id', $has_list);
-					}
-				endif;
-			}
-		})->get();
-
-		$pagetitle = $user->name . "'s Loopsy List – Loopsy List";
-
-		return View::make('account.show')
-			->with('user', $user)
-			->with('types', $types)
-			->with('dolls', $dolls)
-			->with('loopsies', $loopsies)
-			->with('type', $type)
-			->with('status', $status)
-			->with('pagetitle', $pagetitle);
 	}
 
 	/**
@@ -284,7 +214,12 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		// Make sure this is this user's edit URL (auth filter applied in construct)
+		$user = Auth::user()->slug;
+		if ( $user != $id ){
+			return Redirect::route('user.edit', array($id=>$user));
+		}
+		return View::make('account.edit');
 	}
 
 	/**

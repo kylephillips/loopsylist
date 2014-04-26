@@ -11,7 +11,7 @@
 		<h3>You're all in!</h3>
 		<div class="start-button has-border">
 			<hr />
-			<a href="{{URL::route('user.show', array('user'=>$user))}}">View/Edit Your List</a>
+			<a href="{{URL::route('list.show', array('user'=>$user))}}">View/Edit Your List</a>
 		</div>
 		@else
 		<h1>Track <i>&amp;</i> Share</h1>
