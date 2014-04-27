@@ -2172,3 +2172,21 @@ body.open #page-wrap {
   background: url("../images/loading.gif");
   background-repeat: no-repeat;
   background-position: center; }
+
+.notfound {
+  text-align: center;
+  padding: 50px 20px; }
+  .notfound h1 {
+    font-family: "bello-caps", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 150px;
+    color: #ef5ba1;
+    line-height: 120px;
+    margin: 0; }
+  .notfound h3 {
+    color: #f49ac1;
+    font-size: 30px; }
+    .notfound h3 em {
+      font-style: normal;
+      color: #8e2275; }

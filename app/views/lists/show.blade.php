@@ -1,5 +1,5 @@
 @extends('partials.master')
-@section('title', 'Loopsy List')
+@section('title', $title)
 @section('content')
 
 <?php

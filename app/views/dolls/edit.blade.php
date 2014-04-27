@@ -107,7 +107,9 @@
 
 <script>
 $(document).ready(function(){
-	$('#bio').redactor();
+	$('#bio').redactor({
+		maxHeight: 400 
+	});
 
 	var jcrop_api;
 

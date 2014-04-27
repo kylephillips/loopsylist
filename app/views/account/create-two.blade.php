@@ -17,8 +17,7 @@
 
 		<h3 class="center">Welcome to Loopsy List!</h3>
 		<p class="center">
-			Include the details below to help friends find your list.<br />
-			If you'd like to complete this later, <a href="#">skip right to your list</a>.
+			Include the details below to help friends find your list. You can always edit this information later.
 		</p>
 		
 		@if(Session::has('errors'))
@@ -69,8 +68,7 @@
 			{{Form::hidden('longitude', '', array('id'=>'longitude'))}}
 			{{Form::hidden('city', '', array('id'=>'city'))}}
 			{{Form::hidden('state', '', array('id'=>'state'))}}
-			{{Form::submit('Save', array('class'=>'btn btn-primary'))}}
-			<p><a href="#">or Skip and complete later</a></p>
+			{{Form::submit('Start Your List', array('class'=>'btn btn-primary'))}}
 		</div>
 		{{Form::close()}}
 	</div><!-- .small-form -->

@@ -26,19 +26,8 @@ class DollController extends \BaseController {
 			$type = DB::table('dolltypes')->where('slug', $_GET['type'])->pluck('slug');
 		}
 
-		$status = "";
-		if ( isset($_GET['status']) ){
-			if ( $_GET['status'] == 'has' ){
-				$status = 'has';
-			} elseif ( $_GET['status'] == 'all' )  {
-				$status = 'all';
-			} else {
-				$status = 'hasnot';
-			}
-		}
-
 		// Get doll types for use in category select element
-		$all_types = DollType::get();
+		$all_types = DollType::orderBy('id', 'ASC')->get();
 		foreach ( $all_types as $single_type ){
 			$types[$single_type->slug] = $single_type->title;
 		}
@@ -70,24 +59,6 @@ class DollController extends \BaseController {
 				$q->where('slug', $type);
 			});
 
-			if ( isset($_GET['status']) && Auth::check() ){
-				$stat = $_GET['status'];
-				if ( $stat == 'has' || $stat == 'hasnot' ) :
-					$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
-					$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
-					$has_list = array();
-					foreach ($have as $key=>$has){
-						$has_list[] = $has->doll_id;
-					}
-
-					if ( $_GET['status'] == 'has' ){
-						$query->whereIn('id', $has_list);
-					} else {
-						$query->whereNotIn('id', $has_list);
-					}
-				endif;
-			}
-
 		})->get();
 		
 		return View::make('dolls.index')
@@ -96,8 +67,7 @@ class DollController extends \BaseController {
 			->with('years', $years)
 			->with('dolls', $dolls)
 			->with('year', $year)
-			->with('type', $type)
-			->with('status', $status);
+			->with('type', $type);
 	}
 
 
@@ -301,19 +271,5 @@ class DollController extends \BaseController {
 	{
 		//
 	}
-
-
-	/**
-	* Get a doll's Image using provided ID
-	* @return JSON Response
-	*/
-	public function getImage()
-	{
-		$doll = DB::table('dolls')->where('id', Input::get('id'))->pluck('image');
-		return Response::json(array(
-			'image'=>$doll
-		));
-	}
-
 
 }

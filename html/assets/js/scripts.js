@@ -1,7 +1,3 @@
-/* 
-* Base Scripts
-*/
-
 /*
 * Toggle Mobile Nav
 */
@@ -93,7 +89,7 @@ function displayResults(data)
 
 	var html = "";
 	$.each(data, function(i, item){
-		var li = '<li><a href="http://localhost/~kyle/loopsylist/public/list/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
+		var li = '<li><a href="http://localhost/~kyle/loopsylist/html/list/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
 		html = html + li;
 	});
 	$('#searchresults').append(html);

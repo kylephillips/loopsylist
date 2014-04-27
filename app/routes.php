@@ -20,6 +20,16 @@ Route::post('login', array('as'=>'login', 'uses'=>'UserController@postLogin'));
 Route::get('logout', array('as'=>'logout', 'uses'=>'UserController@getLogout'));
 Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserController@validateSignup'));
 
+
+/**
+* Password Resets
+*/
+Route::get('forgot-password', array('as'=>'get_remind', 'uses'=>'RemindersController@getRemind'));
+Route::post('forgot-password', array('as'=>'post_remind', 'uses'=>'RemindersController@postRemind'));
+Route::get('reset-password/{token}', array('as'=>'get_reset', 'uses'=>'RemindersController@getReset'));
+Route::post('reset-password/{token}', array('as'=>'post_reset', 'uses'=>'RemindersController@postReset'));
+
+
 /**
 * Lists
 */
@@ -35,4 +45,8 @@ Route::get('list-order', array('as'=>'list_order', 'uses'=>'ListController@reord
 */ 
 Route::resource('loopsy', 'DollController');
 Route::get('loopsy-image', array('as'=>'loopsy_image', 'uses'=>'DollController@getImage'));
+
+
+
+
 
