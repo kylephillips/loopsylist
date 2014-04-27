@@ -161,10 +161,9 @@ class UserController extends \BaseController {
 		if ( Auth::check() ){
 
 			// Validation requirements
-			// No fields technically required, but we need to check formatting
 			$required = array(
-				'name' => 'min:3',
-				'zip' => 'min:5|numeric'
+				'name' => 'required|min:3',
+				'zip' => 'required|min:5|numeric'
 			);
 			$message = array(
 				'zip.min' => 'Your zip code should be a 5-digit number'
@@ -191,6 +190,8 @@ class UserController extends \BaseController {
 			$list = Toylist::where('user_id', $user->id)->firstOrFail();
 			$list->visibility = ( Input::get('visibility') ) ? 'public' : 'private';
 			$list->save();
+
+			return Redirect::route('list.edit', array('id'=>$user->slug));
 		} else {
 			return Redirect::route('user.create');
 		}

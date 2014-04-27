@@ -93,7 +93,7 @@
 <script>
 $(document).ready(function(){
 	$('#bio').redactor({
-		toolbarFixedBox: true
+		maxHeight: 400 
 	});
 });
 </script>

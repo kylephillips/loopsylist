@@ -32,7 +32,7 @@
 		{{Form::submit('Log In', array('class'=>'btn btn-primary', 'id'=>'login-submit'))}}
 		<ul class="login-options">
 			<li><a href="{{URL::route('user.create')}}">Sign Up</a></li>
-			<li><a href="#">Recover Password</a></li>
+			<li><a href="{{URL::route('get_remind')}}">Recover Password</a></li>
 		</ul>
 		{{Form::close()}}
 		@endif

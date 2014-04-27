@@ -49,6 +49,14 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+	//return View::make('pages.404');
+});
+
+
+// 404 page
+App::missing(function($exception)
+{
+    return View::make('pages.404');
 });
 
 /*
@@ -66,6 +74,8 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
+
+
 
 /*
 |--------------------------------------------------------------------------

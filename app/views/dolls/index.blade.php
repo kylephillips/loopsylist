@@ -8,12 +8,8 @@
 </section>
 
 <div class="container">
-
-	@if(Auth::check())
-	<ul class="list-filters loggedin">
-	@else
+	
 	<ul class="list-filters">
-	@endif
 		<li>
 			{{Form::label('year', 'Year')}}
 			{{Form::select('year', $years, $year, array('class'=>'filter'))}}
@@ -22,16 +18,6 @@
 			{{Form::label('type', 'Type')}}
 			{{Form::select('type', $types, $type, array('class'=>'filter'))}}
 		</li>
-		@if(Auth::check())
-		<li>
-			{{Form::label('status', 'Status')}}
-			<select id="status" class="filter">
-				<option value="all" <?php if($status == 'all') echo 'selected'; ?>>All</option>
-				<option value="has" <?php if($status == 'has') echo 'selected'; ?>>Dolls I have</option>
-				<option value="hasnot" <?php if($status == 'hasnot') echo 'selected'; ?>>Dolls I don't have</option>
-			</select>
-		</li>
-		@endif
 	</ul>
 
 	@if(count($loopsies) == 0)

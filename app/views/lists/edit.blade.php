@@ -1,5 +1,5 @@
 @extends('partials.master')
-@section('title', 'Loopsy List')
+@section('title', 'Edit Your List - Loopsy List')
 @section('content')
 
 <section class="page-header">

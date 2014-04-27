@@ -1,0 +1,22 @@
+//
+// 404 Error Page
+// --------------------------------------------------
+.notfound {
+	text-align: center;
+	padding: 50px 20px;
+	h1 {
+		@include bello();
+		font-size: 150px;
+		color: $magenta;
+		line-height: 120px;
+		margin: 0;
+	}
+	h3 {
+		color: $pink;
+		font-size: 30px;
+		em {
+			font-style: normal;
+			color: $purple;
+		}
+	}
+}

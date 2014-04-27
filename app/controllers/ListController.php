@@ -27,11 +27,14 @@ class ListController extends \BaseController {
 		// Get the years to populate the select menu
 		$years = Doll::distinct()->orderBy('release_year', 'DESC')->get(array('release_year'));
 		$years = $years->toArray();
+
+		$title = "$user->name's Loopsy List";
 		
 		return View::make('lists.show')
 			->with('user', $user)
 			->with('types', $types)
-			->with('years', $years);
+			->with('years', $years)
+			->with('title', $title);
 	}
 
 
