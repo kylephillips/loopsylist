@@ -2,6 +2,7 @@
 /html/.sass-cache
 /vendor
 /app/config/database.php
+/app/config/mail.php
 composer.phar
 composer.lock
 .env.local.php

@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => '',
+	'username' => 'kylephillipsdesign@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => '',
+	'password' => 'quqAaOwkdNrIz_8eSCtPiw',
 
 	/*
 	|--------------------------------------------------------------------------

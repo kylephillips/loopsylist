@@ -49,7 +49,7 @@
 			border-right: 0;
 			border-radius: 4px 0 0 4px;
 		}
-		&:last-child a {
+		&.last a {
 			border-left: 0;
 			border-radius: 0 4px 4px 0;
 		}
@@ -69,6 +69,7 @@
 	}
 	label, select {
 		float: left;
+		line-height: 16px;
 	}
 	label {
 		margin-right: 8px;
@@ -78,32 +79,38 @@
 // All Loopsies
 .user-list-all {
 	@include unstyled();
+	display: table;
+	width: 100%;
 	li {
+		display: table-row;
 		background-color: $pink-lighter;
-		padding: 8px;
 		@include clearfix();
 		&:nth-child(even){
 			background-color: darken($pink-lighter, 2%);
 		}
 		div {
-			float: left;
+			display: table-cell;
+			vertical-align: middle;
 			width: 60%;
-			padding-top: 8px;
+			padding: 5px;
+			line-height: 16px;
 			font-weight: bold;
 			color: $purple-dark;
 			@include clearfix();
 			a {
 				display: block;
 				float: left;
-				margin:3px 10px 0 0;
+				margin:0px 10px 0 0;
 				i {
 					font-size: 18px;
 				}
 			}
 		}
 		section {
-			float: right;
+			display: table-cell;
+			vertical-align: middle;
 			width: 40%;
+			padding: 5px;
 			position: relative;
 			span {
 				background-color: $magenta-dark;
@@ -126,11 +133,13 @@
 } // .list-all
 
 .donthavelist {
+	width: 100%;
 	li {
 		cursor:pointer;
 		position:relative;
 		div {
-			float: none;
+			width: 100%;
+			padding: 8px;
 		}
 	}
 }
@@ -141,7 +150,10 @@
 	@include clearfix();
 	background-color: $magenta;
 	border-radius: 3px;
+	display: block;
+	position: relative;
 	li {
+		display: list-item;
 		padding: 0;
 		float: left;
 		width: 50%;
@@ -173,6 +185,18 @@
 	background-position: center;
 }
 
+@media(max-width: 767px)
+{
+	// All Loopsies
+	.user-list-all li {
+		div {
+			width: 55%;
+		}
+		section {
+			width: 45%;
+		}
+	} // .list-all
 
+} // media query
 
 

@@ -123,10 +123,27 @@
 
 
 @media (max-width: 767px){
+	.top-nav {
+		.logo a {
+			display: block;
+			height: 40px;
+			font-weight: bold;
+			font-size: 18px;
+			margin:-5px 40px 0 0;
+			color: $white;
+			background-color: rgba(255,255,255,.08);
+			border: 1px solid rgba(255,255,255,.1);
+			padding: 6px 20px;
+		} // .logo
+	}
 	.top-nav ul {
 		display: none;
 	}
 	.nav-toggle {
+		margin: 0;
+		height: 40px;
+		line-height: 40px;
+		padding-top: 0;
 		display: inline-block;
 	}
 }

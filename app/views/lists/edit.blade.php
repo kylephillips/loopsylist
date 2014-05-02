@@ -18,7 +18,7 @@
 	<ul class="user-status-switch">
 		<li><a href="all" class="active">All</a></li>
 		<li><a href="1">Have</a></li>
-		<li><a href="0">Don't Have</a></li>
+		<li class="last"><a href="0">Don't Have</a></li>
 		<input type="hidden" id="status" value="all">
 	</ul>
 
@@ -35,7 +35,7 @@
 				}
 			?>
 			</select>
-			<strong>Have this Loopsy?</strong>
+			<strong>Have?</strong>
 		</div>
 		<ul id="list" class="user-list-all"></ul>
 	</section>
@@ -46,6 +46,7 @@
 @stop
 @section('footer_content')
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+{{HTML::script('assets/js/jquery.ui.touch-punch.min.js')}}
 <script>
 
 $(document).on('click', '.showphoto', function(e){

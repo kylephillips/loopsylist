@@ -500,6 +500,8 @@ label {
 input[type='text'],
 input[type='email'],
 input[type='password'] {
+  -webkit-appearance: none;
+  appearance: none;
   background-color: white;
   border: 1px solid #fad5e5;
   font-size: 18px;
@@ -1196,10 +1198,25 @@ input[type='submit'] {
   float: right; }
 
 @media (max-width: 767px) {
+  .top-nav .logo a {
+    display: block;
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    margin: -5px 40px 0 0;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 20px; }
+
   .top-nav ul {
     display: none; }
 
   .nav-toggle {
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    padding-top: 0;
     display: inline-block; } }
 .admin-bar {
   background-color: #000000; }
@@ -2044,7 +2061,7 @@ body.open #page-wrap {
     .user-status-switch li:first-child a {
       border-right: 0;
       border-radius: 4px 0 0 4px; }
-    .user-status-switch li:last-child a {
+    .user-status-switch li.last a {
       border-left: 0;
       border-radius: 0 4px 4px 0; }
 
@@ -2065,17 +2082,20 @@ body.open #page-wrap {
     width: 40%;
     text-align: center; }
   .user-list-head label, .user-list-head select {
-    float: left; }
+    float: left;
+    line-height: 16px; }
   .user-list-head label {
     margin-right: 8px; }
 
 .user-list-all {
   list-style-type: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  display: table;
+  width: 100%; }
   .user-list-all li {
-    background-color: #fff4f9;
-    padding: 8px; }
+    display: table-row;
+    background-color: #fff4f9; }
     .user-list-all li:before, .user-list-all li:after {
       content: " ";
       /* 1 */
@@ -2086,9 +2106,11 @@ body.open #page-wrap {
     .user-list-all li:nth-child(even) {
       background-color: #ffeaf3; }
     .user-list-all li div {
-      float: left;
+      display: table-cell;
+      vertical-align: middle;
       width: 60%;
-      padding-top: 8px;
+      padding: 5px;
+      line-height: 16px;
       font-weight: bold;
       color: #560143; }
       .user-list-all li div:before, .user-list-all li div:after {
@@ -2101,12 +2123,14 @@ body.open #page-wrap {
       .user-list-all li div a {
         display: block;
         float: left;
-        margin: 3px 10px 0 0; }
+        margin: 0px 10px 0 0; }
         .user-list-all li div a i {
           font-size: 18px; }
     .user-list-all li section {
-      float: right;
+      display: table-cell;
+      vertical-align: middle;
       width: 40%;
+      padding: 5px;
       position: relative; }
       .user-list-all li section span {
         background-color: #cf4c8a;
@@ -2129,18 +2153,23 @@ body.open #page-wrap {
           transition: all 200ms ease;
           left: 50%; }
 
-.donthavelist li {
-  cursor: pointer;
-  position: relative; }
-  .donthavelist li div {
-    float: none; }
+.donthavelist {
+  width: 100%; }
+  .donthavelist li {
+    cursor: pointer;
+    position: relative; }
+    .donthavelist li div {
+      width: 100%;
+      padding: 8px; }
 
 .user-list-switch {
   list-style-type: none;
   margin: 0;
   padding: 0;
   background-color: #ef5ba1;
-  border-radius: 3px; }
+  border-radius: 3px;
+  display: block;
+  position: relative; }
   .user-list-switch:before, .user-list-switch:after {
     content: " ";
     /* 1 */
@@ -2149,6 +2178,7 @@ body.open #page-wrap {
   .user-list-switch:after {
     clear: both; }
   .user-list-switch li {
+    display: list-item;
     padding: 0;
     float: left;
     width: 50%;
@@ -2173,6 +2203,11 @@ body.open #page-wrap {
   background-repeat: no-repeat;
   background-position: center; }
 
+@media (max-width: 767px) {
+  .user-list-all li div {
+    width: 55%; }
+  .user-list-all li section {
+    width: 45%; } }
 .notfound {
   text-align: center;
   padding: 50px 20px; }

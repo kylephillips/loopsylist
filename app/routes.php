@@ -15,10 +15,14 @@ Route::post('search', array('as'=>'post_search', 'uses'=>'SearchController@postS
 Route::resource('user', 'UserController');
 Route::get('user/create/details', array('as'=>'create_step_two', 'uses'=>'UserController@createTwo'));
 Route::post('user/create/details', array('as'=>'create_step_two_post', 'uses'=>'UserController@createTwopost'));
-Route::get('login', array('as'=>'login_form', 'uses'=>'UserController@getLogin'));
-Route::post('login', array('as'=>'login', 'uses'=>'UserController@postLogin'));
-Route::get('logout', array('as'=>'logout', 'uses'=>'UserController@getLogout'));
 Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserController@validateSignup'));
+
+/**
+* Sessions
+*/
+Route::get('login', array('as'=>'login_form', 'uses'=>'SessionController@create'));
+Route::post('login', array('as'=>'login', 'uses'=>'SessionController@store'));
+Route::get('logout', array('as'=>'logout', 'uses'=>'SessionController@destroy'));
 
 
 /**

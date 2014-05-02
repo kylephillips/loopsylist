@@ -21,7 +21,7 @@
 <div class="container">
 	<div class="logo"><a href="{{URL::route('home')}}">Loopsy <em>List</em></a></div>
 	<ul class="pull-right">
-		<li><a href="{{URL::route('loopsy.index')}}">Loopsies</a></li>
+		<li><a href="{{URL::route('loopsy.index')}}">Lalaloopsies</a></li>
 		<li><a href="{{URL::route('find_list')}}">Find a List</a></li>
 		@if(Auth::check())
 		<?php $user = Auth::user()->slug; ?>

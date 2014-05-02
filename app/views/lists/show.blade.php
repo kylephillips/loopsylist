@@ -72,7 +72,7 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 <script>
 
 $(document).ready(function(){
-	loadList('full-size', '', '');
+	loadList('full-size', "<?php $y1 = reset($years); echo $y1[key($y1)]; ?>", '');
 });
 
 /**
