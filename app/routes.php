@@ -17,6 +17,16 @@ Route::get('user/create/details', array('as'=>'create_step_two', 'uses'=>'UserCo
 Route::post('user/create/details', array('as'=>'create_step_two_post', 'uses'=>'UserController@createTwopost'));
 Route::get('validate-signup', array('as'=>'validate_signup', 'uses'=>'UserController@validateSignup'));
 
+
+/**
+* Password Resets
+*/
+Route::get('forgot-password', array('as'=>'get_remind', 'uses'=>'RemindersController@getRemind'));
+Route::post('forgot-password', array('as'=>'post_remind', 'uses'=>'RemindersController@postRemind'));
+Route::get('reset-password/{token}', array('as'=>'get_reset', 'uses'=>'RemindersController@getReset'));
+Route::post('reset-password/{token}', array('as'=>'post_reset', 'uses'=>'RemindersController@postReset'));
+
+
 /**
 * Sessions
 */

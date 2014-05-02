@@ -2203,11 +2203,14 @@ body.open #page-wrap {
   background-repeat: no-repeat;
   background-position: center; }
 
+<<<<<<< HEAD:html/assets/css/styles.css
 @media (max-width: 767px) {
   .user-list-all li div {
     width: 55%; }
   .user-list-all li section {
     width: 45%; } }
+=======
+>>>>>>> 807c35d90580db61eb88b5e73b225f8515bd2df7:html/assets/css/styles.css
 .notfound {
   text-align: center;
   padding: 50px 20px; }
