@@ -1,0 +1,14 @@
+//
+// Redactor Overwriting
+// --------------------------------------------------
+
+.redactor_toolbar {
+	background-color: $pink-lighter !important;
+	li a:hover {
+		background-color: $purple !important;
+	}
+}
+
+.redactor_box ::selection {
+	background-color: $purple !important;
+}
