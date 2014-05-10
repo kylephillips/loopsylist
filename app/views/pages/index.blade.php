@@ -80,7 +80,7 @@
 
 <section class="cta">
 	<div class="container">
-		<h3>Over <em>50</em> full-size dolls alone!</h3>
+		<h3><em>{{$count}}</em> full-size dolls alone!</h3>
 		<p>Do your friends & family know which Lalaloopsies your child has?</p>
 		<div class="start-button">
 			<a href="{{URL::route('user.create')}}">Start Your List</a>
