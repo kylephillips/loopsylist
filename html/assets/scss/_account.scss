@@ -57,3 +57,43 @@
 		}
 	} // .buttons
 } // .user-info
+
+
+// Delete Account Section
+// ----------------------------------
+.toggle-delete {
+	display: block;
+	font-size: 15px;
+	text-align: center;
+	padding-top: 30px;
+}
+
+.delete-section {
+	background-color: $pink-lighter;
+	border: 1px solid $pink-light;
+	padding: 20px;
+	p {
+		color: $red;
+	}
+	button {
+		border: 0;
+		background-color: $red;
+		height: 38px;
+		margin-left: 10px;
+	}
+	.delete-confirmation {
+		background-color: $pink-light;
+		padding: 10px;
+		text-align: center;
+		color: $red;
+		label {
+			margin-bottom: 10px;
+		}
+		input[type='text']{
+			height: 40px;
+			border-radius: 3px;
+		}
+	}
+}
+
+

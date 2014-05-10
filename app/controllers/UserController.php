@@ -215,7 +215,9 @@ class UserController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::findorfail($id);
+		$user->delete();
+		return Response::json(array('status'=>'success'));
 	}
 
 

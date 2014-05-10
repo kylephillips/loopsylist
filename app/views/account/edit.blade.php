@@ -105,8 +105,28 @@
 			{{Form::submit('Save Changes', array('class'=>'btn btn-primary'))}}
 		</div>
 		{{Form::close()}}
-	</div>
+	</div><!-- .small-form -->
 </div><!-- .container -->
+
+@if($user->id !== 2)
+<!-- Delete Account -->
+<div class="container">
+	<div class="small-form delete-list">
+		<p>
+			<a href="#" class="toggle-delete">Want to delete your account?</a>
+		</p>
+		<div class="delete-section" style="display:none;">
+			<div id="delete-error" class="alert alert-danger" style="display:none;"></div>
+			<p><strong>Important:</strong> Once you delete your account, all of your profile and list information will be permanently removed. It is not possible to recover this information once this process is complete.</p>
+			<div class="delete-confirmation">
+				<label for="deleteconfirm">Enter the text "<strong>DELETE</strong>" and submit to completely remove your profile</label>
+				<input type="text" id="deleteconfirm" placeholder="Enter Text" />
+				<button type="submit" id="deleteaccount" class="btn">Delete Account</button>
+			</div>
+		</div><!-- .delete-section -->
+	</div><!-- .small-form -->
+</div><!-- .container -->
+@endif
 
 @stop
 @section('footer_content')
@@ -117,6 +137,45 @@ $(document).ready(function(){
 		buttons: ['bold', 'italic', 'unorderedlist', 'orderedlist', 'link']
 	});
 });
+
+
+/**
+* Delete Account
+*/
+$('.toggle-delete').on('click', function(e){
+	e.preventDefault();
+	$('.delete-section').toggle();
+});
+
+$('#deleteaccount').on('click', function(e){
+	e.preventDefault();
+	validateDelete();
+});
+
+function validateDelete()
+{
+	$('#delete-error').hide();
+	var text = $('#deleteconfirm').val();
+	if ( text !== 'DELETE' ){
+		$('#delete-error').text('You must enter the text "DELETE" to remove your account.');
+		$('#delete-error').show();
+	} else {
+		deleteAccount();
+	}
+}
+
+function deleteAccount()
+{
+	var url = "{{URL::route('user.destroy', array('id'=>$user->id))}}";
+	$.ajax({
+		url: url,
+		method: 'DELETE',
+		success: function(data){
+			var home = "{{URL::route('home')}}";
+			window.location = home;
+		}
+	});
+}
 
 /**
 * Load the User Map

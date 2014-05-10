@@ -2330,3 +2330,31 @@ body.open #page-wrap {
             -o-transition: all 200ms ease;
             transition: all 200ms ease;
             background-color: #8e2275; }
+
+.toggle-delete {
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 30px; }
+
+.delete-section {
+  background-color: #fff4f9;
+  border: 1px solid #fad5e5;
+  padding: 20px; }
+  .delete-section p {
+    color: #bf1e4f; }
+  .delete-section button {
+    border: 0;
+    background-color: #bf1e4f;
+    height: 38px;
+    margin-left: 10px; }
+  .delete-section .delete-confirmation {
+    background-color: #fad5e5;
+    padding: 10px;
+    text-align: center;
+    color: #bf1e4f; }
+    .delete-section .delete-confirmation label {
+      margin-bottom: 10px; }
+    .delete-section .delete-confirmation input[type='text'] {
+      height: 40px;
+      border-radius: 3px; }
