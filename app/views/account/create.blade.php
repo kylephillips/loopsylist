@@ -3,7 +3,7 @@
 
 <section class="signup-hero">
 	<div class="container">
-		<h1><em>Start</em> Your Loopsie List</h1>
+		<h1><em>Start</em> Your Loopsy List</h1>
 		<p>The best free way to keep track of your Lalaloopsy collection.</p>
 	</div>
 </section>

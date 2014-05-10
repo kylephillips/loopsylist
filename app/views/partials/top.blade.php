@@ -26,9 +26,9 @@
 		@if(Auth::check())
 		<?php $user = Auth::user()->slug; ?>
 		<li>
-			<a href="#" class="login-btn">{{Auth::user()->username}}</a>
+			<a href="{{URL::route('user.edit', array('user'=>$user))}}" class="login-btn">{{Auth::user()->username}}</a>
 			<ul>
-				<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Account</a></li>
+				<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Profile</a></li>
 				<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My List</a></li>
 				<li><a href="{{URL::route('list.edit', array('id'=>$user))}}">Edit List</a></li>
 				<li><a href="{{URL::route('logout')}}">Logout</a></li>

@@ -4,7 +4,7 @@
 	<li><a href="{{URL::route('find_list')}}">Find a List</a></li>
 	@if(Auth::check())
 	<?php $user = Auth::user()->username; ?>
-	<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Account</a></li>
+	<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Profile</a></li>
 	<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My List</a></li>
 	<li><a href="{{URL::route('logout')}}" class="login-btn">Logout</a></li>
 	@else

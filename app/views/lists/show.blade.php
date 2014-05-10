@@ -19,7 +19,9 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 		</h1>
 		@if($user->toylist->visibility == 'public')
 		<section class="user-details">
-			<div class="left"
+			<div class="left">
+			<?php $hashed_email = md5(strtolower(trim($user->email))); ?>
+				<img src="http://www.gravatar.com/avatar/{{$hashed_email}}" />
 				<p><strong>Location:</strong><br /> {{$user->city}}, {{$user->state}}</p>
 				{{$user->bio}}
 			</div>

@@ -4,22 +4,12 @@ class UserController extends \BaseController {
 
 	public function __construct()
 	{
-		$this->beforeFilter('auth', array('only' => array('edit')) );
+		$this->beforeFilter('auth', array('only' => array('edit','update','destroy')) );
 	}
 
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
+	 * Show the Signup Form
 	 *
 	 * @return Response
 	 */
@@ -28,8 +18,9 @@ class UserController extends \BaseController {
 		return View::make('account.create');
 	}
 
+
 	/**
-	 * Store a newly created resource in storage.
+	 * Store the new User
 	 *
 	 * @return Response
 	 */
@@ -69,6 +60,7 @@ class UserController extends \BaseController {
 				->withErrors('It appears you are a bot.');
 		}
 	}
+
 
 	/** 
 	* Step Two of the signup process (other details)
@@ -132,16 +124,6 @@ class UserController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -150,12 +132,18 @@ class UserController extends \BaseController {
 	public function edit($id)
 	{
 		// Make sure this is this user's edit URL (auth filter applied in construct)
-		$user = Auth::user()->slug;
-		if ( $user != $id ){
-			return Redirect::route('user.edit', array($id=>$user));
+		$user = Auth::user();
+		$visibility = $user->toylist->visibility;
+		$public = ( $visibility == 'public' ? true : false );
+
+		if ( $user->slug != $id ){
+			return Redirect::route('user.edit', array($id=>$user->slug));
 		}
-		return View::make('account.edit');
+		return View::make('account.edit')
+			->with('user', $user)
+			->with('public', $public);
 	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -165,11 +153,62 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$user = User::findorfail($id);
+		
+		if ( Input::get('email') ) {
+			try
+			{
+				$user->email = Input::get('email');
+				$user->save();
+			}
+			catch (\Illuminate\Database\QueryException $e)
+			{
+				return Redirect::route('user.edit', array('user'=> $user->slug))
+					->withInput()
+					->withErrors('The email you have entered is already in use.');
+			}
+		}
+
+		if ( Input::get('password') ){
+			$rules = array(
+				'password' => 'required|min:6|confirmed',
+				'password_confirmation' => 'required'
+			);
+			$validation = Validator::make(Input::all(), $rules);
+			if ( $validation->fails() ){
+				return Redirect::route('user.edit', array('user'=> $user->slug))
+					->withInput()
+					->withErrors($validation);
+			} else {
+				$user->password = Hash::make(Input::get('password'));
+			}
+		}
+
+		$list = $user->toylist;
+		if ( Input::get('visibility') ){
+			$list->visibility = 'public';
+		} else {
+			$list->visibility = 'private';
+		}
+		$list->save();
+
+		if ( Input::get('name') ) $user->name = Input::get('name');
+		if ( Input::get('zip') ) $user->zip_code = Input::get('zip');
+		if ( Input::get('latitude') ) $user->latitude = Input::get('latitude');
+		if ( Input::get('longitude') ) $user->longitude = Input::get('longitude');
+		if ( Input::get('city') ) $user->city = Input::get('city');
+		if ( Input::get('state') ) $user->state = Input::get('state');
+		if ( Input::get('bio') ) $user->bio = Input::get('bio');
+		
+		$user->save();
+
+		return Redirect::route('user.edit', array('user'=> $user->slug))
+			->with('success','success');
 	}
 
+
 	/**
-	 * Remove the specified resource from storage.
+	 * Delete the User
 	 *
 	 * @param  int  $id
 	 * @return Response

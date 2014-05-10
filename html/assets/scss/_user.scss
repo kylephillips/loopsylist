@@ -11,6 +11,12 @@
 	.left {
 		float: left;
 		width: 48%;
+		@include clearfix();
+		img {
+			float: left;
+			margin: 0 10px 10px 0;
+			border-radius: 40px;
+		}
 	}
 	#map {
 		//background-color: $pink;

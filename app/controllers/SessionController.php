@@ -1,16 +1,6 @@
 <?php
 
-use Loopsy\Forms\Login;
-
 class SessionController extends \BaseController {
-
-	protected $loginForm;
-
-	public function __construct(Login $loginForm)
-	{
-		$this->loginForm = $loginForm;
-	}
-
 
 	/**
 	 * Show the Login Form
@@ -30,14 +20,14 @@ class SessionController extends \BaseController {
 	 */
 	public function store()
 	{
-		try
-		{
-			$this->loginForm->validate(Input::all());
-		}
-		catch(Loopsy\Forms\FormValidationException $e)
-		{
-			$error_message = "Oopsie! Looks like the login you entered is incorrect.";
+		$rules = array(
+			'username' => 'required|exists:users,username',
+			'password' => 'required'
+		);
+		$validation = Validator::make(Input::all(), $rules);
+		$error_message = "Oopsie! Looks like the login you entered is incorrect.";
 
+		if ( $validation->fails() ){
 			if ( Request::ajax() ){
 				return Response::json(array('status'=>'error', 'message'=>$error_message));
 			} else {
@@ -52,8 +42,7 @@ class SessionController extends \BaseController {
 				'username'=>Input::get('username'), 
 				'password'=>Input::get('password')
 			)) ){
-			return Redirect::route('login_form')
-				->withSuccess('You have successfully logged in.');
+			return Redirect::route('user.edit', array('user'=>Auth::user()->slug));
 		} else {
 			return Redirect::route('login_form')
 				->withMessage($error_message);
