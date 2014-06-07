@@ -12,6 +12,7 @@
 		<h1>My Profile</h1>
 	</div>
 </section>
+
 <?php 
 	$hashed_email = md5(strtolower(trim(Auth::user()->email)));
 	$default_avatar = urlencode(URL::asset('assets/images/avatar-default.png'));
@@ -25,7 +26,9 @@
 				<img src="http://www.gravatar.com/avatar/{{$hashed_email}}?s=200&d={{$default_avatar}}" />
 				<a href="https://en.gravatar.com/" target="_blank">Edit Avatar</a>
 			</div>
+			@if(($user->latitude !== "") || ($user->longitude !== ""))
 			<div id="usermap" class="loading"></div>
+			@endif
 			<nav class="buttons">
 				<ul>
 					<li><a href="{{URL::route('list.show', array('user'=>$user->slug))}}">View List</a></li>
@@ -176,7 +179,7 @@ function deleteAccount()
 		}
 	});
 }
-
+@if(($user->latitude !== "") || ($user->longitude !== ""))
 /**
 * Load the User Map
 */
@@ -245,5 +248,6 @@ function initialize(){
 	$('#usermap').removeClass('loading');
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+@endif
 </script>
 @stop

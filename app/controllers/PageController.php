@@ -1,4 +1,7 @@
 <?php
+
+use Loopsy\Entities\Doll\Doll;
+
 class PageController extends BaseController {
 
 	public function getIndex()

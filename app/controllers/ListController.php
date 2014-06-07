@@ -1,6 +1,11 @@
 <?php
 
-class ListController extends \BaseController {
+use Loopsy\Entities\ToyList\ToyList;
+use Loopsy\Entities\Doll\Doll;
+use Loopsy\Entities\DollType\DollType;
+use Loopsy\Entities\User\User;
+
+class ListController extends BaseController {
 
 	public function __construct()
     {

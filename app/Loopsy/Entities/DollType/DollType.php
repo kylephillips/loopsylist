@@ -1,6 +1,6 @@
-<?php
+<?php namespace Loopsy\Entities\DollType;
 
-class DollType extends Eloquent {
+class DollType extends \Eloquent {
 
 	protected $table = 'dolltypes';
 

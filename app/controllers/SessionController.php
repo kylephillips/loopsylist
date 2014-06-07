@@ -1,5 +1,7 @@
 <?php
 
+use Loopsy\Entities\User\User;
+
 class SessionController extends \BaseController {
 
 	/**

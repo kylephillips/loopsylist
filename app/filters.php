@@ -46,7 +46,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('admin', function(){
 	if (Auth::guest()) return Redirect::guest('login');
-	if ( Auth::user()->group->id !== 2 ){
+	if ( Auth::user()->group_id !== '2' ){
 		return Redirect::route('home');
 	}
 });

@@ -1,10 +1,19 @@
 <?php
 
+use Loopsy\Entities\Doll\EloquentDollRepository;
+use Loopsy\Entities\Doll\Doll;
+use Loopsy\Entities\ToyList\ToyList;
+use Loopsy\Entities\DollType\DollType;
+
 class DollController extends \BaseController {
 
-	public function __construct()
+
+	public $dollrepository;
+
+	public function __construct(EloquentDollRepository $dollrepository)
     {
         $this->beforeFilter('admin', array('only' => array('create','edit')) );
+        $this->dollrepository = $dollrepository;
     }
 
 	
@@ -15,6 +24,7 @@ class DollController extends \BaseController {
 	 */
 	public function index()
 	{
+
 		// Variables for use in select menu filters
 		$year = "";
 		if ( isset($_GET['year']) ){

@@ -47,6 +47,11 @@ input[type='submit']{
 	&:hover {
 		background-color: $red;
 	}
+	&:disabled {
+		background-color: darken($white, 25%);
+		border-color: darken($white, 30%);
+		cursor: not-allowed;
+	}
 }
 
 select {

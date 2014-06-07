@@ -1,5 +1,9 @@
 <?php
 
+use Loopsy\Entities\ToyList\ToyList;
+use Loopsy\Entities\Doll\Doll;
+use Loopsy\Entities\User\User;
+
 class UserController extends \BaseController {
 
 	public function __construct()

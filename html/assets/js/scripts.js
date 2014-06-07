@@ -13,8 +13,10 @@ $('.login-trigger').on('click', function(e){
 	e.preventDefault();
 	var url = $(this).attr('href') + ' ' + '#login-form-cont';
 	$('#modal-cont').addClass('open');
+	$('.modal-body').addClass('loading');
 	$('#modal-cont .modal-body').load(url, function(){
 		$('#username').focus();
+		$('.modal-body').removeClass("loading");
 	});
 });
 
@@ -127,6 +129,7 @@ function geocodeSearch()
 */
 $(document).on('submit', '.modal #login-form', function(e){
 	e.preventDefault();
+	$('#login-submit').prop('disabled', 'disabled');
 	var url = $(this).attr('action');
 	var data = $(this).serialize();
 	$.ajax({
@@ -137,6 +140,7 @@ $(document).on('submit', '.modal #login-form', function(e){
 			if ( data.status == 'error' ){
 				$('#login-error').text(data.message);
 				$('#login-error').show();
+				$('#login-submit').prop('disabled',false);
 			} else {
 				location.reload();
 			}

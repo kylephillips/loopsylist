@@ -1,6 +1,6 @@
-<?php
+<?php namespace Loopsy\Entities\ToyList;
 
-class Toylist extends Eloquent {
+class ToyList extends \Eloquent {
 
 	protected $table = 'lists';
 	
@@ -10,12 +10,12 @@ class Toylist extends Eloquent {
 	
 	public function user()
 	{
-		return $this->belongsTo('user');
+		return $this->belongsTo('User');
 	}
 
 	public function dolls()
 	{
-		return $this->belongsToMany('Doll', 'dolls_lists', 'list_id', 'doll_id')
+		return $this->belongsToMany('Loopsy\Entities\Doll\Doll', 'dolls_lists', 'list_id', 'doll_id')
 			->withPivot('order')
 			->withPivot('status')
 			->withTimestamps();

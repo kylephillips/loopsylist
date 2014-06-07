@@ -1,9 +1,11 @@
-<?php
+<?php namespace Loopsy\Entities\User;
 
+use Loopsy\Entities\ToyList\ToyList;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+
+class User extends \Eloquent implements UserInterface, RemindableInterface {
 
 	/**
 	 * The database table used by the model.
@@ -79,7 +81,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function group()
 	{
-		return $this->belongsTo('group');
+		return $this->belongsTo('Loopsy\Entities\Group\Group');
 	}
 	
 	/**
@@ -87,9 +89,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @return string
 	 */
-	public function toylist()
+	public function toyList()
 	{
-		return $this->hasOne('ToyList');
+		return $this->hasOne('Loopsy\Entities\ToyList\ToyList');
 	}
 
 	

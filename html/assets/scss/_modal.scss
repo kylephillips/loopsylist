@@ -26,6 +26,11 @@
 	padding: 10px;
 	border-radius: 4px;
 	@include box-shadow(2px 2px 8px 0px rgba(0,0,0,.7));
+	&.loading {
+		background: url('../images/loading.gif'), $white;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
 	#login-form-cont {
 		border-radius: 2px;
 		background-color: rgba(0,0,0,.06);
