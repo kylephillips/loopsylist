@@ -3,6 +3,7 @@
 /vendor
 /app/config/database.php
 /app/config/mail.php
+/app/config/app.php
 composer.phar
 composer.lock
 .env.local.php
