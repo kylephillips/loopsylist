@@ -1,83 +1,67 @@
 <?php
 
 use Loopsy\Entities\Doll\EloquentDollRepository;
+use Loopsy\Entities\DollType\EloquentDollTypeRepository;
+use Loopsy\Entities\User\EloquentUserRepository;
 use Loopsy\Entities\Doll\Doll;
 use Loopsy\Entities\ToyList\ToyList;
 use Loopsy\Entities\DollType\DollType;
 
 class DollController extends \BaseController {
 
+	/**
+	* Doll Repository
+	* Loopsy\Entities\Doll\EloquentDollRepository
+	*/
+	private $dollrepository;
 
-	public $dollrepository;
+	/**
+	* DollType Repository
+	* Loopsy\Entities\DollType\EloquentDollTypeRepository
+	*/
+	private $dolltyperepository;
 
-	public function __construct(EloquentDollRepository $dollrepository)
+	/**
+	* User Repository
+	* Loopsy\Entities\User\EloquentUserRepository
+	*/
+	private $userrepository;
+
+
+	public function __construct(EloquentDollRepository $dollrepository, EloquentDollTypeRepository $dolltyperepository, EloquentUserRepository $userrepository)
     {
+    	$this->dollrepository = $dollrepository;
+    	$this->dolltyperepository = $dolltyperepository;
+    	$this->userrepository = $userrepository;
         $this->beforeFilter('admin', array('only' => array('create','edit')) );
-        $this->dollrepository = $dollrepository;
     }
-
 	
 	/**
-	 * Display a listing of the resource.
+	 * Show all the dolls
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
+		// Variables for use in query
+		$queried_year = ( isset($_GET['year']) ) ? $_GET['year'] : '';
+		$queried_type = ( isset($_GET['type']) ) ? $this->dolltyperepository->getSlugBySlug($_GET['type']) : 'full-size';
+		
+		// Select Menu Filters
+		$dolltypes = $this->dolltyperepository->selectArray();
+		$years = $this->dollrepository->yearList();
 
-		// Variables for use in select menu filters
-		$year = "";
-		if ( isset($_GET['year']) ){
-			$year = $_GET['year'];
-		}
-
-		$type = 'full-size';
-		if ( isset($_GET['type']) ){
-			$type = DB::table('dolltypes')->where('slug', $_GET['type'])->pluck('slug');
-		}
-
-		// Get doll types for use in category select element
-		$all_types = DollType::orderBy('id', 'ASC')->get();
-		foreach ( $all_types as $single_type ){
-			$types[$single_type->slug] = $single_type->title;
-		}
-
-		// List of Years Loopsies available for select menu
-		$years['all'] = 'All';
-		foreach ( range(2010, date('Y')) as $number ){
-			$years[$number] = $number;
-		}
-
-		// Dolls this user has
-		$dolls = array();
-		if ( Auth::check() ){
-			$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
-			$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();
-			foreach($have as $key=>$has){
-				$dolls[$key] = $has->doll_id;
-			}
-		}
-
-		// Get the list of Loopsies - filter as needed
-		$loopsies = Doll::where(function($query) use ($type) {
-
-			if ( (isset($_GET['year'])) && ($_GET['year'] !== 'all') ){
-				$query->where('release_year', $_GET['year']);
-			}
-
-			$query->whereHas('dolltypes', function($q) use ($type) {
-				$q->where('slug', $type);
-			});
-
-		})->get();
+		// Get the list of Loopsies & what the user has
+		$dolls_owned = $this->userrepository->dollsUserHasArray();
+		$loopsies = $this->dollrepository->getDollsFiltered($queried_year, $queried_type);
 		
 		return View::make('dolls.index')
 			->with('loopsies', $loopsies)
-			->with('types', $types)
+			->with('types', $dolltypes)
 			->with('years', $years)
-			->with('dolls', $dolls)
-			->with('year', $year)
-			->with('type', $type);
+			->with('dolls', $dolls_owned)
+			->with('year', $queried_year)
+			->with('type', $queried_type);
 	}
 
 
@@ -164,13 +148,13 @@ class DollController extends \BaseController {
 	 */
 	public function show($slug)
 	{
-		$loopsy = Doll::with('dolltypes')->where('slug', $slug)->first();
-		$pagetitle = 'Loopsy List - ' . $loopsy->title;
+		$loopsy = $this->dollrepository->getBySlug($slug);
 		
-		// Save the formatted birthday for display
+		// Formatted Vars for View
 		$birthday_month = date('F', $loopsy->sewn_on_month);
 		$birthday_day = date('jS', $loopsy->sewn_on_day);
 		$birthday = $birthday_month . ' ' . $birthday_day;
+		$pagetitle = 'Loopsy List - ' . $loopsy->title;
 
 		// Does the user have this doll?
 		$status = 0;
@@ -192,9 +176,9 @@ class DollController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($slug)
 	{
-		$doll = Doll::with('dolltypes')->findOrFail($id);
+		$doll = $this->dollrepository->getBySlug($slug);
 		
 		// Get doll types for use in category select element
 		$all_types = DollType::get();
@@ -272,7 +256,7 @@ class DollController extends \BaseController {
 
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Delete the Doll
 	 *
 	 * @param  int  $id
 	 * @return Response
