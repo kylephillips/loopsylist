@@ -11,28 +11,25 @@ class DollController extends \BaseController {
 
 	/**
 	* Doll Repository
-	* Loopsy\Entities\Doll\EloquentDollRepository
 	*/
-	private $dollrepository;
+	private $doll;
 
 	/**
 	* DollType Repository
-	* Loopsy\Entities\DollType\EloquentDollTypeRepository
 	*/
-	private $dolltyperepository;
+	private $dolltype;
 
 	/**
 	* User Repository
-	* Loopsy\Entities\User\EloquentUserRepository
 	*/
-	private $userrepository;
+	private $user;
 
 
-	public function __construct(EloquentDollRepository $dollrepository, EloquentDollTypeRepository $dolltyperepository, EloquentUserRepository $userrepository)
+	public function __construct(EloquentDollRepository $doll, EloquentDollTypeRepository $dolltype, EloquentUserRepository $user)
     {
-    	$this->dollrepository = $dollrepository;
-    	$this->dolltyperepository = $dolltyperepository;
-    	$this->userrepository = $userrepository;
+    	$this->doll = $doll;
+    	$this->dolltype = $dolltype;
+    	$this->user = $user;
         $this->beforeFilter('admin', array('only' => array('create','edit')) );
     }
 	
@@ -44,16 +41,16 @@ class DollController extends \BaseController {
 	public function index()
 	{
 		// Variables for use in query
-		$queried_year = ( isset($_GET['year']) ) ? $_GET['year'] : '';
-		$queried_type = ( isset($_GET['type']) ) ? $this->dolltyperepository->getSlugBySlug($_GET['type']) : 'full-size';
+		$queried_year = ( Input::get('year') ) ? Input::get('year') : '';
+		$queried_type = ( Input::get('type') ) ? $this->dolltype->getSlugBySlug(Input::get('type')) : 'full-size';
 		
 		// Select Menu Filters
-		$dolltypes = $this->dolltyperepository->selectArray();
-		$years = $this->dollrepository->yearList();
+		$dolltypes = $this->dolltype->selectArray();
+		$years = $this->doll->yearList();
 
 		// Get the list of Loopsies & what the user has
-		$dolls_owned = $this->userrepository->dollsUserHasArray();
-		$loopsies = $this->dollrepository->getDollsFiltered($queried_year, $queried_type);
+		$dolls_owned = $this->user->dollsUserHasArray();
+		$loopsies = $this->doll->getDollsFiltered($queried_year, $queried_type);
 		
 		return View::make('dolls.index')
 			->with('loopsies', $loopsies)
@@ -72,13 +69,7 @@ class DollController extends \BaseController {
 	 */
 	public function create()
 	{
-		// Get doll types for use in category select element
-		$all_types = DollType::get();
-		foreach ( $all_types as $single_type ){
-			$types[$single_type->id] = $single_type->title;
-		}
-
-
+		$types = $this->dolltype->selectArray('id');
 		return View::make('dolls.create')
 			->with('types', $types);
 	}
@@ -148,7 +139,7 @@ class DollController extends \BaseController {
 	 */
 	public function show($slug)
 	{
-		$loopsy = $this->dollrepository->getBySlug($slug);
+		$loopsy = $this->doll->getBySlug($slug);
 		
 		// Formatted Vars for View
 		$birthday_month = date('F', $loopsy->sewn_on_month);
@@ -171,27 +162,16 @@ class DollController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the Doll.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($slug)
 	{
-		$doll = $this->dollrepository->getBySlug($slug);
-		
-		// Get doll types for use in category select element
-		$all_types = DollType::get();
-		foreach ( $all_types as $single_type ){
-			$types[$single_type->id] = $single_type->title;
-		}
-
-		// Get this doll's type
-		foreach($doll->dolltypes as $type)
-		{
-			$type_id = $type->id;
-		}
-
+		$doll = $this->doll->getBySlug($slug);
+		$types = $this->dolltype->selectArray('id');
+		$type_id = $doll->dolltypes->first()->id;
 
 		$image = public_path() . '/uploads/toys/' . $doll->image;
 		$image_size = getimagesize($image);
@@ -250,7 +230,7 @@ class DollController extends \BaseController {
 
 		$doll->dolltypes()->sync(array(Input::get('type')));
 
-		return Redirect::route('loopsy.edit', array('id'=>$id))
+		return Redirect::route('loopsy.edit', array('id'=>$doll->slug))
 			->with('success', 'Loopsy successfully updated');
 	}
 

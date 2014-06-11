@@ -48,7 +48,7 @@ Route::post('reset-password/{token}', array('as'=>'post_reset', 'uses'=>'Reminde
 * Lists
 */
 Route::resource('list', 'ListController');
-Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@statusSwitch'));
+Route::get('save-switch', array('as'=>'save_switch', 'uses'=>'ListController@update'));
 Route::get('user-dolls', array('as'=>'user_dolls', 'uses'=>'ListController@getUserDolls'));
 Route::get('list-order', array('as'=>'list_order', 'uses'=>'ListController@reorder'));
 

@@ -38,8 +38,8 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 		<li id="yearselect">
 			{{Form::label('year', 'Year')}}
 			<select id="year" class="filter">
-				@foreach($years as $key=>$year)
-				<option value="{{$year['release_year']}}">{{$year['release_year']}}</option>
+				@foreach($years as $year)
+				<option value="{{$year}}">{{$year}}</option>
 				@endforeach
 			</select>
 		</li>
@@ -74,7 +74,7 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 <script>
 
 $(document).ready(function(){
-	loadList('full-size', "<?php $y1 = reset($years); echo $y1[key($y1)]; ?>", '');
+	loadList('full-size', "<?php $y1 = array_values($years)[0]; echo $y1; ?>", '');
 });
 
 /**

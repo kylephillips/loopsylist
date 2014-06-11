@@ -1,38 +1,54 @@
 <?php
 
-use Loopsy\Entities\ToyList\ToyList;
-use Loopsy\Entities\Doll\Doll;
-use Loopsy\Entities\DollType\DollType;
-use Loopsy\Entities\User\User;
+use Loopsy\Entities\DollType\EloquentDollTypeRepository;
+use Loopsy\Entities\Doll\EloquentDollRepository;
+use Loopsy\Entities\User\EloquentUserRepository;
+use Loopsy\Entities\ToyList\EloquentToyListRepository;
 
 class ListController extends BaseController {
 
-	public function __construct()
+	/**
+	* DollType Repository
+	*/
+	protected $dolltype;
+
+	/**
+	* Doll Repository
+	*/
+	protected $doll;
+
+	/**
+	* User Repository
+	*/
+	protected $user;
+
+	/**
+	* List Repository
+	*/
+	protected $toylist;
+
+
+	public function __construct(EloquentDollTypeRepository $dolltype, EloquentDollRepository $doll, EloquentUserRepository $user, EloquentToyListRepository $toylist)
     {
+    	$this->dolltype = $dolltype;
+    	$this->doll = $doll;
+    	$this->user = $user;
+    	$this->toylist = $toylist;
         $this->beforeFilter('auth', array('only' => array('edit')) );
     }
 
 
 	/**
-	 * Display the specified resource.
+	 * Display the user's list.
 	 *
 	 * @param  string  $user Users slug
 	 * @return Response
 	 */
 	public function show($user)
 	{
-		$user = User::with('ToyList')->where('slug', $user)->firstOrFail();
-
-		// Get doll types for use in category select element
-		$all_types = DollType::get();
-		foreach ( $all_types as $single_type ){
-			$types[$single_type->slug] = $single_type->title;
-		}
-
-		// Get the years to populate the select menu
-		$years = Doll::distinct()->orderBy('release_year', 'DESC')->get(array('release_year'));
-		$years = $years->toArray();
-
+		$user = $this->user->userBySlug($user);
+		$types = $this->dolltype->selectArray();
+		$years = $this->doll->yearList(false);
 		$title = "$user->name's Loopsy List";
 		
 		return View::make('lists.show')
@@ -46,55 +62,34 @@ class ListController extends BaseController {
 	/**
 	 * Show the form for editing the list
 	 *
-	 * @param  string  $id - User's slug
+	 * @param  string  $user - User's slug
 	 * @return Response
 	 */
 	public function edit($user)
 	{
-		// Get the User ID & make sure this is their list
-		$user = User::with('toylist')->where('slug', $user)->firstOrFail();
-		if ( Auth::user()->id == $user->id ) {
-
-			// Get doll types for use in category select element
-			$all_types = DollType::get();
-			foreach ( $all_types as $single_type ){
-				$types[$single_type->slug] = $single_type->title;
-			}
-
-			// Latest Release Year
-			$latest_year = Doll::orderBy('release_year', 'DESC')->pluck('release_year');
+		$user = $this->user->userBySlug($user);
+		if ( Auth::user()->id == $user->id ){
+			$types = $this->dolltype->selectArray();
+			$years = $this->doll->yearList(false);
 
 			return View::make('lists.edit')
 				->with('types', $types)
-				->with('latest_year', $latest_year);
-		} else {
-			// Redirect them to their list
-			return Redirect::route('list.show', array('id'=>Auth::user()->slug));
+				->with('years', $years);
 		}
+		return Redirect::route('loopsy.index');
 	}
 
+
 	/**
-	 * Update the specified resource in storage.
+	 * Update the list (status switch).
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
-	}
-
-
-	/**
-	* Single Update switch
-	*
-	* @return Response
-	*/
-	public function statusSwitch()
-	{
-		if (Request::ajax()){
+		if ( Request::ajax() ){
 			
-			$list = ToyList::where('user_id', Auth::user()->id)->first();
+			$list = $this->toylist->getUserList();
 			$status = Input::get('status');
 			$doll = Input::get('doll');
 
@@ -110,7 +105,6 @@ class ListController extends BaseController {
 	}
 
 
-
 	/**
 	* Get list of dolls for user (AJAX)
 	*
@@ -118,84 +112,14 @@ class ListController extends BaseController {
 	*/
 	public function getUserDolls()
 	{
-		if ( !Input::get('user') ){
-			$userid = Auth::user()->id;
-		} else {
-			$userid = Input::get('user'); 
-		}
-
+		$user = ( !Input::get('user') ) ? Auth::user()->id : Input::get('user');
 		$type = Input::get('type');
 		$year = Input::get('year');
 		$status = Input::get('status');
-
-
-		// Start building the query
-		$query = DB::table('dolls')
-				->join('dolls_dolltypes', 'dolls.id', '=', 'dolls_dolltypes.doll_id')
-				->join('dolltypes', function($join) use ($type)
-					{
-						$join->on('dolltypes.id', '=', 'dolls_dolltypes.doll_type_id')
-						->where('dolltypes.slug', '=', $type);
-					});
-		
-		$query->join('lists', function($join) use ($userid)
-				{
-					$join->on('lists.user_id', '=', DB::raw($userid));
-				});
-		
-		// Status Options
-		if ( (!Input::get('status')) || (Input::get('status') == 'all') ){
-			$query->leftJoin('dolls_lists', function($join)
-					{
-						$join->on('dolls_lists.list_id', '=', 'lists.id')
-						->on('dolls_lists.doll_id','=', 'dolls.id');
-					});
-		} elseif ( $status == 'no' ) {
-			$query->leftJoin('dolls_lists', function($join) use ($status)
-					{
-						$join->on('dolls_lists.list_id', '=', 'lists.id')
-						->on('dolls_lists.doll_id','=', 'dolls.id')
-						->where('dolls_lists.status', '!=', DB::raw('IS NOT NULL'));
-					});
-		} else {
-			$query->join('dolls_lists', function($join) use ($status)
-					{
-						$join->on('dolls_lists.list_id', '=', 'lists.id')
-						->on('dolls_lists.doll_id','=', 'dolls.id')
-						->where('dolls_lists.status', '=', '1');
-					});
-		}
-
-		// Limit to year if provided (only for full size dolls)
-		if ( Input::get('year') && ( Input::get('type') == 'full-size' ) ){
-			$query->where('dolls.release_year', $year);
-		}
-
-		$query->select('dolls.id','dolls.title','dolls.release_year','dolls.image','dolls.slug','dolltypes.title as type','dolls_lists.order as order','dolls_lists.status as status');
-		
-		if ( $status == 'yes' ){	
-			$query->orderBy('release_year', 'DESC');
-		} else {
-			$query->orderBy('dolls_lists.order', 'ASC');
-		}
-
-		$results = $query->get();
-
-		// Remove null and 0 values from returned results if status is no
-		if ( $status == 'no' ){
-			foreach($results as $key=>$result){
-				if ( $result->status == 1 ){
-					unset($results[$key]);
-				} else {
-					$result->status = 0;
-				}
-			}
-			return $results;
-		}
-
+		$results = $this->doll->getUserDolls($user, $type, $year, $status);
 		return $results;
+		
 	}
-
 
 
 	/**
@@ -204,12 +128,10 @@ class ListController extends BaseController {
 	public function reorder()
 	{
 		if ( Request::ajax() ){
+			$order = explode(',', Input::get('order'));
+			$list = $this->toylist->getUserList();
 
-			$orders = explode(',', $_GET['order']);
-			$userid = Auth::user()->id;
-			$list = Toylist::with('dolls')->where('user_id',$userid)->firstOrFail();
-
-			foreach ( $orders as $key=>$item ){
+			foreach ( $order as $key=>$item ){
 				$neworder[] = $key;
 				$list->dolls()->detach($item);
 				$list->dolls()->attach($item, array('order'=>$key, 'status'=>0));

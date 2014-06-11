@@ -50,7 +50,7 @@
 				{{$loopsy->title}}
 			</a>
 			@if ( (Auth::check()) && (Auth::user()->group->id == 2) )
-			<p><a href="{{URL::route('loopsy.edit', array('id'=>$loopsy->id))}}">(Edit)</a></p>
+			<p><a href="{{URL::route('loopsy.edit', array('id'=>$loopsy->slug))}}">(Edit)</a></p>
 			@endif
 		</li>
 	<?php $c++; ?>

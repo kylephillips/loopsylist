@@ -6,6 +6,7 @@ use Loopsy\Entities\User\User;
 
 class UserController extends \BaseController {
 
+
 	public function __construct()
 	{
 		$this->beforeFilter('auth', array('only' => array('edit','update','destroy')) );

@@ -18,7 +18,7 @@
 		<h2>{{$loopsy->title}}</h2>
 		{{$loopsy->bio}}
 		@if( (Auth::check()) && (Auth::user()->group->id == 2) )
-		<a href="{{URL::route('loopsy.edit', array('loopsy'=>$loopsy->id))}}" class="btn">Edit</a>
+		<a href="{{URL::route('loopsy.edit', array('loopsy'=>$loopsy->slug))}}" class="btn">Edit</a>
 		@endif
 	</section>
 
@@ -110,9 +110,3 @@ function savePosition(position, id)
 </script>
 @endif
 @stop
-
-
-
-
-
-

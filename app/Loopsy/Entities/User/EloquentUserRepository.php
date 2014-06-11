@@ -23,4 +23,12 @@ class EloquentUserRepository {
 		return $dolls;
 	}
 
+	/**
+	* Get User by Slug
+	*/
+	public function userBySlug($slug)
+	{
+		return User::where('slug', $slug)->firstOrFail();
+	}
+
 }

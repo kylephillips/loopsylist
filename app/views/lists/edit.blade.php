@@ -25,15 +25,9 @@
 	<section id="all" class="tab-content">
 		<div class="user-list-head">
 			<select id="year-select">
-			<?php 
-				for ($y = 2010; $y <= $latest_year; $y++){
-					$years[] = $y;
-				}
-				$years = array_reverse($years);
-				foreach ($years as $year){
-					echo '<option value="' . $year . '">' . $year . ' Releases</option>';
-				}
-			?>
+				@foreach($years as $year)
+				<option value="{{$year}}">{{$year}}</option>
+				@endforeach
 			</select>
 			<strong>Have?</strong>
 		</div>
@@ -65,7 +59,7 @@ $(document).on('click', '.showphoto', function(e){
 */
 $(document).ready(function(){
 	var type = "full-size";
-	var year = "{{$latest_year}}";
+	var year = "{{array_values($years)[0]}}";
 	var status = '';
 	loadDolls(type, year, status);
 });
