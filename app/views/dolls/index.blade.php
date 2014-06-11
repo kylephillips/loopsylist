@@ -27,7 +27,7 @@
 	<?php $c = 0; ?>	
 	@foreach($loopsies as $loopsy)
 	<?php
-	if ( $c % 4 == 0 ){
+	if ( $c % 3 == 0 ){
 		echo '</ul><ul class="loopsy-gallery">';
 	}
 	?>
@@ -47,7 +47,7 @@
 					<img src="{{URL::asset('uploads/toys/_thumbs') . '/225x265_' . $loopsy->image}}" alt="{{$loopsy->title}}" />
 				</div>
 				@endif
-				{{$loopsy->title}}
+				<p>{{$loopsy->title}}</p>
 			</a>
 			@if ( (Auth::check()) && (Auth::user()->group->id == 2) )
 			<p><a href="{{URL::route('loopsy.edit', array('id'=>$loopsy->slug))}}">(Edit)</a></p>

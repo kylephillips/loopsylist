@@ -113,7 +113,7 @@ function displayList(data)
 		console.log(doll);
 		var link = url + doll.slug;
 
-		if ( i % 4 === 0 ){
+		if ( i % 3 === 0 ){
 			out += '</ul><ul class="loopsy-gallery">';
 		}
 
@@ -128,7 +128,7 @@ function displayList(data)
 			out += check;
 		}
 		out += '</div>';
-		out += doll.title;
+		out += '<p>' + doll.title + '</p>';
 		out += '</a></li>' ;
 		i++;
 	});

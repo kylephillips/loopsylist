@@ -26,7 +26,7 @@
 		}
 		select {
 			min-width: 150px;
-		}	
+		}
 	}
 	&.loggedin {
 		max-width: 100%;
@@ -47,7 +47,7 @@
 	}
 	li {
 		float: left;
-		width: 25%;
+		width: 33.33%;
 		text-align: center;
 		img {
 			border: 1px solid $white;
@@ -61,7 +61,7 @@
 		div {
 			width: 70%;
 			padding: 8px;
-			margin: 0 auto 10px auto;
+			margin: 0 auto 5px auto;
 			background-color: $pink-lighter;
 			border-radius: 4px;
 			position: relative;
@@ -137,8 +137,12 @@
 		border: 0;
 		padding: 0;
 		li {
-			width: 50%;
+			float: none;
+			width: 100%;
 			margin-bottom: 20px;
+			img {
+				width: 100%;
+			}
 		}
 	}
 
