@@ -57,6 +57,18 @@
 } // .start-button
 
 
+.wishlist-btn {
+	background: transparent;
+	border: 0;
+	color: $pink;
+	@include transition(all 200ms ease);
+	outline: none;
+	&.active {
+		color: $purple-dark;
+	}
+}
+
+
 @media (max-width: 767px) {
 	.start-button {
 		hr { display: none;	}

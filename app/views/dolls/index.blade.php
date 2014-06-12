@@ -36,22 +36,27 @@
 	@else
 		<li class="{{$loopsy->release_year}} @foreach($loopsy->dollTypes as $type){{$type->slug}}@endforeach">
 	@endif
+		<div class="doll">
+			<div class="title"><p>{{$loopsy->title}}</p><button class="wishlist-btn"><i class="icon-star"></i></button></div>
 			<a href="{{URL::route('loopsy.show', array('loopsy'=>$loopsy->slug))}}">
-				@if ( in_array($loopsy->id, $dolls) )
-				<div class="have">
-					<img src="{{URL::asset('uploads/toys/_thumbs') . '/225x265_' . $loopsy->image}}" alt="{{$loopsy->title}}" />
-					<img src="{{URL::asset('assets/images/check-snipe.png')}}" class="check" alt="You have this" />
-				</div>
-				@else
-				<div>
+				<div class="image">
 					<img src="{{URL::asset('uploads/toys/_thumbs') . '/225x265_' . $loopsy->image}}" alt="{{$loopsy->title}}" />
 				</div>
-				@endif
-				<p>{{$loopsy->title}}</p>
 			</a>
-			@if ( (Auth::check()) && (Auth::user()->group->id == 2) )
-			<p><a href="{{URL::route('loopsy.edit', array('id'=>$loopsy->slug))}}">(Edit)</a></p>
+			@if(Auth::check())
+			<section class="status-switch">
+				<div>
+					<ul>
+						<li><a href="no" @if(!in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-lock"></i></a></li>
+						<li><a href="yes" @if(in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-check"></i></a></li>
+					</ul>
+					<span @if(in_array($loopsy->id, $dolls))class="right"@endif></span>
+				</div>
+			</section>
+			@else
+			<section class="status-switch loggedout"></section>
 			@endif
+		</div>
 		</li>
 	<?php $c++; ?>
 	@endforeach
@@ -78,6 +83,38 @@ $('.filter').on('change', function(){
 	var newurl = url + '?year=' + year + '&type=' + type + '&status=' + status;
 	window.location.replace(newurl);
 });
+
+$('.status-switch a').on('click', function(e){
+	
+	var doll = $(this).parents('.status-switch').parents('li');
+	var button = $(doll).find('span');
+	var status = $(this).attr('href');
+	var id = $(this).data('id');
+
+	if ( status == 'no' ){
+		$(button).removeClass('right');
+		$(doll).removeClass('has');
+		savePosition('no', id);
+	} else {
+		$(button).addClass('right');
+		$(doll).addClass('has');
+		savePosition('yes', id);
+	}
+	
+	e.preventDefault();
+});
+
+function savePosition(position, id)
+{
+	$.ajax({
+		url : "{{URL::route('save_switch')}}",
+		type : 'GET',
+		data : {
+			status : position,
+			doll : id
+		}
+	});
+}
 </script>
 @else
 <script>

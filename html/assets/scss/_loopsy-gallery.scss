@@ -50,36 +50,90 @@
 		width: 33.33%;
 		text-align: center;
 		img {
-			border: 1px solid $white;
+			width: 100%;
 		}
-		&.has img {
-			opacity: .5;
-		}
-		&.has img.check {
-			opacity: 1;
-		}
-		div {
-			width: 70%;
-			padding: 8px;
-			margin: 0 auto 5px auto;
+		.doll {
+			width: 75%;
 			background-color: $pink-lighter;
 			border-radius: 4px;
-			position: relative;
-			&.have {
+			@include transition(all 200ms ease);
+		}
+		&.has {
+			.doll {
 				background-color: $magenta;
+				@include transition(all 200ms ease);
+				img {
+					opacity: .5;
+				}
+				p {
+					color: $white;
+				}
 			}
-			.check {
-				border: 0;
-				position: absolute;
-				width: 40px;
-				bottom: 7px;
-				right: 7px;
+			.status-switch {
+				div {
+					background-color: $magenta;
+				}
+				ul {
+					background-color: rgba(0,0,0,.15);	
+				}
+			}
+		}
+		.title {
+			margin: 0 auto 0px auto;
+			text-align: left;
+			font-size: 18px;
+			padding: 8px;
+			@include clearfix();
+			p {
+				margin: 4px 0 0 0;
+				float: left;
+			}
+			button {
+				float: right;
 			}
 		}
 		a {
 			color: $purple;
 		}
-	}
+
+		// Status switch in gallery view
+		.status-switch {
+			margin: 0;
+			&.has div {
+				background-color: $magenta;
+				ul {
+					background-color: rgba(0,0,0,.15);
+				}
+			}
+			&.loggedout {
+				height: 8px;
+				background-color: $pink-lighter;
+				border-radius: 0 0 4px 4px;
+			}
+			div {
+				border-radius: 0 0 4px 4px;
+				border: 0;
+				ul {
+					//width: 80%;
+					li {
+						a {
+							height: 40px;
+						}
+					}
+				}
+				i {
+					font-size: 20px;
+				}
+				span {
+					width: 45%;
+					height: 30px;
+					&.right {
+						left: 50%;
+					}
+				}
+			}
+		} // Status Switch
+	} // li
 } // .loopsy-gallery
 
 

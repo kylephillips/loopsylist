@@ -118,17 +118,17 @@ function displayList(data)
 		}
 
 		out += '<li><a href="' + link + '">';
+		out += '<p>' + doll.title + '</p>';
 		if ( doll.status === "1" ){
-			out += '<div class="have">';
+			out += '<div class="have image">';
 		} else{
-			out += '<div>';
+			out += '<div class="image">';
 		}
 		out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" />';
 		if ( doll.status === "1" ){
 			out += check;
 		}
 		out += '</div>';
-		out += '<p>' + doll.title + '</p>';
 		out += '</a></li>' ;
 		i++;
 	});

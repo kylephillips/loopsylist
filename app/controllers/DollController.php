@@ -122,11 +122,11 @@ class DollController extends \BaseController {
 
 		// Save the toy Type
 		$toy->dolltypes()->sync(array(Input::get('type')));
-		$newid = $toy->id;
+		$newslug = $toy->slug;
 
 		$message = Input::get('title') . ' has been added!';
 
-		return Redirect::route('loopsy.edit', array('id'=>$newid))
+		return Redirect::route('loopsy.edit', array('id'=>$newslug))
 			->withSuccess($message);
 
 	}
