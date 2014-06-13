@@ -57,10 +57,12 @@
 			background-color: $pink-lighter;
 			border-radius: 4px;
 			@include transition(all 200ms ease);
+			border: 1px solid $pink-light;
 		}
 		&.has {
 			.doll {
 				background-color: $magenta;
+				border: 1px solid $magenta;
 				@include transition(all 200ms ease);
 				img {
 					opacity: .5;
@@ -72,9 +74,6 @@
 			.status-switch {
 				div {
 					background-color: $magenta;
-				}
-				ul {
-					background-color: rgba(0,0,0,.15);	
 				}
 			}
 		}
@@ -99,12 +98,6 @@
 		// Status switch in gallery view
 		.status-switch {
 			margin: 0;
-			&.has div {
-				background-color: $magenta;
-				ul {
-					background-color: rgba(0,0,0,.15);
-				}
-			}
 			&.loggedout {
 				height: 8px;
 				background-color: $pink-lighter;
@@ -113,22 +106,25 @@
 			div {
 				border-radius: 0 0 4px 4px;
 				border: 0;
+				padding: 0;
 				ul {
-					//width: 80%;
-					li {
-						a {
-							height: 40px;
-						}
+					background: transparent;
+					li a {
+						height: 40px;
 					}
 				}
 				i {
 					font-size: 20px;
 				}
 				span {
-					width: 45%;
+					width: 50%;
 					height: 30px;
+					top: 5px;
+					left: 5px;
+					background-color: $pink-light;
 					&.right {
-						left: 50%;
+						background-color: $white;
+						left: 48%;
 					}
 				}
 			}
@@ -194,8 +190,14 @@
 			float: none;
 			width: 100%;
 			margin-bottom: 20px;
+			.doll {
+				margin: 0 auto;
+			}
 			img {
 				width: 100%;
+			}
+			ul li {
+				margin-bottom: 0;
 			}
 		}
 	}

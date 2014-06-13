@@ -37,7 +37,14 @@
 		<li class="{{$loopsy->release_year}} @foreach($loopsy->dollTypes as $type){{$type->slug}}@endforeach">
 	@endif
 		<div class="doll">
-			<div class="title"><p>{{$loopsy->title}}</p><button class="wishlist-btn"><i class="icon-star"></i></button></div>
+			<div class="title">
+				<p>{{$loopsy->title}}</p>
+				@if(in_array($loopsy->id, $wishlist))
+				<button class="wishlist-btn active" data-doll="{{$loopsy->id}}"><i class="icon-star"></i></button>
+				@else
+				<button class="wishlist-btn" data-doll="{{$loopsy->id}}"><i class="icon-star"></i></button>
+				@endif
+			</div>
 			<a href="{{URL::route('loopsy.show', array('loopsy'=>$loopsy->slug))}}">
 				<div class="image">
 					<img src="{{URL::asset('uploads/toys/_thumbs') . '/225x265_' . $loopsy->image}}" alt="{{$loopsy->title}}" />
@@ -91,6 +98,9 @@ $('.status-switch a').on('click', function(e){
 	var status = $(this).attr('href');
 	var id = $(this).data('id');
 
+	$(this).parents('.status-switch').find('a').removeClass('active');
+	$(this).addClass('active');
+
 	if ( status == 'no' ){
 		$(button).removeClass('right');
 		$(doll).removeClass('has');
@@ -115,6 +125,44 @@ function savePosition(position, id)
 		}
 	});
 }
+
+// Wishlist Button
+$('.wishlist-btn').on('click', function(e){
+	e.preventDefault();
+	var doll = $(this).data('doll');
+	
+	if ( $(this).hasClass('active') ){
+		$(this).removeClass('active');
+		removeFromWishlist(doll);
+	} else {
+		$(this).addClass('active');
+		addToWishlist(doll);
+	}
+});
+
+function addToWishlist(id)
+{
+	$.ajax({
+		url: "{{URL::route('wishlist.store')}}",
+		type : 'POST',
+		data : {
+			doll : id
+		}
+	});
+}
+
+function removeFromWishlist(id)
+{
+	$.ajax({
+		url: "{{URL::route('wishlist.destroy')}}",
+		type : 'DELETE',
+		data : {
+			doll : id
+		}
+	});
+}
+
+
 </script>
 @else
 <script>

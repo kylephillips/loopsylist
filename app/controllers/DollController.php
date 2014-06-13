@@ -6,6 +6,7 @@ use Loopsy\Entities\User\EloquentUserRepository;
 use Loopsy\Entities\Doll\Doll;
 use Loopsy\Entities\ToyList\ToyList;
 use Loopsy\Entities\DollType\DollType;
+use Loopsy\Entities\Wishlist\EloquentWishlistRepository;
 
 class DollController extends \BaseController {
 
@@ -24,12 +25,18 @@ class DollController extends \BaseController {
 	*/
 	private $user;
 
+	/**
+	* Wishlist Repository
+	*/
+	private $wishlist;
 
-	public function __construct(EloquentDollRepository $doll, EloquentDollTypeRepository $dolltype, EloquentUserRepository $user)
+
+	public function __construct(EloquentDollRepository $doll, EloquentDollTypeRepository $dolltype, EloquentUserRepository $user, EloquentWishlistRepository $wishlist)
     {
     	$this->doll = $doll;
     	$this->dolltype = $dolltype;
     	$this->user = $user;
+    	$this->wishlist = $wishlist;
         $this->beforeFilter('admin', array('only' => array('create','edit')) );
     }
 	
@@ -48,9 +55,10 @@ class DollController extends \BaseController {
 		$dolltypes = $this->dolltype->selectArray();
 		$years = $this->doll->yearList();
 
-		// Get the list of Loopsies & what the user has
+		// Get the list of Loopsies, which ones they have, and which ones are in wishlist
 		$dolls_owned = $this->user->dollsUserHasArray();
 		$loopsies = $this->doll->getDollsFiltered($queried_year, $queried_type);
+		$wishlist = $this->wishlist->userWishlistArray();
 		
 		return View::make('dolls.index')
 			->with('loopsies', $loopsies)
@@ -58,7 +66,8 @@ class DollController extends \BaseController {
 			->with('years', $years)
 			->with('dolls', $dolls_owned)
 			->with('year', $queried_year)
-			->with('type', $queried_type);
+			->with('type', $queried_type)
+			->with('wishlist', $wishlist);
 	}
 
 
@@ -243,7 +252,9 @@ class DollController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$doll = Doll::find($id);
+		$doll->delete();
+		return Redirect::route('loopsy.index');
 	}
 
 }

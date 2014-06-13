@@ -53,6 +53,11 @@ Route::get('user-dolls', array('as'=>'user_dolls', 'uses'=>'ListController@getUs
 Route::get('list-order', array('as'=>'list_order', 'uses'=>'ListController@reorder'));
 
 
+/**
+* Wishlist
+*/
+Route::resource('wishlist', 'WishlistController');
+
 
 /**
 * Toys (loopsies)

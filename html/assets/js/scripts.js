@@ -26,15 +26,7 @@ $('.modal').not('.modal-body, .showphoto, .login-trigger').on('click', function(
 	$('.modal').removeClass('open');
 });
 
-// Wishlist Button
-$('.wishlist-btn').on('click', function(e){
-	e.preventDefault();
-	if ( $(this).hasClass('active') ){
-		$(this).removeClass('active');
-	} else {
-		$(this).addClass('active');
-	}
-});
+
 
 // Form Switch
 $('.switch a').on('click', function(e){

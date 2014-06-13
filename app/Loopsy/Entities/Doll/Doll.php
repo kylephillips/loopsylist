@@ -1,5 +1,4 @@
 <?php namespace Loopsy\Entities\Doll;
-use Loopsy\Entities\ToyList\ToyList;
 
 class Doll extends \Eloquent {
 
@@ -32,6 +31,11 @@ class Doll extends \Eloquent {
 	public function dolltypes()
 	{
 		return $this->belongsToMany('Loopsy\Entities\DollType\DollType', 'dolls_dolltypes');
+	}
+
+	public function wishlists()
+	{
+		return $this->belongsToMany('Loopsy\Entities\Wishlist\Wishlist');
 	}
 
 }

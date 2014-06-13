@@ -94,6 +94,14 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Loopsy\Entities\ToyList\ToyList');
 	}
 
+	/**
+	* Get user's wishlist
+	*/ 
+	public function wishlists()
+	{
+		return $this->belongsToMany('Loopsy\Entities\Wishlist\Wishlist', 'wishlists', 'user_id', 'doll_id')->withTimestamps();
+	}
+
 	
 
 }

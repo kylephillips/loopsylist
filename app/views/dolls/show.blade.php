@@ -19,6 +19,7 @@
 		{{$loopsy->bio}}
 		@if( (Auth::check()) && (Auth::user()->group->id == 2) )
 		<a href="{{URL::route('loopsy.edit', array('loopsy'=>$loopsy->slug))}}" class="btn">Edit</a>
+		<a href="{{URL::route('loopsy.destroy', array('loopsy'=>$loopsy->id))}}" class="btn delete-btn">Delete</a>
 		@endif
 	</section>
 
@@ -94,6 +95,18 @@ $('.status-switch a').on('click', function(e){
 		}
 	}
 	e.preventDefault();
+});
+
+$('.delete-btn').on('click', function(e){
+	e.preventDefault();
+	var url = $(this).attr('href');
+	$.ajax({
+		url : url,
+		type : 'DELETE',
+		success : function(){
+			window.location.href = "{{URL::route('loopsy.index')}}";
+		}
+	});
 });
 
 function savePosition(position, id)
