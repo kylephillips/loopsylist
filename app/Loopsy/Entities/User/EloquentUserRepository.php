@@ -12,7 +12,7 @@ class EloquentUserRepository {
 	*/
 	public function dollsUserHasArray()
 	{
-		$dolls = [];
+		$dolls = array();
 		if ( Auth::check() ){
 			$list = ToyList::where('user_id', Auth::user()->id)->pluck('id');
 			$have = DB::table('dolls_lists')->where('list_id', $list)->where('status', 1)->select('doll_id')->get();

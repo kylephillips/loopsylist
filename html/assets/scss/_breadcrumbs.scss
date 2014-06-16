@@ -16,10 +16,11 @@
 		position: relative;
 		&:before {
 			position: absolute;
-			font-family: 'icons';
-			content: 'd';
-			left: -3px;
-			font-size: 10px;
+			font-family: 'icomoon';
+			content: '\e611';
+			left: -8px;
+			top: 1px;
+			font-size: 15px;
 			color: $pink;
 		}
 		&:first-child {

@@ -28,7 +28,7 @@ $('.modal').not('.modal-body, .showphoto, .login-trigger').on('click', function(
 
 
 
-// Form Switch
+// Search form Switch
 $('.switch a').on('click', function(e){
 	e.preventDefault();
 	
@@ -54,8 +54,10 @@ $('.switch a').on('click', function(e){
 });
 
 
-/*
-* Search Form / Results
+/**
+* ========================================================================
+* Search form & results
+* ========================================================================
 */
 $('#searchform').on('submit', function(e){
 	e.preventDefault();
@@ -93,7 +95,7 @@ function displayResults(data)
 
 	var html = "";
 	$.each(data, function(i, item){
-		var li = '<li><a href="http://localhost/~kyle/loopsylist/html/list/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
+		var li = '<li><a href="' + loopsy_data.home + '/list/' + item.slug + '"><strong>' + item.name + '</strong>, <span>' + item.city + ' ' + item.state + '</a></li>';
 		html = html + li;
 	});
 	$('#searchresults').append(html);
@@ -126,8 +128,10 @@ function geocodeSearch()
 }
 
 
-/*
-* Ajax login
+/**
+* ========================================================================
+* AJAX Login
+* ========================================================================
 */
 $(document).on('submit', '.modal #login-form', function(e){
 	e.preventDefault();
@@ -149,6 +153,14 @@ $(document).on('submit', '.modal #login-form', function(e){
 		}
 	});
 });
+
+
+
+/**
+* ========================================================================
+* Various Form Functionality
+* ========================================================================
+*/
 
 /* 
 * Show/Hide Password Functionality
@@ -224,7 +236,7 @@ function displayError(field)
 	var parent = $(element).parent('div');
 	removeFeedback(field);
 	$(parent).addClass('has-error');
-	$(parent).append('<i class="icon-remove icon-feedback"></i>');
+	$(parent).append('<i class="icon-close icon-feedback"></i>');
 }
 
 /*
@@ -236,7 +248,7 @@ function displaySuccess(field)
 	var parent = $(element).parent('div');
 	removeFeedback(field);
 	$(parent).addClass('has-success');
-	$(parent).append('<i class="icon-check icon-feedback"></i>');
+	$(parent).append('<i class="icon-checkmark icon-feedback"></i>');
 }
 
 /*
@@ -287,6 +299,93 @@ function geocodeZip(zip){
 			$('.page-loading').hide();
 			$('#addresserror').show();
 			$('#addressform button').removeAttr('disabled');
+		}
+	});
+}
+
+
+/**
+* ========================================================================
+* Wishlist Toggle
+* ========================================================================
+*/
+$(document).on('click', '.wishlist-btn', function(e){
+	e.preventDefault();
+	var doll = $(this).data('doll');
+	var tooltip = $(this).find('span');
+	
+	if ( $(this).hasClass('active') ){
+		$(this).removeClass('active');
+		$(tooltip).text('+ Wishlist');
+		$(this).find('i').removeClass('icon-heart').addClass('icon-heart2');
+		removeFromWishlist(doll);
+	} else {
+		$(this).addClass('active');
+		$(tooltip).text('- Wishlist');
+		$(this).find('i').removeClass('icon-heart2').addClass('icon-heart');
+		addToWishlist(doll);
+	}
+});
+
+function addToWishlist(id)
+{
+	$.ajax({
+		url: loopsy_data.wishlist_store,
+		type : 'POST',
+		data : {
+			doll : id
+		}
+	});
+}
+
+function removeFromWishlist(id)
+{
+	$.ajax({
+		url: loopsy_data.wishlist_destroy,
+		type : 'DELETE',
+		data : {
+			doll : id
+		}
+	});
+}
+
+
+/**
+* ========================================================================
+* Index View Add/Remove List
+* ========================================================================
+*/
+$(document).on('click', '.index-switch a', function(e){
+	
+	var doll = $(this).parents('.status-switch').parents('li');
+	var button = $(doll).find('span');
+	var status = $(this).attr('href');
+	var id = $(this).data('id');
+
+	$(this).parents('.status-switch').find('a').removeClass('active');
+	$(this).addClass('active');
+
+	if ( status == 'no' ){
+		$(button).removeClass('right');
+		$(doll).removeClass('has');
+		savePosition('no', id);
+	} else {
+		$(button).addClass('right');
+		$(doll).addClass('has');
+		savePosition('yes', id);
+	}
+	
+	e.preventDefault();
+});
+
+function savePosition(position, id)
+{
+	$.ajax({
+		url : loopsy_data.status_switch,
+		type : 'GET',
+		data : {
+			status : position,
+			doll : id
 		}
 	});
 }

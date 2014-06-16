@@ -20,3 +20,23 @@
 		</section>
 	</div>
 </footer>
+@if(Auth::check())
+<script type='text/javascript'>
+/* <![CDATA[ */
+var loopsy_data = {
+	"home" : "{{URL::route('home')}}",
+	"status_switch" : "{{URL::route('save_switch')}}",
+	"wishlist_store":"{{URL::route('wishlist.store')}}",
+	"wishlist_destroy":"{{URL::route('wishlist.destroy')}}"
+};
+/* ]]> */
+</script>
+@else
+<script type='text/javascript'>
+/* <![CDATA[ */
+var loopsy_data = {
+	"home" : "{{URL::route('home')}}"
+};
+/* ]]> */
+</script>
+@endif

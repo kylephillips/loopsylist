@@ -105,6 +105,13 @@ class EloquentDollRepository {
 				{
 					$join->on('lists.user_id', '=', DB::raw($user));
 				});
+
+		// Add Wishlist 
+		$query->leftJoin('wishlists', function($join) use ($user)
+				{
+					$join->on('dolls.id', '=', 'wishlists.doll_id')
+					->where('wishlists.user_id', '=', DB::raw($user));
+				});
 		
 
 		// Filter by status
@@ -136,8 +143,9 @@ class EloquentDollRepository {
 		}
 
 		// Fields to select
-		$query->select('dolls.id','dolls.title','dolls.release_year','dolls.image','dolls.slug','dolltypes.title as type','dolls_lists.order as order','dolls_lists.status as status');
+		$query->select('dolls.id','dolls.title','dolls.release_year','dolls.image','dolls.slug','dolltypes.title as type','dolls_lists.order as order','dolls_lists.status as status', 'wishlists.doll_id as wishlist');
 		
+		// Order Parameter
 		if ( $status == 'yes' ){	
 			$query->orderBy('release_year', 'DESC');
 		} else {
@@ -145,18 +153,6 @@ class EloquentDollRepository {
 		}
 
 		$results = $query->get();
-
-		// Remove null and 0 values from returned results if status is no
-		if ( $status == 'no' ){
-			foreach($results as $key=>$result){
-				if ( $result->status == 1 ){
-					unset($results[$key]);
-				} else {
-					$result->status = 0;
-				}
-			}
-			return $results;
-		}
 		return $results;
 	}
 

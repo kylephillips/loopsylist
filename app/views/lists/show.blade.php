@@ -107,35 +107,98 @@ function displayList(data)
 	var out = '';
 	var url = "{{URL::route('home')}}/loopsy/";
 	var imgurl = "{{URL::asset('uploads/toys/_thumbs')}}" + '/225x265_';
-	var check = '<img src="' + "{{URL::asset('assets/images/check-snipe.png')}}" + '" class="check" alt="You have this" />';
 
 	$.each(data, function(index, doll){
-		console.log(doll);
 		var link = url + doll.slug;
 
 		if ( i % 3 === 0 ){
 			out += '</ul><ul class="loopsy-gallery">';
 		}
 
-		out += '<li><a href="' + link + '">';
-		out += '<p>' + doll.title + '</p>';
 		if ( doll.status === "1" ){
-			out += '<div class="have image">';
-		} else{
-			out += '<div class="image">';
+			out += dollHas(doll, link, imgurl);
+		} else {
+			out += dollHasNot(doll, link, imgurl);
 		}
-		out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" />';
-		if ( doll.status === "1" ){
-			out += check;
-		}
-		out += '</div>';
-		out += '</a></li>' ;
+
 		i++;
 	});
 
 	out += '</ul>';
 	$('#list').removeClass('loading');
 	$('#list').html(out);
+}
+
+/**
+* Have - list item for doll user has
+*/
+function dollHas(doll, link, imgurl)
+{
+	var out = '<li class="has"><div class="doll"><div class="title">';
+	out += '<p>' + doll.title + '</p>';
+
+	@if( $userid == $user->id )
+	out += wishlistButton(doll);
+	@endif
+
+	out += '</div>';
+	out += '<a href="' + link + '"><div class="image">';
+	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></a></div>';
+	
+	@if( $userid == $user->id )
+	out += '<section class="status-switch index-switch"><div><ul>';
+	out += '<li><a href="no" data-id="' + doll.id + '"><i class="icon-close"></i></a></li>';
+	out += '<li><a href="no" class="active" data-id="' + doll.id + '"><i class="icon-checkmark"></i></a></li>';
+	out += '</ul><span class="right"></span></div></section>';
+	@endif
+	
+	out += '</div>';
+	out += '</li>';
+	return out;
+}
+
+
+/**
+* Dont Have - list item for doll user doesn't have
+*/
+function dollHasNot(doll, link, imgurl)
+{
+	var out = '<li><div class="doll"><div class="title">';
+	out += '<p>' + doll.title + '</p>';
+
+	@if( $userid == $user->id )
+	out += wishlistButton(doll);
+	@endif
+
+	out += '</div>';
+	out += '<div class="image"><a href="' + link + '">';
+	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></a></div>';
+	
+	@if( $userid == $user->id )
+	out += '<section class="status-switch index-switch"><div><ul>';
+	out += '<li><a href="no" class="active" data-id="' + doll.id + '"><i class="icon-close"></i></a></li>';
+	out += '<li><a href="yes" data-id="' + doll.id + '"><i class="icon-checkmark"></i></a></li>';
+	out += '</ul><span></span></div></section>';
+	@endif
+	
+	out += '</div>';
+	out += '</li>';
+	return out;
+}
+
+
+/**
+* Wishlist Button
+*/
+function wishlistButton(doll)
+{
+	var wishlist = doll.wishlist;
+	if (wishlist === null ){
+		var out = '<button class="wishlist-btn" data-doll="' + doll.id + '"><i class="icon-heart2"></i><span>+ Wishlist</span></button>';
+	} else {
+		var out = '<button class="wishlist-btn active" data-doll="' + doll.id + '"><i class="icon-heart"></i><span>- Wishlist</span></button>';
+	}
+	return out;
 }
 
 

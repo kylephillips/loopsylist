@@ -2,7 +2,7 @@
 @section('content')
 <section class="page-header">
 	<div class="container">
-		<h1>Login to <em>Loosy List</em></h1>
+		<h1>Login to <em>Loopsy List</em></h1>
 	</div>
 </section>
 

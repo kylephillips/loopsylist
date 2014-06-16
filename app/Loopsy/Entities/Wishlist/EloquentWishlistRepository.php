@@ -9,7 +9,7 @@ class EloquentWishlistRepository {
 	*/
 	public function userWishlistArray()
 	{
-		$wishlist = [];
+		$wishlist = array();
 		if ( \Auth::check() ) {
 			$dolls = Wishlist::where('user_id', \Auth::user()->id)->select('doll_id')->get();
 			foreach($dolls as $key=>$doll){

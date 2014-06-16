@@ -63,10 +63,41 @@
 	color: $pink;
 	@include transition(all 200ms ease);
 	outline: none;
+	position: relative;
 	&.active {
 		color: $purple-dark;
 	}
-}
+	// Tooltip
+	span {
+		opacity: 0;
+		position: absolute;
+		font-size: 14px;
+		background-color: rgba($purple,.8);
+		width: 80px;
+		height: 25px;
+		border-radius: 3px;
+		color: $white;
+		line-height: 25px;
+		top: -30px;
+		left: -25px;
+		@include transition(opacity 200ms ease);
+		&:after {
+			content: '';
+			width: 10px;
+			height: 10px;
+			position: absolute;
+			top: 25px;
+			left: 35px;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 5px solid rgba($purple, .8);
+		}
+	}
+	&:hover span {
+		opacity: 1;
+		@include transition(opacity 200ms ease);
+	}
+} // .wishlist-btn
 
 
 @media (max-width: 767px) {

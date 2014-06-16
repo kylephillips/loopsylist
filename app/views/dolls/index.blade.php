@@ -39,10 +39,16 @@
 		<div class="doll">
 			<div class="title">
 				<p>{{$loopsy->title}}</p>
-				@if(in_array($loopsy->id, $wishlist))
-				<button class="wishlist-btn active" data-doll="{{$loopsy->id}}"><i class="icon-star"></i></button>
-				@else
-				<button class="wishlist-btn" data-doll="{{$loopsy->id}}"><i class="icon-star"></i></button>
+				@if(Auth::check())
+					@if(in_array($loopsy->id, $wishlist))
+					<button class="wishlist-btn active" data-doll="{{$loopsy->id}}">
+						<i class="icon-heart"></i><span>- Wishlist</span>
+					</button>
+					@else
+					<button class="wishlist-btn" data-doll="{{$loopsy->id}}">
+						<i class="icon-heart2"></i><span>+ Wishlist</span>
+					</button>
+					@endif
 				@endif
 			</div>
 			<a href="{{URL::route('loopsy.show', array('loopsy'=>$loopsy->slug))}}">
@@ -51,11 +57,11 @@
 				</div>
 			</a>
 			@if(Auth::check())
-			<section class="status-switch">
+			<section class="status-switch index-switch">
 				<div>
 					<ul>
-						<li><a href="no" @if(!in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-lock"></i></a></li>
-						<li><a href="yes" @if(in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-check"></i></a></li>
+						<li><a href="no" @if(!in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-close"></i></a></li>
+						<li><a href="yes" @if(in_array($loopsy->id, $dolls))class="active"@endif data-id="{{$loopsy->id}}"><i class="icon-checkmark"></i></a></li>
 					</ul>
 					<span @if(in_array($loopsy->id, $dolls))class="right"@endif></span>
 				</div>
@@ -90,79 +96,6 @@ $('.filter').on('change', function(){
 	var newurl = url + '?year=' + year + '&type=' + type + '&status=' + status;
 	window.location.replace(newurl);
 });
-
-$('.status-switch a').on('click', function(e){
-	
-	var doll = $(this).parents('.status-switch').parents('li');
-	var button = $(doll).find('span');
-	var status = $(this).attr('href');
-	var id = $(this).data('id');
-
-	$(this).parents('.status-switch').find('a').removeClass('active');
-	$(this).addClass('active');
-
-	if ( status == 'no' ){
-		$(button).removeClass('right');
-		$(doll).removeClass('has');
-		savePosition('no', id);
-	} else {
-		$(button).addClass('right');
-		$(doll).addClass('has');
-		savePosition('yes', id);
-	}
-	
-	e.preventDefault();
-});
-
-function savePosition(position, id)
-{
-	$.ajax({
-		url : "{{URL::route('save_switch')}}",
-		type : 'GET',
-		data : {
-			status : position,
-			doll : id
-		}
-	});
-}
-
-// Wishlist Button
-$('.wishlist-btn').on('click', function(e){
-	e.preventDefault();
-	var doll = $(this).data('doll');
-	
-	if ( $(this).hasClass('active') ){
-		$(this).removeClass('active');
-		removeFromWishlist(doll);
-	} else {
-		$(this).addClass('active');
-		addToWishlist(doll);
-	}
-});
-
-function addToWishlist(id)
-{
-	$.ajax({
-		url: "{{URL::route('wishlist.store')}}",
-		type : 'POST',
-		data : {
-			doll : id
-		}
-	});
-}
-
-function removeFromWishlist(id)
-{
-	$.ajax({
-		url: "{{URL::route('wishlist.destroy')}}",
-		type : 'DELETE',
-		data : {
-			doll : id
-		}
-	});
-}
-
-
 </script>
 @else
 <script>

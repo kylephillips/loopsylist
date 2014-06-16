@@ -60,7 +60,7 @@ class SessionController extends \BaseController {
 	public function destroy()
 	{
 		Auth::logout();
-		return Redirect::back()
+		return Redirect::route('login_form')
 			->with('topmessage','You have been logged out.');
 	}
 

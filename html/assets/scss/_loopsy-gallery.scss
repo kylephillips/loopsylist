@@ -54,6 +54,7 @@
 		}
 		.doll {
 			width: 75%;
+			margin: 0 auto;
 			background-color: $pink-lighter;
 			border-radius: 4px;
 			@include transition(all 200ms ease);
@@ -115,6 +116,12 @@
 				}
 				i {
 					font-size: 20px;
+					&.icon-close {
+						font-size: 16px;
+						top: -4px;
+						position: relative;
+						color: lighten($magenta, 10%);
+					}
 				}
 				span {
 					width: 50%;
@@ -158,6 +165,13 @@
 		}
 	}
 } // .loopsy-details
+
+@media (max-width: 968px)
+{
+	.loopsy-gallery li .doll {
+		width: 88%;
+	}
+}
 
 
 @media (max-width:767px){

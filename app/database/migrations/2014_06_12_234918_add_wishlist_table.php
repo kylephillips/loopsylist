@@ -14,6 +14,7 @@ class AddWishlistTable extends Migration {
 	{
 		Schema::create('wishlists', function(Blueprint $table)
 		{
+			$table->engine = "InnoDB";
 			$table->increments('id');
 			$table->integer('doll_id')->unsigned();
 			$table->foreign('doll_id')->references('id')->on('dolls')->onDelete('CASCADE')->onUpdate('CASCADE');;

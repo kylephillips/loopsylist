@@ -15,13 +15,6 @@
 		{{Form::select('type', $types, 'full-size', array('class'=>'filter'))}}
 	</section>
 
-	<ul class="user-status-switch">
-		<li><a href="all" class="active">All</a></li>
-		<li><a href="1">Have</a></li>
-		<li class="last"><a href="0">Don't Have</a></li>
-		<input type="hidden" id="status" value="all">
-	</ul>
-
 	<section id="all" class="tab-content">
 		<div class="user-list-head">
 			<select id="year-select">
@@ -92,24 +85,10 @@ function showDolls(data, type, status)
 {
 	$('#list').empty();
 
-	if ( status === "0" ){
-		$('#list').addClass('donthavelist');
-		makeSortable();
-	} else {
-		if ( $('#list').hasClass('donthavelist') ){
-			removeSortable();
-		}
-		$('#list').removeClass('donthavelist');
-	}
-
 	var out = "";
 
 	$.each(data, function(index, doll){
-		if ( status === '0' ){
-			out += donthaveRow(doll);
-		} else {
-			out += allRow(doll);
-		}
+		out += dollRow(doll);
 	});
 
 	$('#list').html(out);
@@ -119,7 +98,7 @@ function showDolls(data, type, status)
 /*
 * Rows for ALL & HAVE Tab
 */
-function allRow(doll)
+function dollRow(doll)
 {
 	var id = doll.id;
 	var title = doll.title;
@@ -152,24 +131,6 @@ function allRow(doll)
 	return out;
 }
 
-/*
-* Rows for DONT HAVE Tab
-*/
-function donthaveRow(doll)
-{
-	var id = doll.id;
-	var title = doll.title;
-	var image = doll.image;
-	var order = doll.order;
-	var year = doll.release_year;
-	var status = doll.status;
-	var out = "";
-
-	if ( status !== '1' ){
-		out += '<li class="donthave" id="' + id + '"><div><a href="#" class="showphoto" data-image="' + image + '"><i class="icon-search"></i></a>' + title + '</div></li>';
-	}
-	return out;
-}
 
 
 /**
@@ -203,23 +164,6 @@ $(document).on('change', '#year-select', function(){
 
 	loadDolls(type, year, status);
 	$('#list').show();
-});
-
-
-/**
-* Change list type
-*/
-$(document).on('click', '.user-status-switch li a', function(e){
-	e.preventDefault();
-	$('.user-status-switch li a').removeClass("active");
-	$(this).addClass('active');
-
-	var status = $(this).attr('href');
-	var year = $('#year-select').val();
-	var type = $('#type').val();
-
-	$('#status').val(status);
-	loadDolls(type, year, status)
 });
 
 
