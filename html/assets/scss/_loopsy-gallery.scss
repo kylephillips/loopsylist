@@ -96,6 +96,9 @@
 					background-color: $magenta;
 				}
 			}
+			.title p i {
+				color: $white;
+			}
 		}
 		.title {
 			margin: 0 auto 0px auto;
@@ -106,9 +109,14 @@
 			p {
 				margin: 4px 0 0 0;
 				float: left;
+				i {
+					color: $pink;
+					font-size: 15px;
+				}
 			}
 			button {
 				float: right;
+				margin-top: 2px;
 			}
 		}
 		a {

@@ -126,7 +126,8 @@ class EloquentDollRepository {
 					{
 						$join->on('dolls_lists.list_id', '=', 'lists.id')
 						->on('dolls_lists.doll_id','=', 'dolls.id')
-						->where('dolls_lists.status', '!=', DB::raw('IS NOT NULL'));
+						->where('dolls_lists.status', '!=', DB::raw('IS NOT NULL'))
+						->where('dolls_lists.status', '=', '0');
 					});
 		} else {
 			$query->join('dolls_lists', function($join) use ($status)

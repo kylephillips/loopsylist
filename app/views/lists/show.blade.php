@@ -81,12 +81,15 @@ $(document).ready(function(){
 * Update list from selects
 */
 $('select').on('change', function(){
+	
 	var type = $('#type').val();
 	var status = $('#status').val();
 	var year = $('#year').val();
+
 	if ( type === 'full-size' ){
 		$('.list-filters').addClass('loggedin');
 		$('#yearselect').show();
+		console.log(status);
 		loadList(type, year, status);
 	} else {
 		$('.list-filters').removeClass('loggedin');
@@ -110,15 +113,15 @@ function displayList(data)
 
 	$.each(data, function(index, doll){
 		var link = url + doll.slug;
-
+		console.log(doll);
 		if ( i % 3 === 0 ){
 			out += '</ul><ul class="loopsy-gallery">';
 		}
 
-		if ( doll.status === "1" ){
-			out += dollHas(doll, link, imgurl);
-		} else {
+		if ( ( !doll.status || doll.status === '0') ){
 			out += dollHasNot(doll, link, imgurl);
+		} else {
+			out += dollHas(doll, link, imgurl);
 		}
 
 		i++;
@@ -135,7 +138,7 @@ function displayList(data)
 function dollHas(doll, link, imgurl)
 {
 	var out = '<li class="has"><div class="doll"><div class="title">';
-	out += '<p>' + doll.title + '</p>';
+	out += '<p><i class="icon-checkmark"></i> ' + doll.title + '</p>';
 
 	@if( $userid == $user->id )
 	out += wishlistButton(doll);
@@ -164,7 +167,7 @@ function dollHas(doll, link, imgurl)
 function dollHasNot(doll, link, imgurl)
 {
 	var out = '<li><div class="doll"><div class="title">';
-	out += '<p>' + doll.title + '</p>';
+	out += '<p><i class="icon-close"></i> ' + doll.title + '</p>';
 
 	@if( $userid == $user->id )
 	out += wishlistButton(doll);
