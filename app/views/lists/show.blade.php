@@ -83,8 +83,8 @@ $(document).ready(function(){
 $('select').on('change', function(){
 	var type = $('#type').val();
 	var status = $('#status').val();
+	var year = $('#year').val();
 	if ( type === 'full-size' ){
-		var year = $('#year').val();
 		$('.list-filters').addClass('loggedin');
 		$('#yearselect').show();
 		loadList(type, year, status);
@@ -142,8 +142,8 @@ function dollHas(doll, link, imgurl)
 	@endif
 
 	out += '</div>';
-	out += '<a href="' + link + '"><div class="image">';
-	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></a></div>';
+	out += '<a href="' + link + '"><div class="image"><span><i class="icon-search"></i></span>';
+	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></div></a>';
 	
 	@if( $userid == $user->id )
 	out += '<section class="status-switch index-switch"><div><ul>';
@@ -171,8 +171,8 @@ function dollHasNot(doll, link, imgurl)
 	@endif
 
 	out += '</div>';
-	out += '<div class="image"><a href="' + link + '">';
-	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></a></div>';
+	out += '<a href="' + link + '"><div class="image"><span><i class="icon-search"></i></span>';
+	out += '<img src="' + imgurl + doll.image + '" alt="' + doll.title + '" /></div></a>';
 	
 	@if( $userid == $user->id )
 	out += '<section class="status-switch index-switch"><div><ul>';

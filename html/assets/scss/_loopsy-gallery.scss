@@ -60,6 +60,25 @@
 			@include transition(all 200ms ease);
 			border: 1px solid $pink-light;
 		}
+		.image {
+			position: relative;
+			span {
+				opacity: 0;
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				background-color: rgba($magenta, .6);
+				@include transition(opacity 200ms ease);
+				i {
+					font-size: 55px;
+					color: $white;
+					position: relative;
+					top: -10%;
+					@include transition(top 200ms ease);
+				}
+			}
+		}
 		&.has {
 			.doll {
 				background-color: $magenta;
@@ -94,6 +113,14 @@
 		}
 		a {
 			color: $purple;
+			&:hover .image span {
+				opacity: 1;
+				@include transition(opacity 200ms ease);
+				i {
+					top: 43%;
+					@include transition(top 200ms ease);
+				}
+			}
 		}
 
 		// Status switch in gallery view

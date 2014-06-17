@@ -53,6 +53,7 @@
 			</div>
 			<a href="{{URL::route('loopsy.show', array('loopsy'=>$loopsy->slug))}}">
 				<div class="image">
+					<span><i class="icon-search"></i></span>
 					<img src="{{URL::asset('uploads/toys/_thumbs') . '/225x265_' . $loopsy->image}}" alt="{{$loopsy->title}}" />
 				</div>
 			</a>
@@ -109,5 +110,3 @@ $('.filter').on('change', function(){
 </script>
 @endif
 @stop
-
-

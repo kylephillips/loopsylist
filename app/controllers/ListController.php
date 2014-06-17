@@ -114,7 +114,7 @@ class ListController extends BaseController {
 	{
 		$user = ( !Input::get('user') ) ? Auth::user()->id : Input::get('user');
 		$type = Input::get('type');
-		$year = Input::get('year');
+		$year = ( Input::get('year') !== 'All' ) ? Input::get('year') : null;
 		$status = Input::get('status');
 		$results = $this->doll->getUserDolls($user, $type, $year, $status);
 		return $results;
