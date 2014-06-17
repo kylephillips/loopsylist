@@ -60,6 +60,13 @@
 				&:hover {
 					color: $white;
 				}
+				i {
+					font-size: 15px;
+					color: $magenta;
+					position: relative;
+					top: 1px;
+					margin-right: 5px;
+				}
 			}
 			&:last-child {
 				margin: 0;

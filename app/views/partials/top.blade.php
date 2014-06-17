@@ -21,8 +21,8 @@
 <div class="container">
 	<div class="logo"><a href="{{URL::route('home')}}">Loopsy <em>List</em></a></div>
 	<ul class="pull-right">
-		<li><a href="{{URL::route('loopsy.index')}}">Lalaloopsies</a></li>
-		<li><a href="{{URL::route('find_list')}}">Find a List</a></li>
+		<li><a href="{{URL::route('loopsy.index')}}"><i class="icon-happy"></i> Lalaloopsies</a></li>
+		<li><a href="{{URL::route('find_list')}}"><i class="icon-search"></i> Find a List</a></li>
 		@if(Auth::check())
 		<?php $user = Auth::user()->slug; ?>
 		<li>
@@ -36,7 +36,7 @@
 			</ul>
 		</li>
 		@else
-		<li><a href="{{URL::route('user.create')}}">Sign up</a></li>
+		<li><a href="{{URL::route('user.create')}}"><i class="icon-checkmark"></i> Sign up</a></li>
 		<li><a href="{{URL::route('login_form')}}" class="login-btn login-trigger">Login</a></li>
 		@endif
 	</ul>
