@@ -5,7 +5,8 @@
 	@if(Auth::check())
 	<?php $user = Auth::user()->username; ?>
 	<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Profile</a></li>
-	<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My List</a></li>
+	<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My Loopsy List</a></li>
+	<li><a href="{{URL::route('wishlist.show', array('user'=>$user))}}">My Wishlist</a></li>
 	<li><a href="{{URL::route('logout')}}" class="login-btn">Logout</a></li>
 	@else
 	<li><a href="{{URL::route('user.create')}}">Sign up</a></li>

@@ -28,10 +28,11 @@
 		<li>
 			<a href="{{URL::route('user.edit', array('user'=>$user))}}" class="login-btn">{{Auth::user()->username}}</a>
 			<ul>
-				<li><a href="{{URL::route('user.edit', array('user'=>$user))}}">My Profile</a></li>
-				<li><a href="{{URL::route('list.show', array('user'=>$user))}}">My List</a></li>
-				<li><a href="{{URL::route('list.edit', array('id'=>$user))}}">Edit List</a></li>
-				<li><a href="{{URL::route('logout')}}">Logout</a></li>
+				<li><a href="{{URL::route('user.edit', array('user'=>$user))}}"><i class="icon-user"></i> My Profile</a></li>
+				<li><a href="{{URL::route('list.show', array('user'=>$user))}}"><i class="icon-checkmark"></i> My Loopsy List</a></li>
+				<li><a href="{{URL::route('wishlist.show', array('user'=>$user))}}"><i class="icon-heart"></i> My Wishlist</a></li>
+				<li><a href="{{URL::route('list.edit', array('id'=>$user))}}"><i class="icon-pencil"></i> Edit List</a></li>
+				<li><a href="{{URL::route('logout')}}"><i class="icon-power"></i> Logout</a></li>
 			</ul>
 		</li>
 		@else
