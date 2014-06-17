@@ -48,7 +48,7 @@ class ListController extends BaseController {
 	{
 		$user = $this->user->userBySlug($user);
 		$types = $this->dolltype->selectArray();
-		$years = $this->doll->yearList(false);
+		$years = $this->doll->yearList();
 		$title = "$user->name's Loopsy List";
 		
 		return View::make('lists.show')

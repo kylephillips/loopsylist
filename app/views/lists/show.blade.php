@@ -74,7 +74,7 @@ if ( Auth::check() ) $userid = Auth::user()->id;
 <script>
 
 $(document).ready(function(){
-	loadList('full-size', "<?php $y1 = array_values($years)[0]; echo $y1; ?>", '');
+	loadList('full-size', "", '');
 });
 
 /**
