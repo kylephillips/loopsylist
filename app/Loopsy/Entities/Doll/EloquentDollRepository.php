@@ -146,12 +146,7 @@ class EloquentDollRepository {
 		// Fields to select
 		$query->select('dolls.id','dolls.title','dolls.release_year','dolls.image','dolls.slug','dolltypes.title as type','dolls_lists.order as order','dolls_lists.status as status', 'wishlists.doll_id as wishlist');
 		
-		// Order Parameter
-		if ( $status == 'yes' ){	
-			$query->orderBy('release_year', 'DESC');
-		} else {
-			$query->orderBy('dolls_lists.order', 'ASC');
-		}
+		$query->orderBy('release_year', 'DESC');
 
 		$results = $query->get();
 		return $results;
